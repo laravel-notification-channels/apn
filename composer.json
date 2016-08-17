@@ -13,11 +13,11 @@
     "require": {
         "php": ">=5.5",
         "illuminate/notifications": "^5.3",
-        "illuminate/support": "^5.1|^5.2|^5.3"
+        "illuminate/support": "^5.1|^5.2|^5.3",
+        "zendframework/zendservice-apple-apns": "^1.2"
     },
     "require-dev": {
-        "mockery/mockery": "^0.9.5",
-        "phpunit/phpunit": "4.*"
+        "phpunit/phpunit": "5.*"
     },
     "autoload": {
         "psr-4": {
@@ -32,5 +32,6 @@
     "config": {
         "sort-packages": true
     },
+    "prefer-stable": true,
     "minimum-stability": "dev"
 }
