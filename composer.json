@@ -1,0 +1,36 @@
+{
+    "name": "fruitcake/laravel-apn-notification-channel",
+    "description": "Apple APN Push Notification Channel",
+    "homepage": "https://github.com/fruitcake/laravel-apn-notification-channel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fruitcake",
+            "email": "info@fruitcake.nl",
+            "homepage": "https://fruitcake.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "illuminate/notifications": "^5.3",
+        "illuminate/support": "^5.1|^5.2|^5.3"
+    },
+    "require-dev": {
+        "mockery/mockery": "^0.9.5",
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fruitcake\\NotificationChannels\\Apn\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fruitcake\\NotificationChannels\\Apn\\Test\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}
