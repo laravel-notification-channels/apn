@@ -38,18 +38,17 @@ class ApnChannel
             $tokens = [$tokens];
         }
 
-        $message = $notification->toPushNotification($notifiable);
+        $message = $notification->toApn($notifiable);
         if (!$message) {
             return;
         }
-
-        $body = $message->title . ": \n" . $message->message;
 
         foreach ($tokens as $token) {
             try {
                 $packet = new Packet();
                 $packet->setToken($token);
-                $packet->setAlert($body);
+                $packet->setAlert($message->body);
+                $packet->setBadge($message->badge);
                 $packet->setCustom($message->data);
 
                 $response = $this->client->send($packet);

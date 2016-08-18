@@ -2,22 +2,18 @@
 
 namespace Fruitcake\NotificationChannels\Apn;
 
-class PushMessage
+class ApnMessage
 {
 
-    /**
-     * The title of the notification.
-     *
-     * @var string
-     */
-    public $title;
+    const PRIORITY_NORMAL = 5;
+    const PRIORITY_HIGH = 10;
 
     /**
-     * The message of the notification.
+     * The body of the notification.
      *
      * @var string
      */
-    public $message;
+    public $body;
 
     /**
      * The badge of the notification.
@@ -25,6 +21,14 @@ class PushMessage
      * @var integer
      */
     public $badge;
+
+    /**
+     * The priority of the notification.
+     * @warning UNUSED
+     *
+     * @var integer
+     */
+    public $priority = self::PRIORITY_NORMAL;
 
     /**
      * Additional data of the notification.
@@ -35,14 +39,14 @@ class PushMessage
 
 
     /**
-     * Set the title of the notification.
+     * Set the body of the notification.
      *
-     * @param string $title
+     * @param string $body
      * @return $this
      */
-    public function title($title)
+    public function body($body)
     {
-        $this->title = $title;
+        $this->body = $body;
 
         return $this;
     }
@@ -69,6 +73,19 @@ class PushMessage
     public function badge($badge)
     {
         $this->badge = $badge;
+
+        return $this;
+    }
+
+    /**
+     * Set the priority of the notification.
+     *
+     * @param integer $priority
+     * @return $this
+     */
+    public function priority($priority)
+    {
+        $this->priority = $priority;
 
         return $this;
     }
