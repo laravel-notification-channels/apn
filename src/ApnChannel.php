@@ -78,10 +78,10 @@ class ApnChannel
     private function openConnection()
     {
         try {
-            if (app()->environment() == 'production') {
-                $this->client->open(Client::PRODUCTION_URI, storage_path('app/cert/production.pem'));
+            if (config('services.apn.sandbox')) {
+                $this->client->open(Client::SANDBOX_URI, storage_path(config('services.apn.certificate_sandbox')));
             } else {
-                $this->client->open(Client::SANDBOX_URI, storage_path('app/cert/development.pem'));
+                $this->client->open(Client::PRODUCTION_URI, storage_path(config('services.apn.certificate')));
             }
             return true;
         } catch (\Exception $e) {
