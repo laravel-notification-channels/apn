@@ -2,6 +2,7 @@
 
 namespace Fruitcake\NotificationChannels\Apn;
 
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use ZendService\Apple\Apns\Client\Message as Client;
 use ZendService\Apple\Apns\Message as Packet;
@@ -36,7 +37,7 @@ class ApnChannel
         if (!$tokens) {
             return;
         }
-        
+
         $message = $notification->toApn($notifiable);
         if (!$message) {
             return;
@@ -54,7 +55,7 @@ class ApnChannel
 
                 if($response->getCode() != Response::RESULT_OK) {
                     app()->make('events')->fire(
-                        new Events\NotificationFailed($notifiable, $notification, $this, [
+                        new NotificationFailed($notifiable, $notification, $this, [
                             'token' => $token,
                             'error' => $response->getCode()
                         ])
