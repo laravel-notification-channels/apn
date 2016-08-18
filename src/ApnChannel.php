@@ -32,14 +32,11 @@ class ApnChannel
             return;
         }
 
-        $tokens = $notifiable->routeNotificationFor('apn');
-        if (!$tokens || count($tokens) == 0) {
+        $tokens = (array) $notifiable->routeNotificationFor('apn');
+        if (!$tokens) {
             return;
         }
-        if (!is_array($tokens)) {
-            $tokens = [$tokens];
-        }
-
+        
         $message = $notification->toApn($notifiable);
         if (!$message) {
             return;
