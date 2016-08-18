@@ -5,18 +5,11 @@ namespace Fruitcake\NotificationChannels\Apn\Exceptions;
 class SendingFailed extends \Exception
 {
     /**
-     * @var \Exception
-     */
-    public $original;
-
-    /**
-     * @param \Exception $original
+     * @param \Exception $e
      * @return SendingFailed
      */
-    public static function create($original)
+    public static function create($e)
     {
-        $exception = new static("Cannot send message to APNs: ". $original->getMessage());
-        $exception->original = $original;
-        return $exception;
+        return new static("Cannot send message to APNs: ". $e->getMessage(), 0, $e);
     }
 }

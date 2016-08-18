@@ -5,18 +5,11 @@ namespace Fruitcake\NotificationChannels\Apn\Exceptions;
 class ConnectionFailed extends \Exception
 {
     /**
-     * @var \Exception
-     */
-    public $original;
-
-    /**
-     * @param \Exception $original
+     * @param \Exception $e
      * @return ConnectionFailed
      */
-    public static function create($original)
+    public static function create($e)
     {
-        $exception = new static("Cannot connect to APNs: ". $original->getMessage());
-        $exception->original = $original;
-        return $exception;
+        return new static("Cannot connect to APNs: ". $e->getMessage(), 0, $e);
     }
 }
