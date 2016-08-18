@@ -23,6 +23,8 @@ class ApnChannel
      * @param mixed $notifiable
      * @param Notification $notification
      * @return void
+     *
+     * @throws Exceptions\ConnectionFailed|Exceptions\SendingFailed
      */
     public function send($notifiable, Notification $notification)
     {
@@ -62,8 +64,7 @@ class ApnChannel
                     );
                 }
             } catch (\Exception $e) {
-                // TODO; Should we fire NotificationFailed event here, or throw exception?
-                app('log')->error('Error sending APN notification to ' . $notifiable->name . ' (#' . $notifiable->id . ') ' . $e->getMessage());
+                throw Exceptions\SendingFailed::create($e);
             }
         }
 
@@ -74,6 +75,8 @@ class ApnChannel
      * Try to open connection
      *
      * @return bool
+     *
+     * @throws Exceptions\ConnectionFailed
      */
     private function openConnection()
     {
@@ -85,8 +88,7 @@ class ApnChannel
             }
             return true;
         } catch (\Exception $e) {
-            app('log')->error('Error opening APN connection: ' . $e->getMessage());
-            return false;
+            throw Exceptions\ConnectionFailed::create($e);
         }
     }
 
