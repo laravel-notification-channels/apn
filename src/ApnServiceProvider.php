@@ -9,7 +9,7 @@ class ApnServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      */
-    public function register()
+    public function boot()
     {
         $this->app->when(ApnChannel::class)
             ->needs('$environment')
