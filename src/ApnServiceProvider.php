@@ -13,11 +13,12 @@ class ApnServiceProvider extends ServiceProvider
     {
         $this->app->when(ApnChannel::class)
             ->needs('$environment')
-            ->give(config('broadcasting.connections.apn.environment'))
+            ->give(config('broadcasting.connections.apn.environment'));
+        $this->app->when(ApnChannel::class)
             ->needs('$certificate')
-            ->give(config('broadcasting.connections.apn.certificate'))
+            ->give(config('broadcasting.connections.apn.certificate'));
+        $this->app->when(ApnChannel::class)
             ->needs('$passPhrase')
-            ->give(config('broadcasting.connections.apn.pass_phrase'))
-        ;
+            ->give(config('broadcasting.connections.apn.pass_phrase'));
     }
 }
