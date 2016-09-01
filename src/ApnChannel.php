@@ -39,7 +39,7 @@ class ApnChannel
      * @param Client $client
      * @param Dispatcher $events
      */
-    public function __construct($environment, $certificate, $passPhrase, Client $client, Dispatcher $events)
+    public function __construct($environment, $certificate, $passPhrase = null, Client $client, Dispatcher $events)
     {
         $this->environment = $environment;
         $this->certificate = $certificate;
