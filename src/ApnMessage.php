@@ -26,6 +26,13 @@ class ApnMessage
     public $badge;
 
     /**
+     * The sound for the notification.
+     *
+     * @var string|null
+     */
+    public $sound;
+
+    /**
      * Additional data of the notification.
      *
      * @var array
@@ -97,6 +104,19 @@ class ApnMessage
     public function badge($badge)
     {
         $this->badge = $badge;
+
+        return $this;
+    }
+
+    /**
+     * Set the sound for the notification.
+     *
+     * @param string|null $sound
+     * @return $this
+     */
+    public function sound($sound)
+    {
+        $this->sound = $sound;
 
         return $this;
     }
