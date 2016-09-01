@@ -33,19 +33,20 @@ class ApnChannel
 
     /**
      * ApnChannel constructor.
+     *
+     * @param Client $client
+     * @param Dispatcher $events
      * @param string $environment
      * @param string $certificate
      * @param string|null $passPhrase
-     * @param Client $client
-     * @param Dispatcher $events
      */
-    public function __construct($environment, $certificate, $passPhrase = null, Client $client, Dispatcher $events)
+    public function __construct(Client $client, Dispatcher $events, $environment, $certificate, $passPhrase = null)
     {
+        $this->client = $client;
+        $this->events = $events;
         $this->environment = $environment;
         $this->certificate = $certificate;
         $this->passphrase = $passPhrase;
-        $this->client = $client;
-        $this->events = $events;
     }
 
     /**
