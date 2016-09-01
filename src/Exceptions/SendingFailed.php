@@ -1,6 +1,6 @@
 <?php
 
-namespace Fruitcake\NotificationChannels\Apn\Exceptions;
+namespace NotificationChannels\Apn\Exceptions;
 
 class SendingFailed extends \Exception
 {

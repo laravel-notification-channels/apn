@@ -1,21 +1,51 @@
 <?php
 
-namespace Fruitcake\NotificationChannels\Apn;
+namespace NotificationChannels\Apn;
 
+use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\Apn\Exceptions\SendingFailed;
 use ZendService\Apple\Apns\Client\Message as Client;
 use ZendService\Apple\Apns\Message as Packet;
+use ZendService\Apple\Apns\Message\Alert;
 use ZendService\Apple\Apns\Response\Message as Response;
 
 class ApnChannel
 {
+    const SANDBOX = 0;
+    const PRODUCTION = 1;
+
+    /** @var  string */
+    protected $environment;
+
+    /** @var  string */
+    protected $certificate;
+
+    /** @var  string|null */
+    protected $passPhrase;
+
     /** @var Client */
     protected $client;
 
-    public function __construct(Client $client)
+    /** @var  Dispatcher */
+    protected $events;
+
+    /**
+     * ApnChannel constructor.
+     * @param string $environment
+     * @param string $certificate
+     * @param string|null $passPhrase
+     * @param Client $client
+     * @param Dispatcher $events
+     */
+    public function __construct($environment, $certificate, $passPhrase, Client $client, Dispatcher $events)
     {
+        $this->environment = $environment;
+        $this->certificate = $certificate;
+        $this->passphrase = $passPhrase;
         $this->client = $client;
+        $this->events = $events;
     }
 
     /**
@@ -45,16 +75,20 @@ class ApnChannel
 
         foreach ($tokens as $token) {
             try {
+                $alert = new Alert();
+                $alert->setTitle($message->title);
+                $alert->setBody($message->body);
+
                 $packet = new Packet();
                 $packet->setToken($token);
-                $packet->setAlert($message->body);
                 $packet->setBadge($message->badge);
-                $packet->setCustom($message->data);
+                $packet->setAlert($alert);
+                $packet->setCustom($message->custom);
 
                 $response = $this->client->send($packet);
 
-                if($response->getCode() != Response::RESULT_OK) {
-                    app()->make('events')->fire(
+                if ($response->getCode() != Response::RESULT_OK) {
+                    $this->events->fire(
                         new NotificationFailed($notifiable, $notification, $this, [
                             'token' => $token,
                             'error' => $response->getCode()
@@ -62,7 +96,7 @@ class ApnChannel
                     );
                 }
             } catch (\Exception $e) {
-                throw Exceptions\SendingFailed::create($e);
+                throw SendingFailed::create($e);
             }
         }
 
@@ -79,11 +113,8 @@ class ApnChannel
     private function openConnection()
     {
         try {
-            if (config('services.apn.sandbox')) {
-                $this->client->open(Client::SANDBOX_URI, storage_path(config('services.apn.certificate_sandbox')));
-            } else {
-                $this->client->open(Client::PRODUCTION_URI, storage_path(config('services.apn.certificate')));
-            }
+            $this->client->open($this->environment, $this->certificate, $this->passPhrase);
+
             return true;
         } catch (\Exception $e) {
             throw Exceptions\ConnectionFailed::create($e);

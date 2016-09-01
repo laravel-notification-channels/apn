@@ -1,12 +1,15 @@
 <?php
 
-namespace Fruitcake\NotificationChannels\Apn;
+namespace NotificationChannels\Apn;
 
 class ApnMessage
 {
-
-    const PRIORITY_NORMAL = 5;
-    const PRIORITY_HIGH = 10;
+    /**
+     * The title of the notification.
+     *
+     * @var string
+     */
+    public $title;
 
     /**
      * The body of the notification.
@@ -23,23 +26,57 @@ class ApnMessage
     public $badge;
 
     /**
-     * The priority of the notification.
-     * @warning UNUSED
-     *
-     * @var integer
-     */
-    public $priority = self::PRIORITY_NORMAL;
-
-    /**
      * Additional data of the notification.
      *
      * @var array
      */
-    public $data = [];
+    public $custom = [];
+
+    /**
+     * @param string|null $title
+     * @param string|null $body
+     * @param array $custom
+     * @param null|integer $badge
+     * @return static
+     *
+     */
+    public static function create($title = null, $body = null, $custom = [], $badge = null)
+    {
+        return new static($title, $body, $custom, $badge);
+    }
+
+    /**
+     * @param string|null $title
+     * @param string|null $body
+     * @param array $custom
+     * @param null|integer $badge
+     * @return static
+     *
+     */
+    public function __construct($title = null, $body = null, $custom = [], $badge = null)
+    {
+        $this->title = $title;
+        $this->body = $body;
+        $this->custom = $custom;
+        $this->badge = $badge;
+    }
 
 
     /**
-     * Set the body of the notification.
+     * Set the alert title of the notification.
+     *
+     * @param string $title
+     * @return $this
+     */
+    public function title($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Set the alert message of the notification.
      *
      * @param string $body
      * @return $this
@@ -47,19 +84,6 @@ class ApnMessage
     public function body($body)
     {
         $this->body = $body;
-
-        return $this;
-    }
-
-    /**
-     * Set the message of the notification.
-     *
-     * @param string $message
-     * @return $this
-     */
-    public function message($message)
-    {
-        $this->message = $message;
 
         return $this;
     }
@@ -78,28 +102,15 @@ class ApnMessage
     }
 
     /**
-     * Set the priority of the notification.
-     *
-     * @param integer $priority
-     * @return $this
-     */
-    public function priority($priority)
-    {
-        $this->priority = $priority;
-
-        return $this;
-    }
-
-    /**
-     * Add data to the notification.
+     * Add custom data to the notification.
      *
      * @param string $key
      * @param mixed $value
      * @return $this
      */
-    public function data($key, $value)
+    public function custom($key, $value)
     {
-        $this->data[$key] = $value;
+        $this->custom[$key] = $value;
 
         return $this;
     }
@@ -107,12 +118,12 @@ class ApnMessage
     /**
      * Override the data of the notification.
      *
-     * @param array $data
+     * @param array $custom
      * @return $this
      */
-    public function setData($data)
+    public function setCustom($custom)
     {
-        $this->data = $data;
+        $this->custom = $custom;
 
         return $this;
     }
@@ -126,10 +137,9 @@ class ApnMessage
      */
     public function action($action, $params = null)
     {
-        return $this->data('action', [
+        return $this->custom('action', [
             'action' => $action,
             'params' => $params
         ]);
     }
-
 }
