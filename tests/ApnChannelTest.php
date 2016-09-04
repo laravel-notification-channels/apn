@@ -32,7 +32,7 @@ class ChannelTest extends PHPUnit_Framework_TestCase
     {
         $this->client = Mockery::mock(Client::class);
         $this->events = Mockery::mock(Dispatcher::class);
-        $this->channel = new ApnChannel(ApnChannel::SANDBOX, '/some/path', null, $this->client, $this->events);
+        $this->channel = new ApnChannel($this->client, $this->events, ApnChannel::SANDBOX, '/some/path', null);
         $this->notification = new TestNotification;
         $this->notifiable = new TestNotifiable;
     }
