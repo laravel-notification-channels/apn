@@ -21,7 +21,7 @@ class ApnMessage
     /**
      * The badge of the notification.
      *
-     * @var integer
+     * @var int
      */
     public $badge;
 
@@ -43,9 +43,8 @@ class ApnMessage
      * @param string|null $title
      * @param string|null $body
      * @param array $custom
-     * @param null|integer $badge
+     * @param null|int $badge
      * @return static
-     *
      */
     public static function create($title = null, $body = null, $custom = [], $badge = null)
     {
@@ -56,9 +55,8 @@ class ApnMessage
      * @param string|null $title
      * @param string|null $body
      * @param array $custom
-     * @param null|integer $badge
+     * @param null|int $badge
      * @return static
-     *
      */
     public function __construct($title = null, $body = null, $custom = [], $badge = null)
     {
@@ -67,7 +65,6 @@ class ApnMessage
         $this->custom = $custom;
         $this->badge = $badge;
     }
-
 
     /**
      * Set the alert title of the notification.
@@ -98,7 +95,7 @@ class ApnMessage
     /**
      * Set the badge of the notification.
      *
-     * @param integer $badge
+     * @param int $badge
      * @return $this
      */
     public function badge($badge)
@@ -149,7 +146,7 @@ class ApnMessage
     }
 
     /**
-     * Add an action to the notification
+     * Add an action to the notification.
      *
      * @param string $action
      * @param mixed $params
@@ -159,7 +156,7 @@ class ApnMessage
     {
         return $this->custom('action', [
             'action' => $action,
-            'params' => $params
+            'params' => $params,
         ]);
     }
 }

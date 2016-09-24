@@ -10,6 +10,6 @@ class ConnectionFailed extends \Exception
      */
     public static function create($e)
     {
-        return new static("Cannot connect to APNs: ". $e->getMessage(), 0, $e);
+        return new static('Cannot connect to APNs: '.$e->getMessage(), 0, $e);
     }
 }
