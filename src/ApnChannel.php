@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn;
 
+use Exception;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
@@ -25,17 +26,15 @@ class ApnChannel
     /** @var  string|null */
     protected $passPhrase;
 
-    /** @var Client */
+    /** @var \ZendService\Apple\Apns\Client\Message */
     protected $client;
 
-    /** @var  Dispatcher */
+    /** @var  \Illuminate\Events\Dispatcher */
     protected $events;
 
     /**
-     * ApnChannel constructor.
-     *
-     * @param Client $client
-     * @param Dispatcher $events
+     * @param \ZendService\Apple\Apns\Client\Message $client
+     * @param \Illuminate\Events\Dispatcher $events
      * @param string $environment
      * @param string $certificate
      * @param string|null $passPhrase
@@ -50,13 +49,12 @@ class ApnChannel
     }
 
     /**
-     * Send the notification to Apple Push Notification Service
+     * Send the notification to Apple Push Notification Service.
      *
      * @param mixed $notifiable
-     * @param Notification $notification
-     * @return void
+     * @param \Illuminate\Notifications\Notification $notification
      *
-     * @throws Exceptions\ConnectionFailed|Exceptions\SendingFailed
+     * @throws \NotificationChannels\Apn\Exceptions\SendingFailed
      */
     public function send($notifiable, Notification $notification)
     {
@@ -89,7 +87,7 @@ class ApnChannel
 
                 $response = $this->client->send($packet);
 
-                if ($response->getCode() != Response::RESULT_OK) {
+                if ($response->getCode() !== Response::RESULT_OK) {
                     $this->events->fire(
                         new NotificationFailed($notifiable, $notification, $this, [
                             'token' => $token,
@@ -97,7 +95,7 @@ class ApnChannel
                         ])
                     );
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 throw SendingFailed::create($e);
             }
         }
@@ -106,11 +104,11 @@ class ApnChannel
     }
 
     /**
-     * Try to open connection
+     * Open the connection.
      *
      * @return bool
      *
-     * @throws Exceptions\ConnectionFailed
+     * @throws \NotificationChannels\Apn\Exceptions\ConnectionFailed
      */
     private function openConnection()
     {
@@ -118,15 +116,13 @@ class ApnChannel
             $this->client->open($this->environment, $this->certificate, $this->passPhrase);
 
             return true;
-        } catch (\Exception $e) {
-            throw Exceptions\ConnectionFailed::create($e);
+        } catch (Exception $exception) {
+            throw Exceptions\ConnectionFailed::create($exception);
         }
     }
 
     /**
-     * Close connection
-     *
-     * @return void
+     * Close the connection.
      */
     private function closeConnection()
     {

@@ -49,6 +49,7 @@ Before using the APN Service, follow the [Provisioning and Development guide fro
 
 You will need to generate a certificate for you application, before you can use this channel. Configure the path in config/broadcasting.php
 
+```php
     'connections' => [
       ....
       'apn' => [
@@ -58,6 +59,7 @@ You will need to generate a certificate for you application, before you can use 
       ],
       ...
     ]
+```
 
 ## Usage
 
@@ -96,10 +98,10 @@ public function routeNotificationForApn()
 
 ### Available methods
 
- - title($str)
- - body($str)
- - badge($integer)
- - custom($customData)
+ - `title($str)`
+ - `body($str)`
+ - `badge($integer)`
+ - `custom($customData)`
 
 ## Changelog
 

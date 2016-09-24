@@ -2,14 +2,17 @@
 
 namespace NotificationChannels\Apn\Exceptions;
 
-class SendingFailed extends \Exception
+use Exception;
+
+class SendingFailed extends Exception
 {
     /**
-     * @param \Exception $e
-     * @return SendingFailed
+     * @param \Exception $exception
+     *
+     * @return \NotificationChannels\Apn\Exceptions\SendingFailed
      */
-    public static function create($e)
+    public static function create($exception)
     {
-        return new static("Cannot send message to APNs: ". $e->getMessage(), 0, $e);
+        return new static("Cannot send message to APNs: {$exception->getMessage()}", 0, $exception);
     }
 }
