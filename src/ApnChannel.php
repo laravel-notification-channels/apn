@@ -16,19 +16,19 @@ class ApnChannel
     const SANDBOX = 0;
     const PRODUCTION = 1;
 
-    /** @var  string */
+    /** @var string */
     protected $environment;
 
-    /** @var  string */
+    /** @var string */
     protected $certificate;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $passPhrase;
 
     /** @var Client */
     protected $client;
 
-    /** @var  Dispatcher */
+    /** @var Dispatcher */
     protected $events;
 
     /**
@@ -50,7 +50,7 @@ class ApnChannel
     }
 
     /**
-     * Send the notification to Apple Push Notification Service
+     * Send the notification to Apple Push Notification Service.
      *
      * @param mixed $notifiable
      * @param Notification $notification
@@ -60,17 +60,17 @@ class ApnChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (!$this->openConnection()) {
+        if (! $this->openConnection()) {
             return;
         }
 
         $tokens = (array) $notifiable->routeNotificationFor('apn');
-        if (!$tokens) {
+        if (! $tokens) {
             return;
         }
 
         $message = $notification->toApn($notifiable);
-        if (!$message) {
+        if (! $message) {
             return;
         }
 
@@ -93,7 +93,7 @@ class ApnChannel
                     $this->events->fire(
                         new NotificationFailed($notifiable, $notification, $this, [
                             'token' => $token,
-                            'error' => $response->getCode()
+                            'error' => $response->getCode(),
                         ])
                     );
                 }
@@ -106,7 +106,7 @@ class ApnChannel
     }
 
     /**
-     * Try to open connection
+     * Try to open connection.
      *
      * @return bool
      *
@@ -124,7 +124,7 @@ class ApnChannel
     }
 
     /**
-     * Close connection
+     * Close connection.
      *
      * @return void
      */

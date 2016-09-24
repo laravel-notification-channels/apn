@@ -10,7 +10,6 @@ use NotificationChannels\Apn\ApnMessage;
 use PHPUnit_Framework_TestCase;
 use Mockery;
 use ZendService\Apple\Apns\Client\Message as Client;
-use ZendService\Apple\Apns\Message as Packet;
 use ZendService\Apple\Apns\Response\Message as MessageResponse;
 
 class ChannelTest extends PHPUnit_Framework_TestCase
@@ -76,7 +75,7 @@ class TestNotifiable
      */
     public function routeNotificationForApn()
     {
-        return array('662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd8', '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd9');
+        return ['662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd8', '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd9'];
     }
 }
 
