@@ -10,7 +10,6 @@ use NotificationChannels\Apn\ApnMessage;
 use PHPUnit_Framework_TestCase;
 use Mockery;
 use ZendService\Apple\Apns\Client\Message as Client;
-use ZendService\Apple\Apns\Message as Packet;
 use ZendService\Apple\Apns\Response\Message as MessageResponse;
 
 class ChannelTest extends PHPUnit_Framework_TestCase
