@@ -15,17 +15,13 @@ use ZendService\Apple\Apns\Response\Message as MessageResponse;
 
 class ChannelTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var Client
-     */
+    /** @var \ZendService\Apple\Apns\Client\Message */
     protected $client;
 
-    /**
-     * @var Dispatcher
-     */
+    /** @var \Illuminate\Events\Dispatcher */
     protected $events;
 
-    /** @var Notification */
+    /** @var \Illuminate\Notifications\Notification */
     protected $notification;
 
     public function setUp()
@@ -72,11 +68,11 @@ class TestNotifiable
     use Notifiable;
 
     /**
-     * @return int
+     * @return array
      */
     public function routeNotificationForApn()
     {
-        return array('662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd8', '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd9');
+        return ['662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd8', '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd9'];
     }
 }
 

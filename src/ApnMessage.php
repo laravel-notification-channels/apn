@@ -44,6 +44,7 @@ class ApnMessage
      * @param string|null $body
      * @param array $custom
      * @param null|integer $badge
+     *
      * @return static
      *
      */
@@ -57,6 +58,7 @@ class ApnMessage
      * @param string|null $body
      * @param array $custom
      * @param null|integer $badge
+     *
      * @return static
      *
      */
@@ -73,6 +75,7 @@ class ApnMessage
      * Set the alert title of the notification.
      *
      * @param string $title
+     *
      * @return $this
      */
     public function title($title)
@@ -86,6 +89,7 @@ class ApnMessage
      * Set the alert message of the notification.
      *
      * @param string $body
+     *
      * @return $this
      */
     public function body($body)
@@ -99,6 +103,7 @@ class ApnMessage
      * Set the badge of the notification.
      *
      * @param integer $badge
+     *
      * @return $this
      */
     public function badge($badge)
@@ -112,6 +117,7 @@ class ApnMessage
      * Set the sound for the notification.
      *
      * @param string|null $sound
+     *
      * @return $this
      */
     public function sound($sound)
@@ -126,6 +132,7 @@ class ApnMessage
      *
      * @param string $key
      * @param mixed $value
+     *
      * @return $this
      */
     public function custom($key, $value)
@@ -139,6 +146,7 @@ class ApnMessage
      * Override the data of the notification.
      *
      * @param array $custom
+     *
      * @return $this
      */
     public function setCustom($custom)
@@ -149,10 +157,11 @@ class ApnMessage
     }
 
     /**
-     * Add an action to the notification
+     * Add an action to the notification.
      *
      * @param string $action
      * @param mixed $params
+     *
      * @return $this
      */
     public function action($action, $params = null)

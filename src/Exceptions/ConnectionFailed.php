@@ -2,14 +2,17 @@
 
 namespace NotificationChannels\Apn\Exceptions;
 
-class ConnectionFailed extends \Exception
+use Exception;
+
+class ConnectionFailed extends Exception
 {
     /**
-     * @param \Exception $e
-     * @return ConnectionFailed
+     * @param \Exception $exception
+     *
+     * @return \NotificationChannels\Apn\Exceptions\ConnectionFailed
      */
-    public static function create($e)
+    public static function create($exception)
     {
-        return new static("Cannot connect to APNs: ". $e->getMessage(), 0, $e);
+        return new static("Cannot connect to APNs: {$exception->getMessage()}", 0, $exception);
     }
 }
