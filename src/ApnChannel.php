@@ -17,19 +17,19 @@ class ApnChannel
     const SANDBOX = 0;
     const PRODUCTION = 1;
 
-    /** @var  string */
+    /** @var string */
     protected $environment;
 
-    /** @var  string */
+    /** @var string */
     protected $certificate;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $passPhrase;
 
     /** @var \ZendService\Apple\Apns\Client\Message */
     protected $client;
 
-    /** @var  \Illuminate\Events\Dispatcher */
+    /** @var \Illuminate\Events\Dispatcher */
     protected $events;
 
     /**
@@ -58,17 +58,17 @@ class ApnChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (!$this->openConnection()) {
+        if (! $this->openConnection()) {
             return;
         }
 
         $tokens = (array) $notifiable->routeNotificationFor('apn');
-        if (!$tokens) {
+        if (! $tokens) {
             return;
         }
 
         $message = $notification->toApn($notifiable);
-        if (!$message) {
+        if (! $message) {
             return;
         }
 
@@ -91,7 +91,7 @@ class ApnChannel
                     $this->events->fire(
                         new NotificationFailed($notifiable, $notification, $this, [
                             'token' => $token,
-                            'error' => $response->getCode()
+                            'error' => $response->getCode(),
                         ])
                     );
                 }
