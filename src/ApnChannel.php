@@ -58,10 +58,6 @@ class ApnChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (! $this->openConnection()) {
-            return;
-        }
-
         $tokens = (array) $notifiable->routeNotificationFor('apn');
         if (! $tokens) {
             return;
@@ -69,6 +65,10 @@ class ApnChannel
 
         $message = $notification->toApn($notifiable);
         if (! $message) {
+            return;
+        }
+        
+        if (! $this->openConnection()) {
             return;
         }
 
