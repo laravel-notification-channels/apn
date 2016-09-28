@@ -67,7 +67,7 @@ class ApnChannel
         if (! $message) {
             return;
         }
-        
+
         if (! $this->openConnection()) {
             return;
         }
