@@ -63,7 +63,7 @@ You will need to generate a certificate for you application, before you can use 
 
 ## Usage
 
-You can now send messages to GCM by creating a GcmMessage:
+You can now send messages to APN by creating a ApnMessage:
 
 ```php
 use NotificationChannels\Apn\ApnChannel;
