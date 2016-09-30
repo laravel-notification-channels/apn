@@ -45,7 +45,7 @@ class ApnChannel
         $this->events = $events;
         $this->environment = $environment;
         $this->certificate = $certificate;
-        $this->passphrase = $passPhrase;
+        $this->passPhrase = $passPhrase;
     }
 
     /**
