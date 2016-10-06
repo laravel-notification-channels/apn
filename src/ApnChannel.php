@@ -69,8 +69,7 @@ class ApnChannel
 
         foreach ($devices as $device) {
             try {
-                
-                $deviceToken = ($device instanceOf ApnDeviceInterface) ? $device->getToken() : $device;
+                $deviceToken = ($device instanceof ApnDeviceInterface) ? $device->getToken() : $device;
                 
                 $message = $notification->toApn($notifiable, $device);
                 if (! $message) {
