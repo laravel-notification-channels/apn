@@ -77,7 +77,7 @@ class AccountApproved extends Notification
         return [ApnChannel::class];
     }
 
-    public function toApnNotification($notifiable)
+    public function toApn($notifiable)
     {
         return ApnMessage::create()
             ->badge(1)
