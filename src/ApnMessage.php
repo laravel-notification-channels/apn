@@ -33,6 +33,13 @@ class ApnMessage
     public $sound;
 
     /**
+     * The category for action button
+     * 
+     * @var string|null
+     * */
+    public $category;
+
+    /**
      * Additional data of the notification.
      *
      * @var array
@@ -120,6 +127,20 @@ class ApnMessage
     public function sound($sound)
     {
         $this->sound = $sound;
+
+        return $this;
+    }
+
+    /**
+     * Set category for this notification
+     * 
+     * @param string|null $category
+     * 
+     * @return $this
+     * */
+    public function category($category)
+    {
+        $this->category = $category;
 
         return $this;
     }

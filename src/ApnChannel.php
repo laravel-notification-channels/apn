@@ -82,6 +82,7 @@ class ApnChannel
                 $packet->setToken($token);
                 $packet->setBadge($message->badge);
                 $packet->setSound($message->sound);
+                $packet->setCategory($message->category);
                 $packet->setAlert($alert);
                 $packet->setCustom($message->custom);
 
