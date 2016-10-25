@@ -34,7 +34,7 @@ class ApnMessage
 
     /**
      * The category for action button
-     * 
+     *
      * @var string|null
      * */
     public $category;
@@ -133,9 +133,9 @@ class ApnMessage
 
     /**
      * Set category for this notification
-     * 
+     *
      * @param string|null $category
-     * 
+     *
      * @return $this
      * */
     public function category($category)
