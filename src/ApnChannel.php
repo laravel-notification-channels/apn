@@ -81,9 +81,7 @@ class ApnChannel
             return;
         }
 
-        if (! $this->openConnection()) {
-            return;
-        }
+        $this->openConnection();
 
         foreach ($tokens as $token) {
             try {
@@ -148,16 +146,12 @@ class ApnChannel
     /**
      * Open the connection.
      *
-     * @return bool
-     *
      * @throws \NotificationChannels\Apn\Exceptions\ConnectionFailed
      */
     private function openConnection()
     {
         try {
             $this->client->open($this->environment, $this->certificate, $this->passPhrase);
-
-            return true;
         } catch (Exception $exception) {
             throw Exceptions\ConnectionFailed::create($exception);
         }
