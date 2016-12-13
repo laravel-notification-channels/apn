@@ -103,6 +103,29 @@ public function routeNotificationForApn()
  - `badge($integer)`
  - `custom($customData)`
 
+### Feedback Service
+
+Apple implements a Feedback Service. See the [Zend APN documentation](https://framework.zend.com/manual/2.2/en/modules/zendservice.apple.apns.html#feedback-service)
+
+> APNS has a feedback service that you must listen to. Apple states that they monitor providers to ensure that they are listening to this service.
+> 
+> The feedback service simply returns an array of Feedback responses. All tokens provided in the feedback should not be sent to again; unless the device re-registers for push notification. You can use the time in the Feedback response to ensure that the device has not re-registered for push notifications since the last send.
+
+Example using the ApnChannel:
+
+```php
+use NotificationChannels\Apn\ApnChannel;
+use NotificationChannels\Apn\ApnFeedback;
+
+$channel = app(ApnChannel::class);
+
+/** @var ApnFeedback $feedback */
+foreach ($channel->getFeedback() as $feedback) {
+    \App\User::where('apn_token', $feedback->getToken())
+                ->update(['apn_token' => null]);
+}
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
