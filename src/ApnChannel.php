@@ -94,6 +94,7 @@ class ApnChannel
                 $packet->setBadge($message->badge);
                 $packet->setSound($message->sound);
                 $packet->setCategory($message->category);
+                $packet->setContentAvailable($message->contentAvailable);
                 $packet->setAlert($alert);
                 $packet->setCustom($message->custom);
 

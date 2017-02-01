@@ -40,6 +40,13 @@ class ApnMessage
     public $category;
 
     /**
+     * Value indicating embedding resource in notification
+     * 
+     * @var [type]
+     */
+    public $contentAvailable = null;
+
+    /**
      * Additional data of the notification.
      *
      * @var array
@@ -124,7 +131,7 @@ class ApnMessage
      *
      * @return $this
      */
-    public function sound($sound)
+    public function sound($sound = 'default')
     {
         $this->sound = $sound;
 
@@ -141,6 +148,20 @@ class ApnMessage
     public function category($category)
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Set content available value for this notification
+     * 
+     * @param integer $value
+     * 
+     * @return $this
+     */
+    public function contentAvailable($value = 1)
+    {
+        $this->contentAvailable = $value;
 
         return $this;
     }
