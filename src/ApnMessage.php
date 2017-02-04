@@ -33,7 +33,7 @@ class ApnMessage
     public $sound;
 
     /**
-     * The category for action button
+     * The category for action button.
      *
      * @var string|null
      * */
