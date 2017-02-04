@@ -41,7 +41,7 @@ class ApnMessage
 
     /**
      * Value indicating incoming resource in the notification.
-     * 
+     *
      * @var int|null
      */
     public $contentAvailable = null;
@@ -154,9 +154,9 @@ class ApnMessage
 
     /**
      * Set content available value for this notification.
-     * 
+     *
      * @param int $value
-     * 
+     *
      * @return $this
      */
     public function contentAvailable($value = 1)
