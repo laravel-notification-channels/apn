@@ -33,11 +33,18 @@ class ApnMessage
     public $sound;
 
     /**
-     * The category for action button
+     * The category for action button.
      *
      * @var string|null
      * */
     public $category;
+
+    /**
+     * Value indicating incoming resource in the notification.
+     *
+     * @var int|null
+     */
+    public $contentAvailable = null;
 
     /**
      * Additional data of the notification.
@@ -124,7 +131,7 @@ class ApnMessage
      *
      * @return $this
      */
-    public function sound($sound)
+    public function sound($sound = 'default')
     {
         $this->sound = $sound;
 
@@ -132,7 +139,7 @@ class ApnMessage
     }
 
     /**
-     * Set category for this notification
+     * Set category for this notification.
      *
      * @param string|null $category
      *
@@ -141,6 +148,20 @@ class ApnMessage
     public function category($category)
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Set content available value for this notification.
+     *
+     * @param int $value
+     *
+     * @return $this
+     */
+    public function contentAvailable($value = 1)
+    {
+        $this->contentAvailable = $value;
 
         return $this;
     }
