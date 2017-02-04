@@ -40,9 +40,9 @@ class ApnMessage
     public $category;
 
     /**
-     * Value indicating embedding resource in notification
+     * Value indicating incoming resource in the notification.
      * 
-     * @var [type]
+     * @var int|null
      */
     public $contentAvailable = null;
 
@@ -139,7 +139,7 @@ class ApnMessage
     }
 
     /**
-     * Set category for this notification
+     * Set category for this notification.
      *
      * @param string|null $category
      *
@@ -153,9 +153,9 @@ class ApnMessage
     }
 
     /**
-     * Set content available value for this notification
+     * Set content available value for this notification.
      * 
-     * @param integer $value
+     * @param int $value
      * 
      * @return $this
      */

@@ -4,14 +4,14 @@ namespace NotificationChannels\Apn;
 
 use Exception;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Notifications\Events\NotificationFailed;
-use Illuminate\Notifications\Notification;
-use NotificationChannels\Apn\Exceptions\SendingFailed;
-use ZendService\Apple\Apns\Client\Message as Client;
-use ZendService\Apple\Apns\Client\Feedback as FeedbackClient;
-use ZendService\Apple\Apns\Message as Packet;
 use ZendService\Apple\Apns\Message\Alert;
+use Illuminate\Notifications\Notification;
+use ZendService\Apple\Apns\Message as Packet;
+use ZendService\Apple\Apns\Client\Message as Client;
+use NotificationChannels\Apn\Exceptions\SendingFailed;
+use Illuminate\Notifications\Events\NotificationFailed;
 use ZendService\Apple\Apns\Response\Message as Response;
+use ZendService\Apple\Apns\Client\Feedback as FeedbackClient;
 use ZendService\Apple\Apns\Response\Feedback as FeedbackResponse;
 
 class ApnChannel
@@ -117,7 +117,7 @@ class ApnChannel
     }
 
     /**
-     * Get feedback from the Apple Feedback Service about failed deliveries
+     * Get feedback from the Apple Feedback Service about failed deliveries.
      *
      * @return array|ApnFeedback[]
      * @throws Exceptions\ConnectionFailed
