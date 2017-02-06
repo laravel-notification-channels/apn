@@ -71,26 +71,28 @@ class ApnChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $tokens = (array) $notifiable->routeNotificationFor('apn');
-        if (! $tokens) {
-            return;
-        }
-
-        $message = $notification->toApn($notifiable);
-        if (! $message) {
+        $devices = $notifiable->routeNotificationFor('apn');
+        if (! $devices) {
             return;
         }
 
         $this->openConnection();
 
-        foreach ($tokens as $token) {
+        foreach ($devices as $device) {
             try {
+                $deviceToken = ($device instanceof ApnDeviceInterface) ? $device->getToken() : $device;
+
+                $message = $notification->toApn($notifiable, $device);
+                if (! $message) {
+                    continue;
+                }
+
                 $alert = new Alert();
                 $alert->setTitle($message->title);
                 $alert->setBody($message->body);
 
                 $packet = new Packet();
-                $packet->setToken($token);
+                $packet->setToken($deviceToken);
                 $packet->setBadge($message->badge);
                 $packet->setSound($message->sound);
                 $packet->setCategory($message->category);
@@ -103,7 +105,7 @@ class ApnChannel
                 if ($response->getCode() !== Response::RESULT_OK) {
                     $this->events->fire(
                         new NotificationFailed($notifiable, $notification, $this, [
-                            'token' => $token,
+                            'token' => $deviceToken,
                             'error' => $response->getCode(),
                         ])
                     );
