@@ -63,8 +63,10 @@ class ApnChannel
             return;
         }
 
-        if (! $this->openConnection()) {
-            return;
+        if(!$this->environment == 'pretend') {
+            if (! $this->openConnection()) {
+                return;
+            }
         }
 
         foreach ($devices as $device) {
@@ -86,23 +88,32 @@ class ApnChannel
                 $packet->setSound($message->sound);
                 $packet->setAlert($alert);
                 $packet->setCustom($message->custom);
+                
+                if($this->environment == 'pretend') {
+                
+                    \Log::info('APN Notification Sent to: ' . $deviceToken);
+                    
+                } else {
 
-                $response = $this->client->send($packet);
+                    $response = $this->client->send($packet);
 
-                if ($response->getCode() !== Response::RESULT_OK) {
-                    $this->events->fire(
-                        new NotificationFailed($notifiable, $notification, $this, [
-                            'token' => $deviceToken,
-                            'error' => $response->getCode(),
-                        ])
-                    );
+                    if ($response->getCode() !== Response::RESULT_OK) {
+                        $this->events->fire(
+                            new NotificationFailed($notifiable, $notification, $this, [
+                                'token' => $deviceToken,
+                                'error' => $response->getCode(),
+                            ])
+                        );
+                    }
                 }
             } catch (Exception $e) {
                 throw SendingFailed::create($e);
             }
         }
 
-        $this->closeConnection();
+        if(!$this->environment == 'pretend') {
+            $this->closeConnection();
+        }
     }
 
     /**
