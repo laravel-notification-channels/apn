@@ -63,7 +63,7 @@ class ApnChannel
             return;
         }
 
-        if(!$this->environment == 'pretend') {
+        if($this->environment !== 'pretend') {
             if (! $this->openConnection()) {
                 return;
             }
@@ -111,7 +111,7 @@ class ApnChannel
             }
         }
 
-        if(!$this->environment == 'pretend') {
+        if($this->environment !== 'pretend') {
             $this->closeConnection();
         }
     }
