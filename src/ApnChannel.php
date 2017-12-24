@@ -107,6 +107,10 @@ class ApnChannel
                             'error' => $response->getCode(),
                         ])
                     );
+                    
+                    //connection is useless so create a new connection
+                    $this->closeConnection();
+                    $this->openConnection();
                 }
             } catch (Exception $e) {
                 throw SendingFailed::create($e);
