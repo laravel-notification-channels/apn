@@ -107,7 +107,6 @@ class ApnChannel
                             'error' => $response->getCode(),
                         ])
                     );
-                    
                     //connection is useless so create a new connection
                     $this->closeConnection();
                     $this->openConnection();
