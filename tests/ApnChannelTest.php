@@ -2,14 +2,14 @@
 
 namespace NotificationChannels\Gcm\Test;
 
+use Mockery;
+use PHPUnit_Framework_TestCase;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Notifiable;
 use NotificationChannels\Apn\ApnChannel;
-use Illuminate\Notifications\Notification;
-use NotificationChannels\Apn\ApnFeedback;
 use NotificationChannels\Apn\ApnMessage;
-use PHPUnit_Framework_TestCase;
-use Mockery;
+use NotificationChannels\Apn\ApnFeedback;
+use Illuminate\Notifications\Notification;
 use ZendService\Apple\Apns\Client\Message as Client;
 use ZendService\Apple\Apns\Client\Feedback as FeedbackClient;
 use ZendService\Apple\Apns\Response\Message as MessageResponse;
