@@ -30,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "NotificationChannels\\Apn\\Test\\": "tests"
+            "NotificationChannels\\Apn\\Tests\\": "tests"
         }
     },
     "scripts": {
