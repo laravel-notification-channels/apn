@@ -30,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "NotificationChannels\\Apn\\Test\\": "tests"
+            "NotificationChannels\\Apn\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -42,6 +42,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "0.2-dev"
+        },
+        "laravel": {
+            "providers": [
+                "NotificationChannels\\Apn\\ApnServiceProvider"
+            ]
         }
     }
 }
