@@ -3,17 +3,13 @@
 namespace NotificationChannels\Apn\Tests;
 
 use Mockery;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Notifiable;
 use NotificationChannels\Apn\ApnChannel;
 use NotificationChannels\Apn\ApnMessage;
-use NotificationChannels\Apn\ApnFeedback;
 use Illuminate\Notifications\Notification;
 use ZendService\Apple\Apns\Client\Message as Client;
-use ZendService\Apple\Apns\Client\Feedback as FeedbackClient;
 use ZendService\Apple\Apns\Response\Message as MessageResponse;
-use ZendService\Apple\Apns\Response\Feedback as FeedbackResponse;
 
 class ChannelTest extends TestCase
 {
@@ -35,22 +31,10 @@ class ChannelTest extends TestCase
     public function setUp()
     {
         $this->client = Mockery::mock(Client::class);
-        $this->feedbackClient = Mockery::mock(FeedbackClient::class);
         $this->events = Mockery::mock(Dispatcher::class);
-        $this->channel = new ApnChannel($this->client, $this->feedbackClient, $this->events, ApnChannel::SANDBOX, '/some/path', null);
+        $this->channel = new ApnChannel($this->client, $this->events, ApnChannel::SANDBOX, '/some/path', null);
         $this->notification = new TestNotification;
         $this->notifiable = new TestNotifiable;
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        if ($container = Mockery::getContainer()) {
-            $this->addToAssertionCount($container->mockery_getExpectationCount());
-        }
-
-        Mockery::close();
     }
 
     /** @test */
@@ -84,29 +68,6 @@ class ChannelTest extends TestCase
 
         $this->channel->send($this->notifiable, $this->notification);
     }
-
-    /** @test */
-    public function it_can_receive_feedback()
-    {
-        $time = strtotime('now');
-        $feedbackResponse = new FeedbackResponse();
-        $feedbackResponse->setToken('abc123');
-        $feedbackResponse->setTime($time);
-
-        $this->client->shouldReceive('close');  // Close is called on destruct
-
-        $this->feedbackClient->shouldReceive('open')->once();
-        $this->feedbackClient->shouldReceive('feedback')->once()->andReturn([$feedbackResponse]);
-        $this->feedbackClient->shouldReceive('close');
-
-        $feedback = $this->channel->getFeedback();
-        $this->assertCount(1, $feedback);
-
-        $feedback = $feedback[0];
-        $this->assertInstanceOf(ApnFeedback::class, $feedback);
-        $this->assertEquals($time, $feedback->getTimestamp());
-        $this->assertEquals('abc123', $feedback->getToken());
-    }
 }
 
 class TestNotifiable
@@ -118,7 +79,10 @@ class TestNotifiable
      */
     public function routeNotificationForApn()
     {
-        return ['662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd8', '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd9'];
+        return [
+            '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd8',
+            '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd9',
+        ];
     }
 }
 

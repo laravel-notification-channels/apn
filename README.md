@@ -114,15 +114,16 @@ Apple implements a Feedback Service. See the [Zend APN documentation](https://fr
 Example using the ApnChannel:
 
 ```php
-use NotificationChannels\Apn\ApnChannel;
+use App\User;
+use NotificationChannels\Apn\FeedbackService;
 use NotificationChannels\Apn\ApnFeedback;
 
-$channel = app(ApnChannel::class);
+$feedbackService = app(FeedbackService::class);
 
 /** @var ApnFeedback $feedback */
-foreach ($channel->getFeedback() as $feedback) {
-    \App\User::where('apn_token', $feedback->getToken())
-                ->update(['apn_token' => null]);
+foreach ($feedbackService->get() as $feedback) {
+    User::where('apn_token', $feedback->getToken())
+        ->update(['apn_token' => null]);
 }
 ```
 
