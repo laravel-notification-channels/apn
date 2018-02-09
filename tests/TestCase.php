@@ -28,7 +28,7 @@ abstract class TestCase extends BaseTestCase
                     'apn' => [
                         'environment' => 'environment',
                         'certificate' => 'certificate',
-                        'pass_phrase' => 'pass_phrase'
+                        'pass_phrase' => 'pass_phrase',
                     ]
                 ]
             ]
