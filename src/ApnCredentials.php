@@ -7,10 +7,10 @@ use Illuminate\Contracts\Config\Repository;
 class ApnCredentials
 {
     /**
-    * The config repository.
-    *
-    * @var \Illuminate\Contracts\Config\Repository
-    */
+     * The config repository.
+     *
+     * @var \Illuminate\Contracts\Config\Repository
+     */
     protected $config;
 
     /**
