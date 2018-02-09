@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn;
 
+use Exception;
 use Illuminate\Events\Dispatcher;
 use ZendService\Apple\Apns\Message\Alert;
 use Illuminate\Notifications\Notification;

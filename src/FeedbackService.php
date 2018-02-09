@@ -19,7 +19,7 @@ class FeedbackService
      * Create feedback service instance.
      *
      * @param  \ZendService\Apple\Apns\Client\Feedback  $client
-     * @param  int  $environment
+     * @param  string  $environment
      * @param  string  $certificate
      * @param  string|null  $passPhrase
      */

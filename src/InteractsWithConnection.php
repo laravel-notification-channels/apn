@@ -10,7 +10,7 @@ trait InteractsWithConnection
     /**
      * The connection environment.
      *
-     * @var int
+     * @var string
      */
     protected $environment;
 
