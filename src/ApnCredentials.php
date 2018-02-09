@@ -7,6 +7,13 @@ use Illuminate\Contracts\Config\Repository;
 class ApnCredentials
 {
     /**
+    * The config repository.
+    *
+    * @var \Illuminate\Contracts\Config\Repository
+    */
+    protected $config;
+
+    /**
      * Create a new instance of the credentials.
      *
      * @param  \Illuminate\Contracts\Config\Repository
