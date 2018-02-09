@@ -48,8 +48,6 @@ class FeedbackService
         return $feedback;
     }
 
-
-
     /**
      * Fetch the feedback from APNS and collect our feedback object.
      *
