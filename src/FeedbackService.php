@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn;
 
+use Exception;
 use ZendService\Apple\Apns\Client\Feedback as Client;
 use NotificationChannels\Apn\Exception\ConnectionFailed;
 
@@ -15,13 +16,33 @@ class FeedbackService
     protected $client;
 
     /**
+     * The connection environment.
+     *
+     * @var int
+     */
+    protected $environment;
+
+    /**
+     * The connection certificate.
+     *
+     * @var string
+     */
+    protected $certificate;
+
+    /**
+     * The connection pass phrase.
+     *
+     * @var stirng
+     */
+    protected $passPhrase;
+
+    /**
      * Create feedback service instance.
      *
      * @param  \ZendService\Apple\Apns\Client\Feedback  $client
      * @param  string  $environment
      * @param  string  $certificate
      * @param  string|null  $passPhrase
-     * @return void
      */
     public function __construct(Client $client, $environment, $certificate, $passPhrase = null)
     {
