@@ -29,9 +29,9 @@ abstract class TestCase extends BaseTestCase
                         'environment' => 'environment',
                         'certificate' => 'certificate',
                         'pass_phrase' => 'pass_phrase',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ]);
 
         return new ApnCredentials($config);
