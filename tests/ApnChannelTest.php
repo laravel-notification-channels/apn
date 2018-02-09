@@ -3,7 +3,7 @@
 namespace NotificationChannels\Apn\Tests;
 
 use Mockery;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Notifiable;
 use NotificationChannels\Apn\ApnChannel;
@@ -15,7 +15,7 @@ use ZendService\Apple\Apns\Client\Feedback as FeedbackClient;
 use ZendService\Apple\Apns\Response\Message as MessageResponse;
 use ZendService\Apple\Apns\Response\Feedback as FeedbackResponse;
 
-class ChannelTest extends PHPUnit_Framework_TestCase
+class ChannelTest extends TestCase
 {
     /** @var \ZendService\Apple\Apns\Client\Message */
     protected $client;
@@ -44,8 +44,13 @@ class ChannelTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        Mockery::close();
         parent::tearDown();
+
+        if ($container = Mockery::getContainer()) {
+            $this->addToAssertionCount($container->mockery_getExpectationCount());
+        }
+
+        Mockery::close();
     }
 
     /** @test */
@@ -53,22 +58,29 @@ class ChannelTest extends PHPUnit_Framework_TestCase
     {
         $message = $this->notification->toApn($this->notifiable);
 
-        $message->title;
-        $message->body;
-        $message->custom;
-
         $responseOk = new MessageResponse();
         $responseOk->setCode(MessageResponse::RESULT_OK);
+
+        $this->events->shouldNotReceive('fire');
+        $this->client->shouldReceive('open')->once();
+        $this->client->shouldReceive('send')->twice()->andReturn($responseOk);
+        $this->client->shouldReceive('close')->once();
+
+        $this->channel->send($this->notifiable, $this->notification);
+    }
+
+    /** @test */
+    public function it_fires_notification_failed_event_on_failure()
+    {
+        $message = $this->notification->toApn($this->notifiable);
 
         $responseFail = new MessageResponse();
         $responseFail->setCode(MessageResponse::RESULT_INVALID_TOKEN);
 
-        $this->events->shouldReceive('fire')->once();
+        $this->events->shouldReceive('fire')->twice();
         $this->client->shouldReceive('open')->once();
-        $this->client->shouldReceive('send')->twice()->andReturn($responseOk, $responseFail);
+        $this->client->shouldReceive('send')->twice()->andReturn($responseFail);
         $this->client->shouldReceive('close')->once();
-
-        $this->feedbackClient->shouldReceive('close');  // Close is called on destruct
 
         $this->channel->send($this->notifiable, $this->notification);
     }
