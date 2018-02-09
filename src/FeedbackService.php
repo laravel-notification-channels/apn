@@ -17,7 +17,6 @@ class FeedbackService
      * Create feedback service instance.
      *
      * @param  \ZendService\Apple\Apns\Client\Feedback  $client
-     * @param  \NotificationChannels\Apn\ApnCredentials  $credentials
      */
     public function __construct(Client $client)
     {

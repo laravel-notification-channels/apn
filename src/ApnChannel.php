@@ -34,15 +34,11 @@ class ApnChannel
     /** @var \Illuminate\Events\Dispatcher */
     protected $events;
 
-    /** @var \NotificationChannels\Apn\ApnCredentials */
-    protected $credentials;
-
     /**
      * Create a new instance of the APN channel.
      *
      * @param  \ZendService\Apple\Apns\Client\Message  $client
      * @param  \Illuminate\Events\Dispatcher  $events
-     * @param  \NotificationChannels\Apn\ApnCredentials  $credentials
      */
     public function __construct(Client $client, Dispatcher $events)
     {
