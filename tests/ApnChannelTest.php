@@ -32,8 +32,7 @@ class ChannelTest extends TestCase
     {
         $this->client = Mockery::mock(Client::class);
         $this->events = Mockery::mock(Dispatcher::class);
-        $this->credentials = $this->getTestCredentials();
-        $this->channel = new ApnChannel($this->client, $this->events, $this->credentials);
+        $this->channel = new ApnChannel($this->client, $this->events);
         $this->notification = new TestNotification;
         $this->notifiable = new TestNotifiable;
     }
@@ -47,9 +46,7 @@ class ChannelTest extends TestCase
         $responseOk->setCode(MessageResponse::RESULT_OK);
 
         $this->events->shouldNotReceive('fire');
-        $this->client->shouldReceive('open')->once();
         $this->client->shouldReceive('send')->twice()->andReturn($responseOk);
-        $this->client->shouldReceive('close')->once();
 
         $this->channel->send($this->notifiable, $this->notification);
     }
@@ -63,9 +60,7 @@ class ChannelTest extends TestCase
         $responseFail->setCode(MessageResponse::RESULT_INVALID_TOKEN);
 
         $this->events->shouldReceive('fire')->twice();
-        $this->client->shouldReceive('open')->once();
         $this->client->shouldReceive('send')->twice()->andReturn($responseFail);
-        $this->client->shouldReceive('close')->once();
 
         $this->channel->send($this->notifiable, $this->notification);
     }
