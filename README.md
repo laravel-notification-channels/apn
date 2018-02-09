@@ -122,7 +122,7 @@ $feedbackService = app(FeedbackService::class);
 
 /** @var ApnFeedback $feedback */
 foreach ($feedbackService->get() as $feedback) {
-    User::where('apn_token', $feedback->getToken())
+    User::where('apn_token', $feedback->token)
         ->update(['apn_token' => null]);
 }
 ```

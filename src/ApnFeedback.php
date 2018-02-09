@@ -4,32 +4,29 @@ namespace NotificationChannels\Apn;
 
 class ApnFeedback
 {
-    protected $token;
-    protected $time;
+    /**
+     * The token for the feedback.
+     *
+     * @var string
+     */
+    public $token;
 
     /**
-     * @param string $token
-     * @param int $time
+     * The timestamp of the feedback.
+     *
+     * @var int
      */
-    public function __construct($token, $time)
+    public $timestamp;
+
+    /**
+     * Create new feedback instance.
+     *
+     * @param  string  $token
+     * @param  int  $timestamp
+     */
+    public function __construct($token, $timestamp)
     {
         $this->token = $token;
-        $this->time = $time;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTimestamp()
-    {
-        return $this->time;
+        $this->timestamp = $timestamp;
     }
 }

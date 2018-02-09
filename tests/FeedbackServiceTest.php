@@ -43,7 +43,7 @@ class FeedbackServiceTest extends TestCase
 
         $feedback = $feedback[0];
         $this->assertInstanceOf(ApnFeedback::class, $feedback);
-        $this->assertEquals($time, $feedback->getTimestamp());
-        $this->assertEquals('abc123', $feedback->getToken());
+        $this->assertEquals($time, $feedback->timestamp);
+        $this->assertEquals('abc123', $feedback->token);
     }
 }
