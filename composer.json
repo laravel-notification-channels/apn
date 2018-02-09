@@ -11,11 +11,11 @@
         }
     ],
     "require": {
-        "php": ">=5.6.4",
-        "illuminate/events": "^5.3",
-        "illuminate/notifications": "^5.3",
-        "illuminate/support": "^5.3",
-        "illuminate/queue": "^5.3",
+        "php": ">=7.0.0",
+        "illuminate/events": "^5.5",
+        "illuminate/notifications": "^5.5",
+        "illuminate/support": "^5.5",
+        "illuminate/queue": "^5.5",
         "zendframework/zendservice-apple-apns": "^1.2"
     },
     "require-dev": {
