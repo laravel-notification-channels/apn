@@ -58,8 +58,6 @@ class ApnChannel
      *
      * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
-     *
-     * @throws \NotificationChannels\Apn\Exceptions\SendingFailed
      */
     public function send($notifiable, Notification $notification)
     {
@@ -76,35 +74,63 @@ class ApnChannel
         $this->openConnection();
 
         foreach ($tokens as $token) {
-            try {
-                $alert = new Alert();
-                $alert->setTitle($message->title);
-                $alert->setBody($message->body);
-
-                $packet = new Packet();
-                $packet->setToken($token);
-                $packet->setBadge($message->badge);
-                $packet->setSound($message->sound);
-                $packet->setCategory($message->category);
-                $packet->setContentAvailable($message->contentAvailable);
-                $packet->setAlert($alert);
-                $packet->setCustom($message->custom);
-
-                $response = $this->client->send($packet);
-
-                if ($response->getCode() !== Response::RESULT_OK) {
-                    $this->events->fire(
-                        new NotificationFailed($notifiable, $notification, $this, [
-                            'token' => $token,
-                            'error' => $response->getCode(),
-                        ])
-                    );
-                }
-            } catch (Exception $e) {
-                throw SendingFailed::create($e);
-            }
+            $packet = $this->getPacket($message, $token);
+            $this->sendPacket($notifiable, $notification, $packet, $token);
         }
 
         $this->closeConnection();
+    }
+
+    /**
+     * Get the packet for the given message and token.
+     *
+     * @param  \NotificationChannels\Apn\ApnMessage  $message
+     * @param  string
+     * @return \ZendService\Apple\Apns\Message
+     */
+    protected function getPacket($message, $token)
+    {
+        $alert = new Alert();
+        $alert->setTitle($message->title);
+        $alert->setBody($message->body);
+
+        $packet = new Packet();
+        $packet->setToken($token);
+        $packet->setBadge($message->badge);
+        $packet->setSound($message->sound);
+        $packet->setCategory($message->category);
+        $packet->setContentAvailable($message->contentAvailable);
+        $packet->setAlert($alert);
+        $packet->setCustom($message->custom);
+
+        return $packet;
+    }
+
+    /**
+     * Sent the notification to the given token.
+     *
+     * @param mixed $notifiable
+     * @param \Illuminate\Notifications\Notification $notification
+     * @param \ZendService\Apple\Apns\Message  $packet
+     * @param  string  $token
+     * @return void
+     * @throws \NotificationChannels\Apn\Exceptions\SendingFailed
+     */
+    protected function sendPacket($notifiable, $notification, $packet, $token)
+    {
+        try {
+            $response = $this->client->send($packet);
+
+            if ($response->getCode() !== Response::RESULT_OK) {
+                $this->events->fire(
+                    new NotificationFailed($notifiable, $notification, $this, [
+                        'token' => $token,
+                        'error' => $response->getCode(),
+                    ])
+                );
+            }
+        } catch (Exception $e) {
+            throw SendingFailed::create($e);
+        }
     }
 }
