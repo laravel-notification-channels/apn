@@ -3,6 +3,8 @@
 namespace NotificationChannels\Apn\Tests;
 
 use Mockery;
+use Illuminate\Config\Repository;
+use NotificationChannels\Apn\ApnCredentials;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -16,5 +18,22 @@ abstract class TestCase extends BaseTestCase
         }
 
         Mockery::close();
+    }
+
+    protected function getTestCredentials()
+    {
+        $config = new Repository([
+            'broadcasting' => [
+                'connections' => [
+                    'apn' => [
+                        'environment' => 'environment',
+                        'certificate' => 'certificate',
+                        'pass_phrase' => 'pass_phrase'
+                    ]
+                ]
+            ]
+        ]);
+
+        return new ApnCredentials($config);
     }
 }

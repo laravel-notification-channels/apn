@@ -16,7 +16,18 @@ class ApnChannel
 {
     use InteractsWithConnection;
 
+    /**
+     * The sandbox environment identifier.
+     *
+     * @var int
+     */
     const SANDBOX = 0;
+
+    /**
+     * The production environment identifier.
+     *
+     * @var int
+     */
     const PRODUCTION = 1;
 
     /** @var \ZendService\Apple\Apns\Client\Message */
@@ -25,25 +36,20 @@ class ApnChannel
     /** @var \Illuminate\Events\Dispatcher */
     protected $events;
 
+    /** @var \NotificationChannels\Apn\ApnCredentials */
+    protected $credentials;
+
     /**
-     * @param \ZendService\Apple\Apns\Client\Message $client
-     * @param \Illuminate\Events\Dispatcher $events
-     * @param string $environment
-     * @param string $certificate
-     * @param string|null $passPhrase
+     * Create a new instance of the APN channel>
+     *
+     * @param  \ZendService\Apple\Apns\Client\Message  $client
+     * @param  \Illuminate\Events\Dispatcher  $events
+     * @param  \NotificationChannels\Apn\ApnCredentials  $credentials
      */
-    public function __construct(
-        Client $client,
-        Dispatcher $events,
-        $environment,
-        $certificate,
-        $passPhrase = null
-    ) {
+    public function __construct(Client $client, Dispatcher $events, ApnCredentials $credentials) {
         $this->client = $client;
         $this->events = $events;
-        $this->environment = $environment;
-        $this->certificate = $certificate;
-        $this->passPhrase = $passPhrase;
+        $this->credentials = $credentials;
     }
 
     /**

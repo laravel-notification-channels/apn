@@ -23,12 +23,10 @@ class FeedbackService
      * @param  string  $certificate
      * @param  string|null  $passPhrase
      */
-    public function __construct(Client $client, $environment, $certificate, $passPhrase = null)
+    public function __construct(Client $client, ApnCredentials $credentials)
     {
         $this->client = $client;
-        $this->environment = $environment;
-        $this->certificate = $certificate;
-        $this->passPhrase = $passPhrase;
+        $this->credentials = $credentials;
     }
 
     /**

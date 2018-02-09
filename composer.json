@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
+        "illuminate/config": "^5.5",
         "illuminate/events": "^5.5",
         "illuminate/notifications": "^5.5",
         "illuminate/support": "^5.5",
@@ -42,11 +43,6 @@
     "extra": {
         "branch-alias": {
             "dev-master": "0.2-dev"
-        },
-        "laravel": {
-            "providers": [
-                "NotificationChannels\\Apn\\ApnServiceProvider"
-            ]
         }
     }
 }

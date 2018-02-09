@@ -23,7 +23,8 @@ class FeedbackServiceTest extends TestCase
     public function setUp()
     {
         $this->client = Mockery::mock(Client::class);
-        $this->feedbackService = new FeedbackService($this->client, ApnChannel::SANDBOX, '/some/path', null);
+        $this->credentials = $this->getTestCredentials();
+        $this->feedbackService = new FeedbackService($this->client, $this->credentials);
     }
 
     /** @test */

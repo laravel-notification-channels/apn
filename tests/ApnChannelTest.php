@@ -32,7 +32,8 @@ class ChannelTest extends TestCase
     {
         $this->client = Mockery::mock(Client::class);
         $this->events = Mockery::mock(Dispatcher::class);
-        $this->channel = new ApnChannel($this->client, $this->events, ApnChannel::SANDBOX, '/some/path', null);
+        $this->credentials = $this->getTestCredentials();
+        $this->channel = new ApnChannel($this->client, $this->events, $this->credentials);
         $this->notification = new TestNotification;
         $this->notifiable = new TestNotifiable;
     }
