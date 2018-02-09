@@ -43,7 +43,7 @@ class FeedbackService
 
         $feedback = $this->fetchFeedback();
 
-        $this->client->close();
+        $this->closeConnection();
 
         return $feedback;
     }
