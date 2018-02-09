@@ -71,8 +71,6 @@ class ApnMessage
      * @param string|null $body
      * @param array $custom
      * @param null|int $badge
-     *
-     * @return static
      */
     public function __construct($title = null, $body = null, $custom = [], $badge = null)
     {
