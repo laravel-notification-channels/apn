@@ -14,8 +14,6 @@ use ZendService\Apple\Apns\Response\Message as Response;
 
 class ApnChannel
 {
-    use InteractsWithConnection;
-
     /**
      * The sandbox environment identifier.
      *
@@ -46,11 +44,10 @@ class ApnChannel
      * @param  \Illuminate\Events\Dispatcher  $events
      * @param  \NotificationChannels\Apn\ApnCredentials  $credentials
      */
-    public function __construct(Client $client, Dispatcher $events, ApnCredentials $credentials)
+    public function __construct(Client $client, Dispatcher $events)
     {
         $this->client = $client;
         $this->events = $events;
-        $this->credentials = $credentials;
     }
 
     /**
@@ -71,14 +68,10 @@ class ApnChannel
             return;
         }
 
-        $this->openConnection();
-
         foreach ($tokens as $token) {
             $packet = $this->getPacket($message, $token);
             $this->sendPacket($notifiable, $notification, $packet, $token);
         }
-
-        $this->closeConnection();
     }
 
     /**

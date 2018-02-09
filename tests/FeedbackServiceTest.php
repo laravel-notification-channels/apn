@@ -23,8 +23,7 @@ class FeedbackServiceTest extends TestCase
     public function setUp()
     {
         $this->client = Mockery::mock(Client::class);
-        $this->credentials = $this->getTestCredentials();
-        $this->feedbackService = new FeedbackService($this->client, $this->credentials);
+        $this->feedbackService = new FeedbackService($this->client);
     }
 
     /** @test */
@@ -35,9 +34,7 @@ class FeedbackServiceTest extends TestCase
         $feedbackResponse->setToken('abc123');
         $feedbackResponse->setTime($time);
 
-        $this->client->shouldReceive('open')->once();
         $this->client->shouldReceive('feedback')->once()->andReturn([$feedbackResponse]);
-        $this->client->shouldReceive('close');
 
         $feedback = $this->feedbackService->get();
         $this->assertCount(1, $feedback);
