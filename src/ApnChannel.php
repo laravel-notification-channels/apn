@@ -2,7 +2,6 @@
 
 namespace NotificationChannels\Apn;
 
-use Exception;
 use Illuminate\Events\Dispatcher;
 use ZendService\Apple\Apns\Message\Alert;
 use Illuminate\Notifications\Notification;
@@ -14,17 +13,10 @@ use ZendService\Apple\Apns\Response\Message as Response;
 
 class ApnChannel
 {
+    use InteractsWithConnection;
+
     const SANDBOX = 0;
     const PRODUCTION = 1;
-
-    /** @var string */
-    protected $environment;
-
-    /** @var string */
-    protected $certificate;
-
-    /** @var string|null */
-    protected $passPhrase;
 
     /** @var \ZendService\Apple\Apns\Client\Message */
     protected $client;
@@ -106,27 +98,5 @@ class ApnChannel
         }
 
         $this->closeConnection();
-    }
-
-    /**
-     * Open the connection.
-     *
-     * @throws \NotificationChannels\Apn\Exceptions\ConnectionFailed
-     */
-    private function openConnection()
-    {
-        try {
-            $this->client->open($this->environment, $this->certificate, $this->passPhrase);
-        } catch (Exception $exception) {
-            throw Exceptions\ConnectionFailed::create($exception);
-        }
-    }
-
-    /**
-     * Close the connection.
-     */
-    private function closeConnection()
-    {
-        $this->client->close();
     }
 }

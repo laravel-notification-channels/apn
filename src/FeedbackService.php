@@ -2,39 +2,18 @@
 
 namespace NotificationChannels\Apn;
 
-use Exception;
 use ZendService\Apple\Apns\Client\Feedback as Client;
-use NotificationChannels\Apn\Exception\ConnectionFailed;
 
 class FeedbackService
 {
+    use InteractsWithConnection;
+
     /**
      * The feedback client instance.
      *
      * @var \ZendService\Apple\Apns\Client\Feedback
      */
     protected $client;
-
-    /**
-     * The connection environment.
-     *
-     * @var int
-     */
-    protected $environment;
-
-    /**
-     * The connection certificate.
-     *
-     * @var string
-     */
-    protected $certificate;
-
-    /**
-     * The connection pass phrase.
-     *
-     * @var string
-     */
-    protected $passPhrase;
 
     /**
      * Create feedback service instance.
@@ -69,20 +48,7 @@ class FeedbackService
         return $feedback;
     }
 
-    /**
-     * Open the connection to the feedback service.
-     *
-     * @return void
-     * @throws \NotificationChannels\Apn\Exception\ConnectionFailed
-     */
-    protected function openConnection()
-    {
-        try {
-            $this->client->open($this->environment, $this->certificate, $this->passPhrase);
-        } catch (Exception $exception) {
-            throw ConnectionFailed::create($exception);
-        }
-    }
+
 
     /**
      * Fetch the feedback from APNS and collect our feedback object.
