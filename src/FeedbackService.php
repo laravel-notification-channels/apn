@@ -32,7 +32,7 @@ class FeedbackService
     /**
      * The connection pass phrase.
      *
-     * @var stirng
+     * @var string
      */
     protected $passPhrase;
 
@@ -40,7 +40,7 @@ class FeedbackService
      * Create feedback service instance.
      *
      * @param  \ZendService\Apple\Apns\Client\Feedback  $client
-     * @param  string  $environment
+     * @param  int  $environment
      * @param  string  $certificate
      * @param  string|null  $passPhrase
      */
