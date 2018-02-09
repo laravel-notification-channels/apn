@@ -11,7 +11,7 @@ class ApnMessageTest extends TestCase
     {
         $message = ApnMessage::create('title', 'body', ['custom' => 'data'], 1);
 
-        $this->assertInstanceOf( ApnMessage::class, $message);
+        $this->assertInstanceOf(ApnMessage::class, $message);
 
         $this->assertEquals('title', $message->title);
         $this->assertEquals('body', $message->body);

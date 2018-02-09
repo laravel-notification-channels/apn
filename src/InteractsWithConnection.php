@@ -8,25 +8,11 @@ use NotificationChannels\Apn\Exception\ConnectionFailed;
 trait InteractsWithConnection
 {
     /**
-     * The connection environment.
+     * The connection credentials.
      *
-     * @var string
+     * @var \NotificationChannels\Apn\ApnCredentials
      */
-    protected $environment;
-
-    /**
-     * The connection certificate.
-     *
-     * @var string
-     */
-    protected $certificate;
-
-    /**
-     * The connection pass phrase.
-     *
-     * @var string
-     */
-    protected $passPhrase;
+    protected $credentials;
 
     /**
      * Open the connection to the feedback service.
@@ -37,7 +23,11 @@ trait InteractsWithConnection
     protected function openConnection()
     {
         try {
-            $this->client->open($this->environment, $this->certificate, $this->passPhrase);
+            $this->client->open(
+                $this->credentials->environment(),
+                $this->credentials->certificate(),
+                $this->credentials->passPhrase()
+            );
         } catch (Exception $exception) {
             throw ConnectionFailed::create($exception);
         }
