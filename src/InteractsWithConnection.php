@@ -3,7 +3,7 @@
 namespace NotificationChannels\Apn;
 
 use Exception;
-use NotificationChannels\Apn\Exception\ConnectionFailed;
+use NotificationChannels\Apn\Exceptions\ConnectionFailed;
 
 trait InteractsWithConnection
 {
