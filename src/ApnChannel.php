@@ -71,14 +71,14 @@ class ApnChannel
             return;
         }
 
-        $this->openConnection();
-
         foreach ($tokens as $token) {
+            if (! $this->openConnection()) {
+                continue;
+            }
             $packet = $this->getPacket($message, $token);
             $this->sendPacket($notifiable, $notification, $packet, $token);
+            $this->closeConnection();
         }
-
-        $this->closeConnection();
     }
 
     /**
