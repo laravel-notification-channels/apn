@@ -38,10 +38,6 @@ This package makes it easy to send notifications using Apple Push (APN) with Lar
 Install this package with Composer:
 
     composer require laravel-notification-channels/apn
-    
-Register the ServiceProvider in your config/app.php:
-
-    NotificationChannels\Apn\ApnServiceProvider::class,
 
 ### Setting up the APN service
 
