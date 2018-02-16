@@ -47,9 +47,9 @@ class ChannelTest extends TestCase
         $responseOk->setCode(MessageResponse::RESULT_OK);
 
         $this->events->shouldNotReceive('fire');
-        $this->client->shouldReceive('open')->once();
+        $this->client->shouldReceive('open')->twice();
         $this->client->shouldReceive('send')->twice()->andReturn($responseOk);
-        $this->client->shouldReceive('close')->once();
+        $this->client->shouldReceive('close')->twice();
 
         $this->channel->send($this->notifiable, $this->notification);
     }
