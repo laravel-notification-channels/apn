@@ -63,9 +63,9 @@ class ChannelTest extends TestCase
         $responseFail->setCode(MessageResponse::RESULT_INVALID_TOKEN);
 
         $this->events->shouldReceive('fire')->twice();
-        $this->client->shouldReceive('open')->once();
+        $this->client->shouldReceive('open')->twice();
         $this->client->shouldReceive('send')->twice()->andReturn($responseFail);
-        $this->client->shouldReceive('close')->once();
+        $this->client->shouldReceive('close')->twice();
 
         $this->channel->send($this->notifiable, $this->notification);
     }
