@@ -72,9 +72,7 @@ class ApnChannel
         }
 
         foreach ($tokens as $token) {
-            if (! $this->openConnection()) {
-                continue;
-            }
+            $this->openConnection();
             $packet = $this->getPacket($message, $token);
             $this->sendPacket($notifiable, $notification, $packet, $token);
             $this->closeConnection();
