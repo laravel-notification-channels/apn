@@ -16,9 +16,6 @@ class ChannelTest extends TestCase
     /** @var \ZendService\Apple\Apns\Client\Message */
     protected $client;
 
-    /** @var \ZendService\Apple\Apns\Client\Feedback */
-    protected $feedbackClient;
-
     /** @var \Illuminate\Events\Dispatcher */
     protected $events;
 
