@@ -4,7 +4,9 @@ namespace NotificationChannels\Apn\Tests;
 
 use Mockery;
 use Illuminate\Events\Dispatcher;
+use ZendService\Apple\Apns\Message;
 use Illuminate\Notifications\Notifiable;
+use NotificationChannels\Apn\ApnAdapter;
 use NotificationChannels\Apn\ApnChannel;
 use NotificationChannels\Apn\ApnMessage;
 use Illuminate\Notifications\Notification;
@@ -29,8 +31,9 @@ class ChannelTest extends TestCase
     {
         $this->client = Mockery::mock(Client::class);
         $this->events = Mockery::mock(Dispatcher::class);
+        $this->adapter = Mockery::mock(ApnAdapter::class);
         $this->credentials = $this->getTestCredentials();
-        $this->channel = new ApnChannel($this->client, $this->events, $this->credentials);
+        $this->channel = new ApnChannel($this->client, $this->events, $this->adapter, $this->credentials);
         $this->notification = new TestNotification;
         $this->notifiable = new TestNotifiable;
     }
@@ -43,6 +46,7 @@ class ChannelTest extends TestCase
         $responseOk = new MessageResponse();
         $responseOk->setCode(MessageResponse::RESULT_OK);
 
+        $this->adapter->shouldReceive('adapt')->andReturn(new Message);
         $this->events->shouldNotReceive('fire');
         $this->client->shouldReceive('open')->twice();
         $this->client->shouldReceive('send')->twice()->andReturn($responseOk);
@@ -59,6 +63,7 @@ class ChannelTest extends TestCase
         $responseFail = new MessageResponse();
         $responseFail->setCode(MessageResponse::RESULT_INVALID_TOKEN);
 
+        $this->adapter->shouldReceive('adapt')->andReturn(new Message);
         $this->events->shouldReceive('fire')->twice();
         $this->client->shouldReceive('open')->twice();
         $this->client->shouldReceive('send')->twice()->andReturn($responseFail);
