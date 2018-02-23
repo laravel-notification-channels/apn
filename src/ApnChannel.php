@@ -64,7 +64,7 @@ class ApnChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $tokens = (array) $notifiable->routeNotificationFor('apn');
+        $tokens = (array) $notifiable->routeNotificationFor('apn', $notification);
         if (empty($tokens)) {
             return;
         }
