@@ -52,6 +52,27 @@ class ApnMessage
      * @var array
      */
     public $custom = [];
+    
+    /**
+     * APN Environment
+     * 
+     * @var int 
+     */
+    public $environment = null;
+    
+    /**
+     * APN Certificate path
+     * 
+     * @var string 
+     */
+    public $certificate = '';
+    
+    /**
+     * APN Certificate Passphrase
+     * 
+     * @var string 
+     */
+    public $passphrase = '';
 
     /**
      * @param string|null $title
@@ -207,5 +228,44 @@ class ApnMessage
             'action' => $action,
             'params' => $params,
         ]);
+    }
+    
+    /**
+     * Set the APN Environment
+     * 
+     * @param int $environment
+     *
+     * @return $this
+     */
+    public function environment($environment) {
+        $this->environment = $environment;
+        
+        return $this;
+    }
+    
+    /** 
+     * Set the APN Certificate path
+     * 
+     * @param string $certificate
+     * 
+     * @return $this
+     */
+    public function certificate($certificate) {
+        $this->certificate = $certificate;
+        
+        return $this;
+    }
+    
+    /**
+     *  Set the APN Certificate passphrase
+     * 
+     * @param string $passphrase
+     * 
+     * @return $this
+     */
+    public function passphrase($passphrase) {
+        $this->passphrase = $passphrase;
+        
+        return $this;
     }
 }
