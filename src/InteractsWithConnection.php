@@ -20,13 +20,23 @@ trait InteractsWithConnection
      * @return void
      * @throws \NotificationChannels\Apn\Exception\ConnectionFailed
      */
-    protected function openConnection()
+    protected function openConnection($environment = null, $certificate = '',$passphrase = '')
     {
+        if($environment === null) {
+            $environment = $this->credentials->environment();
+        }
+        if(empty($certificate)) {
+            $certificate = $this->credentials->certificate();
+        }
+        if(empty($passphrase)) {
+            $passphrase = $this->credentials->passPhrase();
+        }
+        
         try {
             $this->client->open(
-                $this->credentials->environment(),
-                $this->credentials->certificate(),
-                $this->credentials->passPhrase()
+                $environment,
+                $certificate,
+                $passphrase
             );
         } catch (Exception $exception) {
             throw ConnectionFailed::create($exception);
