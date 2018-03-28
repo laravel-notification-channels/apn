@@ -86,7 +86,7 @@ class ApnChannel
     protected function sendNotifications($notifiable, $notification, $tokens, $message)
     {
         foreach ($tokens as $token) {
-            $this->openConnection();
+            $this->openConnection($message->credentials);
 
             $this->sendNotification(
                 $notifiable,
