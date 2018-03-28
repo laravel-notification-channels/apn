@@ -2,25 +2,42 @@
 
 namespace NotificationChannels\Apn;
 
-use Illuminate\Contracts\Config\Repository;
 
 class ApnCredentials
 {
     /**
-     * The config repository.
+     * The connection environment.
      *
-     * @var \Illuminate\Contracts\Config\Repository
+     * @var string
      */
-    protected $config;
+    protected $environment;
+    
+    /**
+     * The connection certificate.
+     *
+     * @var string
+     */
+    protected $certificate;
+    
+    /**
+     * The connection pass phrase.
+     *
+     * @var string
+     */
+    protected $passPhrase;
 
     /**
      * Create a new instance of the credentials.
      *
-     * @param  \Illuminate\Contracts\Config\Repository
+     * @param  string  $environment
+     * @param  string  $certificate
+     * @param  string|null  $passPhrase
      */
-    public function __construct(Repository $config)
+    public function __construct($environment, $certificate, $passPhrase)
     {
-        $this->config = $config;
+        $this->environment = $environment;
+        $this->certificate = $certificate;
+        $this->passPhrase = $passPhrase;
     }
 
     /**
@@ -30,7 +47,7 @@ class ApnCredentials
      */
     public function environment()
     {
-        return $this->config->get('broadcasting.connections.apn.environment');
+        return $this->environment;
     }
 
     /**
@@ -40,7 +57,7 @@ class ApnCredentials
      */
     public function certificate()
     {
-        return $this->config->get('broadcasting.connections.apn.certificate');
+        return $this->certificate;
     }
 
     /**
@@ -50,6 +67,6 @@ class ApnCredentials
      */
     public function passPhrase()
     {
-        return $this->config->get('broadcasting.connections.apn.pass_phrase');
+        return $this->passPhrase;
     }
 }
