@@ -53,10 +53,10 @@ class ApnMessage
      */
     public $custom = [];
 
-    /** 
+    /**
      * Message specific credentials.
-     * 
-     * @var ApnCredentials 
+     *
+     * @var ApnCredentials
      */
     public $credentials = null;
 
@@ -218,11 +218,11 @@ class ApnMessage
 
     /**
      * Set message specific credentials.
-     * 
+     *
      * @param \NotificationChannels\Apn\ApnCredentials $credentials
      * @return $this
      */
-    public function credentials(ApnCredentials $credentials) 
+    public function credentials(ApnCredentials $credentials)
     {
         $this->credentials = $credentials;
 
