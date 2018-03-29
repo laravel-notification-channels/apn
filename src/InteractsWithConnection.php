@@ -17,17 +17,17 @@ trait InteractsWithConnection
     /**
      * Open the connection to the feedback service.
      *
+     * @param \NotificationChannels\Apn\ApnCredentials $credentials
+     *
      * @return void
      * @throws \NotificationChannels\Apn\Exception\ConnectionFailed
      */
-    protected function openConnection()
+    protected function openConnection(ApnCredentials $credentials = null)
     {
         try {
-            $this->client->open(
-                $this->credentials->environment(),
-                $this->credentials->certificate(),
-                $this->credentials->passPhrase()
-            );
+            $credentials = $credentials ?: $this->credentials;
+
+            $this->client->open($credentials->environment, $credentials->certificate, $credentials->passPhrase);
         } catch (Exception $exception) {
             throw ConnectionFailed::create($exception);
         }

@@ -14,18 +14,18 @@ class ApnCredentialsTest extends TestCase
     /** @test */
     public function it_gets_environment()
     {
-        $this->assertEquals('environment', $this->credentials->environment());
+        $this->assertEquals('environment', $this->credentials->environment);
     }
 
     /** @test */
     public function it_gets_certificate()
     {
-        $this->assertEquals('certificate', $this->credentials->certificate());
+        $this->assertEquals('certificate', $this->credentials->certificate);
     }
 
     /** @test */
     public function it_gets_pass_phrase()
     {
-        $this->assertEquals('pass_phrase', $this->credentials->passPhrase());
+        $this->assertEquals('pass_phrase', $this->credentials->passPhrase);
     }
 }
