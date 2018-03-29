@@ -4,25 +4,18 @@ namespace NotificationChannels\Apn;
 
 use Illuminate\Support\ServiceProvider;
 
-class ApnServiceProvider extends ServiceProvider 
+class ApnServiceProvider extends ServiceProvider
 {
-
-    public function boot() 
+    public function boot()
     {
+        $this->app->bind(ApnCredentials::class, function ($app) {
+            $config = $app['config'];
 
-        $class = ApnCredentials::class;
-
-        $this->app->when($class)
-                ->needs('$environment')
-                ->give(config('broadcasting.connections.apn.environment'));
-
-        $this->app->when($class)
-                ->needs('$certificate')
-                ->give(config('broadcasting.connections.apn.certificate'));
-
-        $this->app->when($class)
-                ->needs('$passPhrase')
-                ->give(config('broadcasting.connections.apn.pass_phrase'));
+            return new ApnCredentials(
+                $config->get('broadcasting.connections.apn.environment'),
+                $config->get('broadcasting.connections.apn.certificate'),
+                $config->get('broadcasting.connections.apn.pass_phrase')
+            );
+        });
     }
-
 }
