@@ -9,7 +9,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/apn/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/apn/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/apn.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/apn)
 
-This package makes it easy to send notifications using Apple Push (APN) with Laravel 5.3.
+This package makes it easy to send notifications using Apple Push (APN) with Laravel 5.8.
 
 ## Contents
 

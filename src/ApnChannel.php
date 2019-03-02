@@ -115,7 +115,7 @@ class ApnChannel
             $response = $this->client->send($message);
 
             if ($response->getCode() !== Response::RESULT_OK) {
-                $this->events->fire(
+                $this->events->dispatch(
                     new NotificationFailed($notifiable, $notification, $this, [
                         'token' => $token,
                         'error' => $response->getCode(),

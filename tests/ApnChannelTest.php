@@ -47,7 +47,7 @@ class ChannelTest extends TestCase
         $responseOk->setCode(MessageResponse::RESULT_OK);
 
         $this->adapter->shouldReceive('adapt')->andReturn(new Message);
-        $this->events->shouldNotReceive('fire');
+        $this->events->shouldNotReceive('dispatch');
         $this->client->shouldReceive('open')->twice();
         $this->client->shouldReceive('send')->twice()->andReturn($responseOk);
         $this->client->shouldReceive('close')->twice();
@@ -64,7 +64,7 @@ class ChannelTest extends TestCase
         $responseFail->setCode(MessageResponse::RESULT_INVALID_TOKEN);
 
         $this->adapter->shouldReceive('adapt')->andReturn(new Message);
-        $this->events->shouldReceive('fire')->twice();
+        $this->events->shouldReceive('dispatch')->twice();
         $this->client->shouldReceive('open')->twice();
         $this->client->shouldReceive('send')->twice()->andReturn($responseFail);
         $this->client->shouldReceive('close')->twice();
