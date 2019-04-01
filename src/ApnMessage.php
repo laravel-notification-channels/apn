@@ -67,6 +67,14 @@ class ApnMessage
      */
     public $credentials = null;
 
+
+    /**
+     * The notification service app extension flag.
+     *
+     * @var int|null
+     */
+    public $mutableContent = null;
+
     /**
      * @param string|null $title
      * @param string|null $body
@@ -261,6 +269,20 @@ class ApnMessage
     public function credentials(ApnCredentials $credentials)
     {
         $this->credentials = $credentials;
+
+        return $this;
+    }
+
+    /**
+     * Set mutable content value for this notification.
+     *
+     * @param int $value
+     *
+     * @return $this
+     */
+    public function mutableContent($value = 1)
+    {
+        $this->mutableContent = $value;
 
         return $this;
     }

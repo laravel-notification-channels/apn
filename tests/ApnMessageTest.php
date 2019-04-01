@@ -140,4 +140,14 @@ class ApnMessageTest extends TestCase
 
         $this->assertEquals($expected, $message->custom);
     }
+
+    /** @test */
+    public function it_can_set_mutable_content()
+    {
+        $message = new ApnMessage;
+
+        $message->mutableContent(1);
+
+        $this->assertEquals(1, $message->mutableContent);
+    }
 }
