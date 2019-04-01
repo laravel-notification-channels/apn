@@ -29,6 +29,7 @@ class ApnAdapter
         $packet->setAlert($alert);
         $packet->setCustom($message->custom);
         $packet->setUrlArgs($message->urlArguments);
+        $packet->setMutableContent($message->mutableContent);
 
         return $packet;
     }
