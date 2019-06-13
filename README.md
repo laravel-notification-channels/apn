@@ -99,9 +99,7 @@ Apple implements a Feedback Service. See the [Zend APN documentation](https://fr
 > 
 > The feedback service simply returns an array of Feedback responses. All tokens provided in the feedback should not be sent to again; unless the device re-registers for push notification. You can use the time in the Feedback response to ensure that the device has not re-registered for push notifications since the last send.
 
-One way to use the Feedback Service is within a cron job. All tokens returned from the feedback service should be removed from the system and should not be sent again.
-
-[Check the documentation](https://laravel.com/docs/5.8/scheduling) for setting up cron jobs with Laravel
+One way to use the Feedback Service is by [using Laravel's task scheduling functionality](https://laravel.com/docs/scheduling). All tokens returned from the feedback service should be removed from the system and should not be sent again. 
 
 ```php
 use App\User;
