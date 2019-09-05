@@ -27,7 +27,7 @@ class ChannelTest extends TestCase
     /** @var ApnChannel */
     protected $channel;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = Mockery::mock(Client::class);
         $this->events = Mockery::mock(Dispatcher::class);

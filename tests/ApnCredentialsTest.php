@@ -4,7 +4,7 @@ namespace NotificationChannels\Apn\Tests;
 
 class ApnCredentialsTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
