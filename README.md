@@ -39,13 +39,13 @@ You will need to generate a certificate for you application, before you can use 
 
 ```php
     'connections' => [
-      ....
+
       'apn' => [
           'environment' => ApnChannel::PRODUCTION, // Or ApnChannel::SANDBOX
           'certificate' => '/path/to/certificate', 
           'pass_phrase' => null, // Optional passPhrase
       ],
-      ...
+
     ]
 ```
 
