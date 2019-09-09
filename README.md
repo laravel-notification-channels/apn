@@ -31,6 +31,10 @@ Install this package with Composer:
 
     composer require laravel-notification-channels/apn
 
+If you're using Laravel 5.x you'll also need to specify a version constraint:
+
+    composer require laravel-notification-channels/apn -v 0.4.0
+
 ### Setting up the APN service
 
 Before using the APN Service, follow the [Provisioning and Development guide from Apple](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ProvisioningDevelopment.html)
