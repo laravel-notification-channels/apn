@@ -37,16 +37,35 @@ If you're using Laravel 5.x you'll also need to specify a version constraint:
 
 ### Setting up the APN service
 
-Before using the APN Service, follow the [Provisioning and Development guide from Apple](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ProvisioningDevelopment.html)
+Before using the APN Service, follow the [Provisioning and Development guide from Apple](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ProvisioningDevelopment.html) (warning: outdated / 404). You can also check [this visual guide](https://medium.com/@ufukatalca/generate-apns-certificate-for-ios-push-notifications-ada9234d4c09) on how to create the p12 file, and then follow the appropriate steps from the list below.
 
-You will need to generate a certificate for you application, before you can use this channel. Configure the path in config/broadcasting.php
+Basically, ensure the following:
+
+* Create a 'Apple Push Services' certificate in the Apple developer portal, and import it into Keychain
+* Set up push certificates on your app on the developer portal and regenerate your provisioning profiles to make them push ready
+* Enable the 'push notifications' capability in your app
+* Build your app with the new provisioning profile and enable push notifications in your app delegate
+* You need the device token of the iOS device you want to send a notification to. You can, for example, run the app on your device and use NSLog to get its push token on the Xcode console.
+* Select *both* your push private key *and* the Apple Push Services certificate in Keychain and export them without a password as a p12 file
+* Run this command to convert your p12 file to a pem file:
+
+  `$ openssl pkcs12 -nodes -in Push.p12 -out Push.pem` 
+* Make sure your server or development machine can send outgoing traffic on port 2195
+* Run this command to make sure your certificates are valid:
+
+  `$ openssl s_client -ssl3 -cert Push.pem -connect gateway.push.apple.com:2195`
+
+  (use gateway.sandbox.push.apple.com if you have a dev push certificate)
+  if they certificates are valid, the server should not hang up
+
+You need to successfully complete the above before you can use this channel. Once you have done so, you can configure the path to the Push.pem certificate in `config/broadcasting.php`
 
 ```php
     'connections' => [
 
       'apn' => [
           'environment' => ApnChannel::PRODUCTION, // Or ApnChannel::SANDBOX
-          'certificate' => '/path/to/certificate', 
+          'certificate' => '/path/to/certificate.pem', 
           'pass_phrase' => null, // Optional passPhrase
       ],
 
@@ -66,7 +85,7 @@ class AccountApproved extends Notification
 {
     public function via($notifiable)
     {
-        return [ApnChannel::class];
+        return [ApnChannel::class]; // Make sure you use 'ApnChannel::class', not just 'apn'
     }
 
     public function toApn($notifiable)
