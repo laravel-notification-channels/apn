@@ -37,16 +37,8 @@ If you're using Laravel 5.x you'll also need to specify a version constraint:
 
 ### Setting up the APN service
 
-Before using the APN Service, follow the [Provisioning and Development guide from Apple](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ProvisioningDevelopment.html) (warning: outdated / 404). You can also check [this visual guide](https://medium.com/@ufukatalca/generate-apns-certificate-for-ios-push-notifications-ada9234d4c09) on how to create the p12 file, and then follow the appropriate steps from the list below.
+Before using the APN Service, [enable Push Notifications in your app](https://help.apple.com/xcode/mac/current/#/devdfd3d04a1). Then, [generate a p12 certificate](https://help.apple.com/developer-account/#/dev82a71386a) and convert it into a .pem file so that we can use it with this library:
 
-Basically, ensure the following:
-
-* Create a 'Apple Push Services' certificate in the Apple developer portal, and import it into Keychain
-* Set up push certificates on your app on the developer portal and regenerate your provisioning profiles to make them push ready
-* Enable the 'push notifications' capability in your app
-* Build your app with the new provisioning profile and enable push notifications in your app delegate
-* You need the device token of the iOS device you want to send a notification to. You can, for example, run the app on your device and use NSLog to get its push token on the Xcode console.
-* Select *both* your push private key *and* the Apple Push Services certificate in Keychain and export them without a password as a p12 file
 * Run this command to convert your p12 file to a pem file:
 
   `$ openssl pkcs12 -nodes -in Push.p12 -out Push.pem` 
@@ -56,7 +48,7 @@ Basically, ensure the following:
   `$ openssl s_client -ssl3 -cert Push.pem -connect gateway.push.apple.com:2195`
 
   (use gateway.sandbox.push.apple.com if you have a dev push certificate)
-  if they certificates are valid, the server should not hang up
+* If the certificates are valid, the server should not hang up
 
 You need to successfully complete the above before you can use this channel. Once you have done so, you can configure the path to the Push.pem certificate in `config/broadcasting.php`
 
