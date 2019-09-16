@@ -42,10 +42,10 @@ Before using the APN Service, [enable Push Notifications in your app](https://he
 * Run this command to convert your p12 file to a pem file:
 
   `$ openssl pkcs12 -nodes -in Push.p12 -out Push.pem` 
-* Make sure your server or development machine can send outgoing traffic on port 2195
+* Make sure your server or development machine can send outgoing traffic on port 2195 and on port 2196 (for the feedback service, see below)
 * Run this command to make sure your certificates are valid:
 
-  `$ openssl s_client -ssl3 -cert Push.pem -connect gateway.push.apple.com:2195`
+  `$ openssl s_client -cert Push.pem -connect gateway.push.apple.com:2195`
 
   (use gateway.sandbox.push.apple.com if you have a dev push certificate)
 * If the certificates are valid, the server should not hang up
