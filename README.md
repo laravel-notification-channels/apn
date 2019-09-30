@@ -17,6 +17,7 @@ This package makes it easy to send notifications using Apple Push (APN) with Lar
 	- [Setting up the APN service](#setting-up-the-apn-service)
 - [Usage](#usage)
 	- [Available Message methods](#available-message-methods)
+	- [Test Command](#test-command)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
@@ -129,6 +130,21 @@ foreach ($feedbackService->get() as $feedback) {
         ->update(['apn_token' => null]);
 }
 ```
+
+### Test Command
+You can easily test and debug your APN integration by using the test command that is provided. All you need is a token
+for a device that you want to send a push notification to.
+
+Run the following Artisan command to send a test notification:
+```php
+php artisan apn:test --token=TOKEN_GOES_HERE 
+                     --title=TITLE_GOES_HERE 
+                     --message=MESSAGE_GOES_HERE 
+                     --badge=BADGE_NUMBER_GOES_HERE
+                     --sound=SOUND_FILENAME_GOES_HERE
+```
+
+Note: The only required field in the command is the 'token' field.
 
 ## Changelog
 
