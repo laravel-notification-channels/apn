@@ -75,6 +75,11 @@ class ApnSendTestNotification extends Command
     private function sendNotification()
     {
         Notification::route('apn', $this->option('token'))
-            ->notify(new APNTestNotification($this->option('title'), $this->option('message'), (int)$this->option('badge'), $this->option('sound')));
+            ->notify(new APNTestNotification(
+                $this->option('title'),
+                $this->option('message'),
+                (int)$this->option('badge'),
+                $this->option('sound')
+            ));
     }
 }

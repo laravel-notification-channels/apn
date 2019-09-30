@@ -52,8 +52,12 @@ class ApnTestNotification extends Notification
      * @param int $badgeNumber
      * @param string $sound
      */
-    public function __construct(string $notificationTitle, string $notificationBody, int $badgeNumber, string $sound = 'default')
-    {
+    public function __construct(
+        string $notificationTitle,
+        string $notificationBody,
+        int $badgeNumber,
+        string $sound = 'default'
+    ) {
         $this->notificationBody = $notificationBody;
         $this->notificationTitle = $notificationTitle;
         $this->badgeNumber = $badgeNumber;
