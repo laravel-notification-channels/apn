@@ -3,9 +3,15 @@
 namespace NotificationChannels\Apn;
 
 use Illuminate\Support\ServiceProvider;
+use NotificationChannels\Apn\Console\ApnSendTestNotification;
 
 class ApnServiceProvider extends ServiceProvider
 {
+    /**
+     * Boot the service provider.
+     *
+     * @return void
+     */
     public function boot()
     {
         $this->app->bind(ApnCredentials::class, function ($app) {
@@ -17,5 +23,21 @@ class ApnServiceProvider extends ServiceProvider
                 $config->get('broadcasting.connections.apn.pass_phrase')
             );
         });
+
+        $this->registerCommands();
+    }
+
+    /**
+     * Register any commands that this package provides.
+     *
+     * @return void
+     */
+    private function registerCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                ApnSendTestNotification::class,
+            ]);
+        }
     }
 }
