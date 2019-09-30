@@ -16,7 +16,7 @@ class ApnSendTestNotification extends Command
     protected $signature = 'apn:test 
                             {--T|token= : The token of the device that the PN will be sent to.} 
                             {--t|title=Test APN Notification : The title of the PN.} 
-                            {--m|message=This is a test push notification sent from the console. : The message body for the PN.} 
+                            {--m|message=This is a test PN sent from the console. : The message body for the PN.} 
                             {--b|badge=1 : The number that will be displayed in the app\'s badge notification.}
                             {--s|sound=default : The name of the sound that should be played with the notification.}';
 
