@@ -67,7 +67,6 @@ class ApnMessage
      */
     public $credentials = null;
 
-
     /**
      * The notification service app extension flag.
      *

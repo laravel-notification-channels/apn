@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/apn.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/apn)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/laravel-notification-channels/apn/master.svg?style=flat-square)](https://travis-ci.org/laravel-notification-channels/apn)
-[![StyleCI](https://styleci.io/repos/66449499/shield)](https://styleci.io/repos/:style_ci_id)
+[![StyleCI](https://styleci.io/repos/66449499/shield)](https://github.styleci.io/repos/66449499)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/c0cd30d0-1013-4ced-a4b5-65e0dc87832e.svg?style=flat-square)](https://insight.sensiolabs.com/projects/c0cd30d0-1013-4ced-a4b5-65e0dc87832e)
 [![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/apn.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/apn)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/apn/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/apn/?branch=master)
