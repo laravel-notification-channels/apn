@@ -5,7 +5,6 @@ namespace NotificationChannels\Apn\Tests;
 use Mockery;
 use Pushok\Client;
 use Illuminate\Notifications\Notifiable;
-use NotificationChannels\Apn\ApnAdapter;
 use NotificationChannels\Apn\ApnChannel;
 use NotificationChannels\Apn\ApnMessage;
 use Illuminate\Notifications\Notification;
@@ -19,7 +18,6 @@ class ChannelTest extends TestCase
     public function setUp(): void
     {
         $this->client = Mockery::mock(Client::class);
-        $this->adapter = Mockery::mock(ApnAdapter::class);
         $this->channel = new ApnChannel($this->client);
         $this->notification = new TestNotification;
         $this->notifiable = new TestNotifiable;
