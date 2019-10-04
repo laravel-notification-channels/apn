@@ -15,20 +15,37 @@ class ApnAdapter
      */
     public function adapt(ApnMessage $message)
     {
-        $alert = Alert::create()
-            ->setTitle($message->title)
-            ->setBody($message->body);
+        $alert = Alert::create();
+
+        if ($title = $message->title) {
+            $alert->setTitle($title);
+        }
+
+        if ($body = $message->body) {
+            $alert->setBody($body);
+        }
 
         $payload = Payload::create()
             ->setAlert($alert)
-            ->setBadge($message->badge)
-            ->setSound($message->sound)
-            ->setCategory($message->setCategory)
-            ->setContentAvailability($message->contentAvailable)
-            ->setMutableContent($message->mutableContent);
+            ->setContentAvailability((bool) $message->contentAvailable)
+            ->setMutableContent((bool) $message->mutableContent);
+
+        if ($badge = $message->badge) {
+            $payload->setBadge($badge);
+        }
+
+        if ($sound = $message->sound) {
+            $payload->setSound($sound);
+        }
+
+        if ($category = $message->category) {
+            $payload->setCategory($category);
+        }
 
         foreach ($message->custom as $key => $value) {
             $payload->setCustomValue($key, $value);
         }
+
+        return $payload;
     }
 }
