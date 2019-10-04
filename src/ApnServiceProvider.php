@@ -8,7 +8,12 @@ use Illuminate\Support\ServiceProvider;
 
 class ApnServiceProvider extends ServiceProvider
 {
-    public function boot()
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
     {
         $this->app->bind(Token::class, function ($app) {
             return Token::create([
