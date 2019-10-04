@@ -54,13 +54,6 @@ class ApnMessage
     public $custom = [];
 
     /**
-     * Url arguments of the notification.
-     *
-     * @var array
-     */
-    public $urlArguments = [];
-
-    /**
      * Message specific credentials.
      *
      * @var ApnCredentials
@@ -210,35 +203,6 @@ class ApnMessage
     public function setCustom($custom)
     {
         $this->custom = $custom;
-
-        return $this;
-    }
-
-    /**
-     * Add a url argument to the notification.
-     *
-     * @param string $key
-     * @param mixed $value
-     *
-     * @return $this
-     */
-    public function urlArgument($key, $value)
-    {
-        $this->urlArguments[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * Override the data of the notification.
-     *
-     * @param array $urlArguments
-     *
-     * @return $this
-     */
-    public function setUrlArguments($urlArguments)
-    {
-        $this->urlArguments = $urlArguments;
 
         return $this;
     }

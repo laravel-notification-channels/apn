@@ -3,19 +3,27 @@
 namespace NotificationChannels\Apn;
 
 use Illuminate\Support\ServiceProvider;
+use Pushok\AuthProvider\Token;
+use Pushok\Client;
 
 class ApnServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->app->bind(ApnCredentials::class, function ($app) {
-            $config = $app['config'];
+        $this->app->bind(Token::class, function ($app) {
+            return Token::create([
+                'key_id' => $app['config']['broadcasting.connections.apn.key_id'],
+                'team_id' => $app['config']['broadcasting.connections.apn.team_id'],
+                'app_bundle_id' => $app['config']['broadcasting.connections.apn.app_bundle_id'],
+                'private_key_path' => $app['config']['broadcasting.connections.apn.private_key_path'],
+                'private_key_secret' => $app['config']['broadcasting.connections.apn.private_key_secret'],
+            ]);
+        });
 
-            return new ApnCredentials(
-                $config->get('broadcasting.connections.apn.environment'),
-                $config->get('broadcasting.connections.apn.certificate'),
-                $config->get('broadcasting.connections.apn.pass_phrase')
-            );
+        $this->app->bind(Client::class, function ($app) {
+            $production = $app['config']['broadcasting.connections.apn.environment'] === ApnChannel::PRODUCTION;
+
+            return new Client($app->make(Token::class), $production);
         });
     }
 }

@@ -12,12 +12,10 @@
     ],
     "require": {
         "php": "^7.2",
+        "edamov/pushok": "^0.6.4",
         "illuminate/config": "^6.0",
-        "illuminate/events": "^6.0",
         "illuminate/notifications": "^6.0",
-        "illuminate/support": "^6.0",
-        "illuminate/queue": "^6.0",
-        "zendframework/zendservice-apple-apns": "^1.2"
+        "illuminate/support": "^6.0"
     },
     "require-dev": {
         "mockery/mockery": "~1.0",

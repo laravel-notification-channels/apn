@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\Apn;
 
-use ZendService\Apple\Apns\Message;
-use ZendService\Apple\Apns\Message\Alert;
+use Pushok\Payload;
+use Pushok\Payload\Alert;
 
 class ApnAdapter
 {
@@ -11,26 +11,24 @@ class ApnAdapter
      * Convert an ApnMessage instance into a Zend Apns Message.
      *
      * @param  \NotificationChannels\Apn\ApnMessage  $message
-     * @param  string  $token
-     * @return \ZendService\Apple\Apns\Message
+     * @return \Pushok\Payload
      */
-    public function adapt(ApnMessage $message, $token)
+    public function adapt(ApnMessage $message)
     {
-        $alert = new Alert();
-        $alert->setTitle($message->title);
-        $alert->setBody($message->body);
+        $alert = Alert::create()
+            ->setTitle($message->title)
+            ->setBody($message->body);
 
-        $packet = new Message;
-        $packet->setToken($token);
-        $packet->setBadge($message->badge);
-        $packet->setSound($message->sound);
-        $packet->setCategory($message->category);
-        $packet->setContentAvailable($message->contentAvailable);
-        $packet->setAlert($alert);
-        $packet->setCustom($message->custom);
-        $packet->setUrlArgs($message->urlArguments);
-        $packet->setMutableContent($message->mutableContent);
+        $payload = Payload::create()
+            ->setAlert($alert)
+            ->setBadge($message->badge)
+            ->setSound($message->sound)
+            ->setCategory($message->setCategory)
+            ->setContentAvailability($message->contentAvailable)
+            ->setMutableContent($message->mutableContent);
 
-        return $packet;
+        foreach ($message->custom as $key => $value) {
+            $payload->setCustomValue($key, $value);
+        }
     }
 }
