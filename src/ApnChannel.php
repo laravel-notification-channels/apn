@@ -57,7 +57,7 @@ class ApnChannel
 
         $payload = (new ApnAdapter)->adapt($message);
 
-        $this->sendNotifications($notifiable, $notification, $tokens, $payload);
+        $this->sendNotifications($tokens, $payload);
     }
 
     /**
