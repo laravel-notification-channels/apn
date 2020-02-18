@@ -110,26 +110,6 @@ class ApnMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_url_argument()
-    {
-        $message = new ApnMessage;
-
-        $message->urlArgument('foo', 'bar');
-
-        $this->assertEquals(['foo' => 'bar'], $message->urlArguments);
-    }
-
-    /** @test */
-    public function it_can_set_url_arguments()
-    {
-        $message = new ApnMessage;
-
-        $message->setUrlArguments(['foo' => 'bar']);
-
-        $this->assertEquals(['foo' => 'bar'], $message->urlArguments);
-    }
-
-    /** @test */
     public function it_can_set_action()
     {
         $message = new ApnMessage;
