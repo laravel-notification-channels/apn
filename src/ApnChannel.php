@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\Apn;
 
-use Pushok\Client;
 use Illuminate\Notifications\Notification;
+use Pushok\Client;
 use Pushok\Notification as PushNotification;
 
 class ApnChannel

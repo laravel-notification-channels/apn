@@ -2,12 +2,12 @@
 
 namespace NotificationChannels\Apn\Tests;
 
-use Mockery;
-use Pushok\Client;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
+use Mockery;
 use NotificationChannels\Apn\ApnChannel;
 use NotificationChannels\Apn\ApnMessage;
-use Illuminate\Notifications\Notification;
+use Pushok\Client;
 
 class ChannelTest extends TestCase
 {

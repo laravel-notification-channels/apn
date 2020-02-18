@@ -2,9 +2,9 @@
 
 namespace NotificationChannels\Apn;
 
-use Pushok\Client;
-use Pushok\AuthProvider\Token;
 use Illuminate\Support\ServiceProvider;
+use Pushok\AuthProvider\Token;
+use Pushok\Client;
 
 class ApnServiceProvider extends ServiceProvider
 {
