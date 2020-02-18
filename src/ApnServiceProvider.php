@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Pushok\AuthProvider\Token;
 use Pushok\Client;
@@ -16,13 +17,9 @@ class ApnServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(Token::class, function ($app) {
-            return Token::create([
-                'key_id' => $app['config']['broadcasting.connections.apn.key_id'],
-                'team_id' => $app['config']['broadcasting.connections.apn.team_id'],
-                'app_bundle_id' => $app['config']['broadcasting.connections.apn.app_bundle_id'],
-                'private_key_path' => $app['config']['broadcasting.connections.apn.private_key_path'],
-                'private_key_secret' => $app['config']['broadcasting.connections.apn.private_key_secret'],
-            ]);
+            $options = Arr::except($app['config']['broadcasting.connections.apn'], 'environment');
+
+            return Token::create($options);
         });
 
         $this->app->bind(Client::class, function ($app) {
