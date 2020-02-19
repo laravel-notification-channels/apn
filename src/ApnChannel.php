@@ -62,7 +62,7 @@ class ApnChannel
         $responses = [];
         foreach ($responseObjects as $response)
         {
-            $responseValues[] = [
+            $responses[] = [
                 'token' => $response->getDeviceToken(),
                 'apnsId' => $response->getApnsId(),
                 'status' => $response->getStatusCode(),
