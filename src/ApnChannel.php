@@ -58,9 +58,9 @@ class ApnChannel
 
         $payload = (new ApnAdapter)->adapt($message);
 
-        $responses = $this->sendNotifications($tokens, $payload);
-        $responseValues = [];
-        foreach ($responses as $response){
+        $responseObjects = $this->sendNotifications($tokens, $payload);
+        $responses = [];
+        foreach ($responseObjects as $response){
             $responseValues[] = [
                 'token' => $response->getDeviceToken(),
                 'apnsId' => $response->getApnsId(),
@@ -69,7 +69,7 @@ class ApnChannel
                 'errorDescription' => $response->getErrorDescription(),
             ];
         }
-        return $responseValues;
+        return $responses;
     }
 
     /**
