@@ -30,7 +30,7 @@ class ApnChannel
     protected $client;
 
     /**
-     * The responses from the each notification sent.
+     * The responses from each notification sent.
      * @var array
      */
     private $responses;
