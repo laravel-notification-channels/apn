@@ -30,6 +30,12 @@ class ApnChannel
     protected $client;
 
     /**
+     * The responses from the each notification sent.
+     * @var array
+     */
+    private $responses;
+
+    /**
      * Create a new channel instance.
      *
      * @param  \Pushok\Client  $client
@@ -61,6 +67,14 @@ class ApnChannel
     }
 
     /**
+     * Returns an array of ApnsResponseInterfaces from the most recent sending of push notifications.
+     * @return array
+     */
+    public function retrieveResponses(){
+        return $this->responses;
+    }
+
+    /**
      * Send the notification to each of the provided tokens.
      *
      * @param  array  $tokens
@@ -77,6 +91,6 @@ class ApnChannel
 
         $this->client->addNotifications($notifications);
 
-        $this->client->push();
+        $this->responses = $this->client->push();
     }
 }
