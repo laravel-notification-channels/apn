@@ -13,7 +13,6 @@ This package makes it easy to send notifications using Apple Push (APN) with Lar
 ## Contents
 
 - [Installation](#installation)
-	- [Setting up the APN service](#setting-up-the-apn-service)
 - [Usage](#usage)
 - [Changelog](#changelog)
 - [Testing](#testing)
