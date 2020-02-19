@@ -62,15 +62,6 @@ class ApnChannel
     }
 
     /**
-     * Returns an array of ApnsResponseInterfaces from the most recent sending of push notifications.
-     * @return array
-     */
-    public function retrieveResponses()
-    {
-        return $this->responses;
-    }
-
-    /**
      * Send the notification to each of the provided tokens.
      *
      * @param  array  $tokens
