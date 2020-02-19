@@ -78,23 +78,21 @@ class AccountApproved extends Notification
 }
 ```
 
+In your `notifiable` model, make sure to include a `routeNotificationForApn()` method, which return one or an array of tokens.
+
+```php
+public function routeNotificationForApn()
+{
+    return $this->apn_token;
+}
+```
+
 ### Available methods
 
  - `title($str)`
  - `body($str)`
  - `badge($integer)`
  - `custom($customData)`
-
-## Capture Responses
-
-In your `notifiable` model, make sure to include a `storeResponses($responses)` method which will store the responses in the notifiable model.
-
-```php
-public function storeResponses($responses)
-{
-    return $this->responses;
-}
-```
 
 
 ## Changelog
