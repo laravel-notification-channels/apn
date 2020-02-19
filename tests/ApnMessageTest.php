@@ -90,6 +90,16 @@ class ApnMessageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_push_type()
+    {
+        $message = new ApnMessage;
+
+        $message->pushType('type');
+
+        $this->assertEquals('type', $message->pushType);
+    }
+
+    /** @test */
     public function it_can_set_custom_value()
     {
         $message = new ApnMessage;

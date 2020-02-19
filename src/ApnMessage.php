@@ -54,6 +54,13 @@ class ApnMessage
     public $custom = [];
 
     /**
+     * Value indicating when the message will expire.
+     *
+     * @var \string
+     */
+    public $pushType = null;
+
+    /**
      * Message specific credentials.
      *
      * @var ApnCredentials
@@ -176,6 +183,18 @@ class ApnMessage
         $this->contentAvailable = $value;
 
         return $this;
+    }
+
+    /**
+     * Set the push type for this notification.
+     *
+     * @param  string  $pushType
+     *
+     * @return $this
+     */
+    public function pushType(string $pushType)
+    {
+        $this->pushType = $pushType;
     }
 
     /**
