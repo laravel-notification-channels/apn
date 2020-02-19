@@ -44,6 +44,7 @@ class ApnChannel
      *
      * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
+     * @return mixed|void
      */
     public function send($notifiable, Notification $notification)
     {
@@ -57,8 +58,7 @@ class ApnChannel
 
         $payload = (new ApnAdapter)->adapt($message);
 
-        $responses = $this->sendNotifications($tokens, $payload);
-        $this->storeResponses($notifiable, $responses);
+        return $this->sendNotifications($tokens, $payload);
     }
 
     /**
@@ -79,18 +79,5 @@ class ApnChannel
         $this->client->addNotifications($notifications);
 
         return $this->client->push();
-    }
-
-    /**
-     * Store the responses from sending the push notification into the notifiable.
-     *
-     * @param $notifiable
-     * @param $responses
-     */
-    private function storeResponses($notifiable, $responses)
-    {
-        if (method_exists($notifiable, 'storeResponses')) {
-            $notifiable->storeResponses($responses);
-        }
     }
 }
