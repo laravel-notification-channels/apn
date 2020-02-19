@@ -30,12 +30,6 @@ class ApnChannel
     protected $client;
 
     /**
-     * The responses from each notification sent.
-     * @var array
-     */
-    private $responses;
-
-    /**
      * Create a new channel instance.
      *
      * @param  \Pushok\Client  $client
@@ -63,7 +57,8 @@ class ApnChannel
 
         $payload = (new ApnAdapter)->adapt($message);
 
-        $this->sendNotifications($tokens, $payload);
+        $responses = $this->sendNotifications($tokens, $payload);
+        $this->storeResponses($notifiable, $responses);
     }
 
     /**
@@ -91,6 +86,20 @@ class ApnChannel
 
         $this->client->addNotifications($notifications);
 
-        $this->responses = $this->client->push();
+        return $this->client->push();
+    }
+
+    /**
+     * Store the responses from sending the push notification into the notifiable.
+     *
+     * @param $notifiable
+     * @param $responses
+     */
+    private function storeResponses($notifiable, $responses)
+    {
+        if (method_exists($notifiable, 'storeResponses'))
+        {
+            $notifiable->storeResponses($responses);
+        }
     }
 }

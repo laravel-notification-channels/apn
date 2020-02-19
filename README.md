@@ -94,6 +94,19 @@ public function routeNotificationForApn()
  - `badge($integer)`
  - `custom($customData)`
 
+## Capture Responses
+```
+
+In your `notifiable` model, make sure to include a `storeResponses($responses)` method which will store the responses in the notifiable model.
+
+```php
+public function storeResponses($responses)
+{
+    return $this->responses;
+}
+```
+
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
