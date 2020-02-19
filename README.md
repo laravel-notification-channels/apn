@@ -94,7 +94,6 @@ public function routeNotificationForApn()
  - `badge($integer)`
  - `custom($customData)`
 
-
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
