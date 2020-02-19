@@ -44,7 +44,7 @@ class ApnChannel
      *
      * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
-     * @return mixed|void
+     * @return array|void
      */
     public function send($notifiable, Notification $notification)
     {
@@ -66,7 +66,7 @@ class ApnChannel
      *
      * @param  array  $tokens
      * @param  \Pushok\Payload  $payload
-     * @return void
+     * @return array
      */
     protected function sendNotifications($tokens, $payload)
     {
