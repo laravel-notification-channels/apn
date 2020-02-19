@@ -60,7 +60,8 @@ class ApnChannel
 
         $responseObjects = $this->sendNotifications($tokens, $payload);
         $responses = [];
-        foreach ($responseObjects as $response){
+        foreach ($responseObjects as $response)
+        {
             $responseValues[] = [
                 'token' => $response->getDeviceToken(),
                 'apnsId' => $response->getApnsId(),
