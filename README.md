@@ -95,7 +95,6 @@ public function routeNotificationForApn()
  - `custom($customData)`
 
 ## Capture Responses
-```
 
 In your `notifiable` model, make sure to include a `storeResponses($responses)` method which will store the responses in the notifiable model.
 
