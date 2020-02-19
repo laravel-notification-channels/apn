@@ -15,7 +15,6 @@ This package makes it easy to send notifications using Apple Push (APN) with Lar
 - [Installation](#installation)
 	- [Setting up the APN service](#setting-up-the-apn-service)
 - [Usage](#usage)
-	- [Available Message methods](#available-message-methods)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
@@ -78,6 +77,8 @@ class AccountApproved extends Notification
 }
 ```
 
+To see more of the methods available to you when creating a message please see the [`ApnMessage` source](https://github.com/laravel-notification-channels/apn/blob/master/src/ApnMessage.php).
+
 In your `notifiable` model, make sure to include a `routeNotificationForApn()` method, which return one or an array of tokens.
 
 ```php
@@ -86,13 +87,6 @@ public function routeNotificationForApn()
     return $this->apn_token;
 }
 ```
-
-### Available methods
-
- - `title($str)`
- - `body($str)`
- - `badge($integer)`
- - `custom($customData)`
 
 ## Changelog
 
