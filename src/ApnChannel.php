@@ -65,7 +65,8 @@ class ApnChannel
      * Returns an array of ApnsResponseInterfaces from the most recent sending of push notifications.
      * @return array
      */
-    public function retrieveResponses(){
+    public function retrieveResponses()
+    {
         return $this->responses;
     }
 
@@ -97,8 +98,7 @@ class ApnChannel
      */
     private function storeResponses($notifiable, $responses)
     {
-        if (method_exists($notifiable, 'storeResponses'))
-        {
+        if (method_exists($notifiable, 'storeResponses')) {
             $notifiable->storeResponses($responses);
         }
     }
