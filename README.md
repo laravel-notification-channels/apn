@@ -87,6 +87,19 @@ public function routeNotificationForApn()
 }
 ```
 
+### Per-message configuration
+
+If you need to provide a custom configuration for a message you can provide an instance of a [Pushok](https://github.com/edamov/pushok) client and it will be used instead of the default one.
+
+```php
+$customClient = new Pushok\Client(new Pushok\Token($options));
+
+return ApnMessage::create()
+    ->title('Account approved')
+    ->body("Your {$notifiable->service} account was approved!")
+    ->via($customClient)
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
