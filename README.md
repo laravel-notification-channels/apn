@@ -35,17 +35,15 @@ Before using the APN Service, [enable Push Notifications in your app](https://he
 Collect your Key ID, as well as your Team ID (displayed at the top right of the Apple Developer page) and app bundle ID and configure as necessary in `config/broadcasting.php`.
 
 ```php
-    'connections' => [
-
-      'apn' => [
-            'key_id' => env('APN_KEY_ID'),
-            'team_id' => env('APN_TEAM_ID'),
-            'app_bundle_id' => env('APN_BUNDLE_ID'),
-            'private_key_content' => env('APN_PRIVATE_KEY'),
-            'environment' => \NotificationChannels\Apn\ApnChannel::PRODUCTION,
-      ],
-
-    ]
+'connections' => [
+    'apn' => [
+        'key_id' => env('APN_KEY_ID'),
+        'team_id' => env('APN_TEAM_ID'),
+        'app_bundle_id' => env('APN_BUNDLE_ID'),
+        'private_key_content' => env('APN_PRIVATE_KEY'),
+        'environment' => \NotificationChannels\Apn\ApnChannel::PRODUCTION,
+    ],
+]
 ```
 
 See the [`pushok` docs](https://github.com/edamov/pushok) for more information about what arguments can be supplied to the client - for example you can also use `private_key_path` and `private_key_secret`.
