@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn\Tests;
 
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Mockery;
@@ -12,13 +13,15 @@ use Pushok\Client;
 class ChannelTest extends TestCase
 {
     protected $client;
+    protected $events;
     protected $notification;
     protected $channel;
 
     public function setUp(): void
     {
         $this->client = Mockery::mock(Client::class);
-        $this->channel = new ApnChannel($this->client);
+        $this->events = Mockery::mock(Dispatcher::class);
+        $this->channel = new ApnChannel($this->client, $this->events);
         $this->notification = new TestNotification;
         $this->notifiable = new TestNotifiable;
     }
