@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn;
 
+use Pushok\Notification;
 use Pushok\Payload;
 use Pushok\Payload\Alert;
 
@@ -11,9 +12,10 @@ class ApnAdapter
      * Convert an ApnMessage instance into a Zend Apns Message.
      *
      * @param  \NotificationChannels\Apn\ApnMessage  $message
-     * @return \Pushok\Payload
+     * @param  string  $token
+     * @return \Pushok\Notification
      */
-    public function adapt(ApnMessage $message)
+    public function adapt(ApnMessage $message, string $token)
     {
         $alert = Alert::create();
 
@@ -46,6 +48,12 @@ class ApnAdapter
             $payload->setCustomValue($key, $value);
         }
 
-        return $payload;
+        $notification = new Notification($payload, $token);
+
+        if ($expiresAt = $message->expiresAt) {
+            $notification->setExpirationAt($expiresAt);
+        }
+
+        return $notification;
     }
 }

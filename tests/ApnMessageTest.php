@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn\Tests;
 
+use DateTime;
 use Mockery;
 use NotificationChannels\Apn\ApnMessage;
 use Pushok\Client;
@@ -106,6 +107,19 @@ class ApnMessageTest extends TestCase
         $result = $message->pushType('type');
 
         $this->assertEquals('type', $message->pushType);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
+    public function it_can_set_expires_at()
+    {
+        $message = new ApnMessage;
+
+        $now = new DateTime;
+
+        $result = $message->expiresAt($now);
+
+        $this->assertEquals($now, $message->expiresAt);
         $this->assertEquals($message, $result);
     }
 
