@@ -2,6 +2,8 @@
 
 namespace NotificationChannels\Apn;
 
+use Pushok\Client;
+
 class ApnMessage
 {
     /**
@@ -61,11 +63,11 @@ class ApnMessage
     public $pushType = null;
 
     /**
-     * Message specific credentials.
+     * Message specific client.
      *
-     * @var ApnCredentials
+     * @var \Pushok\Client|null
      */
-    public $credentials = null;
+    public $client = null;
 
     /**
      * The notification service app extension flag.
@@ -243,14 +245,14 @@ class ApnMessage
     }
 
     /**
-     * Set message specific credentials.
+     * Set message specific client.
      *
-     * @param \NotificationChannels\Apn\ApnCredentials $credentials
+     * @param \Pushok\Client
      * @return $this
      */
-    public function credentials(ApnCredentials $credentials)
+    public function via(Client $client)
     {
-        $this->credentials = $credentials;
+        $this->client = $client;
 
         return $this;
     }

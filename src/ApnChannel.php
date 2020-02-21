@@ -76,8 +76,10 @@ class ApnChannel
             $notifications[] = new PushNotification($payload, $token);
         }
 
-        $this->client->addNotifications($notifications);
+        $client = $message->client ?? $this->client;
 
-        return $this->client->push();
+        $client->addNotifications($notifications);
+
+        return $client->push();
     }
 }

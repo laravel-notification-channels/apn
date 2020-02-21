@@ -2,7 +2,9 @@
 
 namespace NotificationChannels\Apn\Tests;
 
+use Mockery;
 use NotificationChannels\Apn\ApnMessage;
+use Pushok\Client;
 
 class ApnMessageTest extends TestCase
 {
@@ -129,6 +131,18 @@ class ApnMessageTest extends TestCase
         $expected = ['action' => ['action' => 'action', 'params' => ['foo' => 'bar']]];
 
         $this->assertEquals($expected, $message->custom);
+    }
+
+    /** @test */
+    public function it_can_set_client()
+    {
+        $message = new ApnMessage;
+
+        $client = Mockery::mock(Client::class);
+
+        $message->via($client);
+
+        $this->assertEquals($client, $message->client);
     }
 
     /** @test */
