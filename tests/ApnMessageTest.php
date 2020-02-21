@@ -26,9 +26,10 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->title('Title');
+        $result = $message->title('Title');
 
         $this->assertEquals('Title', $message->title);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -36,9 +37,10 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->body('Body');
+        $result = $message->body('Body');
 
         $this->assertEquals('Body', $message->body);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -46,9 +48,10 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->badge(1);
+        $result = $message->badge(1);
 
         $this->assertEquals(1, $message->badge);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -56,9 +59,10 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->sound('Laravel Podcast');
+        $result = $message->sound('Laravel Podcast');
 
         $this->assertEquals('Laravel Podcast', $message->sound);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -66,9 +70,10 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->sound();
+        $result = $message->sound();
 
         $this->assertEquals('default', $message->sound);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -76,9 +81,10 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->category('Category');
+        $result = $message->category('Category');
 
         $this->assertEquals('Category', $message->category);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -86,9 +92,10 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->contentAvailable(1);
+        $result = $message->contentAvailable(1);
 
         $this->assertEquals(1, $message->contentAvailable);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -96,9 +103,10 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->pushType('type');
+        $result = $message->pushType('type');
 
         $this->assertEquals('type', $message->pushType);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -106,9 +114,10 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->custom('foo', 'bar');
+        $result = $message->custom('foo', 'bar');
 
         $this->assertEquals(['foo' => 'bar'], $message->custom);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -116,9 +125,10 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->setCustom(['foo' => 'bar']);
+        $result = $message->setCustom(['foo' => 'bar']);
 
         $this->assertEquals(['foo' => 'bar'], $message->custom);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -126,11 +136,12 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->action('action', ['foo' => 'bar']);
+        $result = $message->action('action', ['foo' => 'bar']);
 
         $expected = ['action' => ['action' => 'action', 'params' => ['foo' => 'bar']]];
 
         $this->assertEquals($expected, $message->custom);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -140,9 +151,10 @@ class ApnMessageTest extends TestCase
 
         $client = Mockery::mock(Client::class);
 
-        $message->via($client);
+        $result = $message->via($client);
 
         $this->assertEquals($client, $message->client);
+        $this->assertEquals($message, $result);
     }
 
     /** @test */
@@ -150,8 +162,9 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->mutableContent(1);
+        $result = $message->mutableContent(1);
 
         $this->assertEquals(1, $message->mutableContent);
+        $this->assertEquals($message, $result);
     }
 }
