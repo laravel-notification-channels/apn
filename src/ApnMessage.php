@@ -197,6 +197,8 @@ class ApnMessage
     public function pushType(string $pushType)
     {
         $this->pushType = $pushType;
+
+        return $this;
     }
 
     /**
