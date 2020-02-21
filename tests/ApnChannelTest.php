@@ -28,7 +28,7 @@ class ChannelTest extends TestCase
     {
         $message = $this->notification->toApn($this->notifiable);
 
-        $this->client->shouldReceive('addNotifications');
+        $this->client->shouldReceive('addNotification');
         $this->client->shouldReceive('push')->once();
 
         $this->channel->send($this->notifiable, $this->notification);

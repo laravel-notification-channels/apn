@@ -4,7 +4,6 @@ namespace NotificationChannels\Apn;
 
 use Illuminate\Notifications\Notification;
 use Pushok\Client;
-use Pushok\Notification as PushNotification;
 
 class ApnChannel
 {
@@ -58,27 +57,9 @@ class ApnChannel
 
         $client = $message->client ?? $this->client;
 
-        $payload = (new ApnAdapter)->adapt($message);
-
-        return $this->sendNotifications($client, $tokens, $payload);
-    }
-
-    /**
-     * Send the notification to each of the provided tokens.
-     *
-     * @param  array  $tokens
-     * @param  \Pushok\Payload  $payload
-     * @return array
-     */
-    protected function sendNotifications($client, $tokens, $payload)
-    {
-        $notifications = [];
-
         foreach ($tokens as $token) {
-            $notifications[] = new PushNotification($payload, $token);
+            $client->addNotification((new ApnAdapter)->adapt($message, $token));
         }
-
-        $client->addNotifications($notifications);
 
         return $client->push();
     }

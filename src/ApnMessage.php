@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn;
 
+use DateTime;
 use Pushok\Client;
 
 class ApnMessage
@@ -61,6 +62,13 @@ class ApnMessage
      * @var \string
      */
     public $pushType = null;
+
+    /**
+     * The expiration time of the notification.
+     *
+     * @var \DateTime|null
+     */
+    public $expiresAt = null;
 
     /**
      * Message specific client.
@@ -197,6 +205,20 @@ class ApnMessage
     public function pushType(string $pushType)
     {
         $this->pushType = $pushType;
+
+        return $this;
+    }
+
+    /**
+     * Set the expiration time for the message.
+     *
+     * @param  \DateTime  $expiresAt
+     *
+     * @return $this
+     */
+    public function expiresAt(DateTime $expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
 
         return $this;
     }
