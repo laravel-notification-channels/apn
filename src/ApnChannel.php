@@ -56,9 +56,11 @@ class ApnChannel
 
         $message = $notification->toApn($notifiable);
 
+        $client = $message->client ?? $this->client;
+
         $payload = (new ApnAdapter)->adapt($message);
 
-        return $this->sendNotifications($tokens, $payload);
+        return $this->sendNotifications($client, $tokens, $payload);
     }
 
     /**
@@ -68,15 +70,13 @@ class ApnChannel
      * @param  \Pushok\Payload  $payload
      * @return array
      */
-    protected function sendNotifications($tokens, $payload)
+    protected function sendNotifications($client, $tokens, $payload)
     {
         $notifications = [];
 
         foreach ($tokens as $token) {
             $notifications[] = new PushNotification($payload, $token);
         }
-
-        $client = $message->client ?? $this->client;
 
         $client->addNotifications($notifications);
 
