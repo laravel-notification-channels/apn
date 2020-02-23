@@ -3,12 +3,14 @@
 namespace NotificationChannels\Apn\Tests;
 
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Mockery;
 use NotificationChannels\Apn\ApnChannel;
 use NotificationChannels\Apn\ApnMessage;
 use Pushok\Client;
+use Pushok\Response;
 
 class ChannelTest extends TestCase
 {
@@ -33,6 +35,26 @@ class ChannelTest extends TestCase
 
         $this->client->shouldReceive('addNotification');
         $this->client->shouldReceive('push')->once();
+
+        $this->channel->send($this->notifiable, $this->notification);
+    }
+
+    /** @test */
+    public function it_dispatches_events_for_failed_notifications()
+    {
+        $message = $this->notification->toApn($this->notifiable);
+
+        $this->events->shouldReceive('dispatch')
+            ->once()
+            ->with(Mockery::type(NotificationFailed::class));
+
+        $this->client->shouldReceive('addNotification');
+        $this->client->shouldReceive('push')
+            ->once()
+            ->andReturn([
+                new Response(200, 'headers', 'body'),
+                new Response(400, 'headers', 'body')
+            ]);
 
         $this->channel->send($this->notifiable, $this->notification);
     }

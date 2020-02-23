@@ -71,7 +71,7 @@ class ApnChannel
             $tokens
         );
 
-        $this->dispatchEvents($responses);
+        $this->dispatchEvents($notifiable, $notification, $responses);
 
         return $responses;
     }
@@ -96,10 +96,12 @@ class ApnChannel
     /**
      * Dispatch failed events for notifications that weren't delivered.
      *
-     * @param  array  $responses
+     * @param mixed $notifiable
+     * @param \Illuminate\Notifications\Notification $notification
+     * @param array $responses
      * @return void
      */
-    protected function dispatchEvents(array $responses)
+    protected function dispatchEvents($notifiable, $notification, array $responses)
     {
         foreach ($responses as $response) {
             if ($response->getStatusCode() === Response::APNS_SUCCESS) {
