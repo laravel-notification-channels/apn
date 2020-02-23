@@ -53,7 +53,7 @@ class ChannelTest extends TestCase
             ->once()
             ->andReturn([
                 new Response(200, 'headers', 'body'),
-                new Response(400, 'headers', 'body')
+                new Response(400, 'headers', 'body'),
             ]);
 
         $this->channel->send($this->notifiable, $this->notification);
