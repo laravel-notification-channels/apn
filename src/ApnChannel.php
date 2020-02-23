@@ -65,9 +65,11 @@ class ApnChannel
             return;
         }
 
+        $message = $notification->toApn($notifiable);
+
         $responses = $this->sendNotifications(
             $message->client ?? $this->client,
-            $notification->toApn($notifiable),
+            $message,
             $tokens
         );
 
