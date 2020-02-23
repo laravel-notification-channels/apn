@@ -2,6 +2,13 @@
 
 All notable changes will be documented in this file
 
+## 1.3.0 - 2020-02-24
+- `NotificationFailed` event dispatched when a notification to a token is unsuccessful (#79)
+
+## 1.2.0 - 2020-02-21
+- You can now provide a configuration per-message if you want to use different clients (#52)
+- You can now set a message expiry thanks to improved internal abstractions (#78)
+
 ## 1.1.1 - 2020-02-20
 - Return the response value from the `send` method so it is available in the `NotificationSent` event (#76)
 - Add `pushType` to support custom push types (#69)

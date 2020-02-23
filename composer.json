@@ -14,6 +14,7 @@
         "php": "^7.2",
         "edamov/pushok": "^0.10.4",
         "illuminate/config": "^6.0",
+        "illuminate/events": "^6.0",
         "illuminate/notifications": "^6.0",
         "illuminate/support": "^6.0"
     },
