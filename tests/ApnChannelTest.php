@@ -19,19 +19,28 @@ class ChannelTest extends TestCase
     {
         $this->client = Mockery::mock(Client::class);
         $this->channel = new ApnChannel($this->client);
-        $this->notification = new TestNotification;
-        $this->notifiable = new TestNotifiable;
     }
 
     /** @test */
     public function it_can_send_a_notification()
     {
-        $message = $this->notification->toApn($this->notifiable);
-
         $this->client->shouldReceive('addNotification');
         $this->client->shouldReceive('push')->once();
 
-        $this->channel->send($this->notifiable, $this->notification);
+        $this->channel->send(new TestNotifiable, new TestNotification);
+    }
+
+    /** @test */
+    public function it_can_send_a_notification_with_custom_client()
+    {
+        $customClient = Mockery::mock(Client::class);
+
+        $this->client->shouldNotReceive('addNotification');
+
+        $customClient->shouldReceive('addNotification');
+        $customClient->shouldReceive('push')->once();
+
+        $this->channel->send(new TestNotifiable, (new TestNotificationWithClient($customClient)));
     }
 }
 
@@ -56,5 +65,20 @@ class TestNotification extends Notification
     public function toApn($notifiable)
     {
         return new ApnMessage('title');
+    }
+}
+
+class TestNotificationWithClient extends Notification
+{
+    protected $client;
+
+    public function __construct($client)
+    {
+        $this->client = $client;
+    }
+
+    public function toApn($notifiable)
+    {
+        return (new ApnMessage('title'))->via($this->client);
     }
 }
