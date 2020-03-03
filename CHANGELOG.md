@@ -2,6 +2,10 @@
 
 All notable changes will be documented in this file
 
+## 2.0.0 - 2020-03-04
+- Simplify configuration for the production environment (#80)
+- Add support for Laravel 7.0 (#82)
+
 ## 1.3.0 - 2020-02-24
 - `NotificationFailed` event dispatched when a notification to a token is unsuccessful (#79)
 
