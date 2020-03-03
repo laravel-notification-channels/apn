@@ -11,20 +11,6 @@ use Pushok\Response;
 class ApnChannel
 {
     /**
-     * The sandbox environment identifier.
-     *
-     * @var int
-     */
-    const SANDBOX = 0;
-
-    /**
-     * The production environment identifier.
-     *
-     * @var int
-     */
-    const PRODUCTION = 1;
-
-    /**
      * The APNS client.
      *
      * @var \Pushok\Client

@@ -41,9 +41,9 @@ Collect your Key ID, as well as your Team ID (displayed at the top right of the 
         'team_id' => env('APN_TEAM_ID'),
         'app_bundle_id' => env('APN_BUNDLE_ID'),
         'private_key_content' => env('APN_PRIVATE_KEY'),
-        'environment' => \NotificationChannels\Apn\ApnChannel::PRODUCTION,
+        'production' => env('APN_PRODUCTION', true),
     ],
-]
+],
 ```
 
 See the [`pushok` docs](https://github.com/edamov/pushok) for more information about what arguments can be supplied to the client - for example you can also use `private_key_path` and `private_key_secret`.
