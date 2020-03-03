@@ -11,12 +11,12 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.2.5",
         "edamov/pushok": "^0.10.4",
-        "illuminate/config": "^6.0",
-        "illuminate/events": "^6.0",
-        "illuminate/notifications": "^6.0",
-        "illuminate/support": "^6.0"
+        "illuminate/config": "^7.0",
+        "illuminate/events": "^7.0",
+        "illuminate/notifications": "^7.0",
+        "illuminate/support": "^7.0"
     },
     "require-dev": {
         "mockery/mockery": "~1.3.0",
