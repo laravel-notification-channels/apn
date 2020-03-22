@@ -2,10 +2,7 @@
 
 namespace NotificationChannels\Apn\Tests;
 
-use DateTime;
-use Mockery;
 use NotificationChannels\Apn\ApnVoipMessage;
-use Pushok\Client;
 
 class ApnVoipMessageTest extends TestCase
 {

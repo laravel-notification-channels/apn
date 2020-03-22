@@ -4,11 +4,8 @@ namespace NotificationChannels\Apn\Tests;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Notifications\Notification;
 use Mockery;
 use NotificationChannels\Apn\ApnChannel;
-use NotificationChannels\Apn\ApnMessage;
 use Pushok\Client;
 use Pushok\Response;
 

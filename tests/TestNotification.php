@@ -2,6 +2,10 @@
 
 namespace NotificationChannels\Apn\Tests;
 
+use Illuminate\Notifications\Notification;
+use NotificationChannels\Apn\ApnMessage;
+use NotificationChannels\Apn\ApnVoipMessage;
+
 class TestNotification extends Notification
 {
     public function toApn($notifiable)
@@ -11,7 +15,6 @@ class TestNotification extends Notification
 
     public function toApnVoip($notifiable)
     {
-        return (new ApnMessage)
-            ->pushType('voip');
+        return new ApnVoipMessage('title');
     }
 }

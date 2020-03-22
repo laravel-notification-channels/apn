@@ -2,6 +2,8 @@
 
 namespace NotificationChannels\Apn\Tests;
 
+use Illuminate\Notifications\Notifiable;
+
 class TestNotifiable
 {
     use Notifiable;
