@@ -98,6 +98,40 @@ return ApnMessage::create()
     ->via($customClient)
 ```
 
+### VoIP push notifications
+
+Sending VoIP push notifications is very similar. You just need to use a special `ApnVoipChannel` channel.
+
+```php
+use NotificationChannels\Apn\ApnVoipChannel;
+use NotificationChannels\Apn\ApnMessage;
+use Illuminate\Notifications\Notification;
+
+class AccountApproved extends Notification
+{
+    public function via($notifiable)
+    {
+        return [ApnVoipChannel::class];
+    }
+
+    public function toApnVoip($notifiable)
+    {
+        return ApnMessage::create()
+            ->pushType('voip')
+            ->badge(1);
+    }
+}
+```
+
+In your `notifiable` model, make sure to include a `routeNotificationForApnVoip()` method, which return one or an array of tokens.
+
+```php
+public function routeNotificationForApnVoip()
+{
+    return $this->apn_voip_token;
+}
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
