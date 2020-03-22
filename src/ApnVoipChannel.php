@@ -2,11 +2,7 @@
 
 namespace NotificationChannels\Apn;
 
-use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
-use Pushok\Client;
-use Pushok\Response;
 
 class ApnVoipChannel extends ApnChannel
 {

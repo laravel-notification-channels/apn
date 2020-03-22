@@ -8,8 +8,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Mockery;
 use NotificationChannels\Apn\ApnChannel;
-use NotificationChannels\Apn\ApnVoipChannel;
 use NotificationChannels\Apn\ApnMessage;
+use NotificationChannels\Apn\ApnVoipChannel;
 use Pushok\Client;
 use Pushok\Response;
 
