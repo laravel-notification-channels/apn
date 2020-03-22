@@ -2,6 +2,10 @@
 
 namespace NotificationChannels\Apn\Tests;
 
+use Illuminate\Notifications\Notification;
+use NotificationChannels\Apn\ApnMessage;
+use NotificationChannels\Apn\ApnVoipMessage;
+
 class TestNotificationWithClient extends Notification
 {
     protected $client;
@@ -18,6 +22,6 @@ class TestNotificationWithClient extends Notification
 
     public function toApnVoip($notifiable)
     {
-        return (new ApnMessage)->pushType('voip')->via($this->client);
+        return (new ApnVoipMessage)->via($this->client);
     }
 }
