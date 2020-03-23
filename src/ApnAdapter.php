@@ -47,7 +47,7 @@ class ApnAdapter
         foreach ($message->custom as $key => $value) {
             $payload->setCustomValue($key, $value);
         }
-        
+
         if ($pushType = $message->pushType) {
             $payload->setPushType($pushType);
         }
