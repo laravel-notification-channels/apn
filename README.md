@@ -100,7 +100,7 @@ return ApnMessage::create()
 
 ### VoIP push notifications
 
-Sending VoIP push notifications is very similar. You just need to use the `ApnVoipChannel` channel with `ApnVoipMessage` (which has the same API has a regular `ApnMessage`).
+Sending VoIP push notifications is very similar. You just need to use the `ApnVoipChannel` channel with `ApnVoipMessage` (which has the same API as a regular `ApnMessage`).
 
 ```php
 use NotificationChannels\Apn\ApnVoipChannel;
