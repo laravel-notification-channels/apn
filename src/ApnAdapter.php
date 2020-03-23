@@ -48,6 +48,10 @@ class ApnAdapter
             $payload->setCustomValue($key, $value);
         }
 
+        if ($pushType = $message->pushType) {
+            $payload->setPushType($pushType);
+        }
+
         $notification = new Notification($payload, $token);
 
         if ($expiresAt = $message->expiresAt) {
