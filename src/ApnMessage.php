@@ -198,7 +198,7 @@ class ApnMessage
     /**
      * Set the push type for this notification.
      *
-     * @param  string  $pushType
+     * @param  string $pushType
      *
      * @return $this
      */
@@ -212,7 +212,7 @@ class ApnMessage
     /**
      * Set the expiration time for the message.
      *
-     * @param  \DateTime  $expiresAt
+     * @param  \DateTime $expiresAt
      *
      * @return $this
      */
