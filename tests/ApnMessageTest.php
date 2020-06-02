@@ -181,4 +181,59 @@ class ApnMessageTest extends TestCase
         $this->assertEquals(1, $message->mutableContent);
         $this->assertEquals($message, $result);
     }
+
+    /** @test */
+    public function it_can_set_title_loc_key()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->titleLocKey('HELLO_WORLD');
+
+        $this->assertEquals('HELLO_WORLD', $message->titleLocKey);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
+    public function it_can_set_title_loc_args()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->titleLocArgs(['hello', 'world']);
+
+        $this->assertEquals(['hello', 'world'], $message->titleLocArgs);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
+    public function it_can_set_action_loc_key()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->actionLocKey('hello_world');
+
+        $this->assertEquals('hello_world', $message->actionLocKey);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
+    public function it_can_set_loc_key()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->setLocKey('hello_world');
+
+        $this->assertEquals('hello_world', $message->locKey);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
+    public function it_can_set_loc_args()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->setLocArgs(['hello', 'world']);
+
+        $this->assertEquals(['hello', 'world'], $message->locArgs);
+        $this->assertEquals($message, $result);
+    }
 }

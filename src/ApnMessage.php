@@ -50,6 +50,41 @@ class ApnMessage
     public $contentAvailable = null;
 
     /**
+     * The key to a title string in the Localizable.strings file for the current localization.
+     *
+     * @var string|null
+     */
+    public $titleLocKey;
+
+    /**
+     * Variable string values to appear in place of the format specifiers in title-loc-key.
+     *
+     * @var string|null
+     */
+    public $titleLocArgs;
+
+    /**
+     * If a string is specified, the iOS system displays an alert that includes the Close and View buttons.
+     *
+     * @var string|null
+     */
+    public $actionLocKey;
+
+    /**
+     * A key to an alert-message string in a Localizable.strings file for the current localization.
+     *
+     * @var string|null
+     */
+    public $locKey;
+
+    /**
+     * Variable string values to appear in place of the format specifiers in loc-key.
+     *
+     * @var array|null
+     */
+    public $locArgs;
+
+    /**
      * Additional data of the notification.
      *
      * @var array
@@ -198,7 +233,7 @@ class ApnMessage
     /**
      * Set the push type for this notification.
      *
-     * @param  string  $pushType
+     * @param  string $pushType
      *
      * @return $this
      */
@@ -212,13 +247,78 @@ class ApnMessage
     /**
      * Set the expiration time for the message.
      *
-     * @param  \DateTime  $expiresAt
+     * @param  \DateTime $expiresAt
      *
      * @return $this
      */
     public function expiresAt(DateTime $expiresAt)
     {
         $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
+    /**
+     * Set a title-loc-key.
+     *
+     * @param  string|null $titleLocKey
+     * @return $this
+     */
+    public function titleLocKey($titleLocKey = null)
+    {
+        $this->titleLocKey = $titleLocKey;
+
+        return $this;
+    }
+
+    /**
+     * Set the title-loc-args.
+     *
+     * @param  array|null $titleLocArgs
+     * @return $this
+     */
+    public function titleLocArgs(array $titleLocArgs = null)
+    {
+        $this->titleLocArgs = $titleLocArgs;
+
+        return $this;
+    }
+
+    /**
+     * Set an action-loc-key.
+     *
+     * @param  string|null $actionLocKey
+     * @return $this
+     */
+    public function actionLocKey($actionLocKey = null)
+    {
+        $this->actionLocKey = $actionLocKey;
+
+        return $this;
+    }
+
+    /**
+     * Set a loc-key.
+     *
+     * @param  string $locKey
+     * @return $this
+     */
+    public function setLocKey($locKey)
+    {
+        $this->locKey = $locKey;
+
+        return $this;
+    }
+
+    /**
+     * Set the loc-args.
+     *
+     * @param  array $locArgs
+     * @return $this
+     */
+    public function setLocArgs($locArgs)
+    {
+        $this->locArgs = $locArgs;
 
         return $this;
     }

@@ -27,6 +27,26 @@ class ApnAdapter
             $alert->setBody($body);
         }
 
+        if ($titleLocArgs = $message->titleLocArgs) {
+            $alert->setTitleLocArgs($titleLocArgs);
+        }
+
+        if ($titleLocKey = $message->titleLocKey) {
+            $alert->setTitleLocKey($titleLocKey);
+        }
+
+        if ($actionLocKey = $message->actionLocKey) {
+            $alert->setActionLocKey($actionLocKey);
+        }
+
+        if ($locArgs = $message->locArgs) {
+            $alert->setLocArgs($locArgs);
+        }
+
+        if ($locKey = $message->locKey) {
+            $alert->setLocKey($locKey);
+        }
+
         $payload = Payload::create()
             ->setAlert($alert)
             ->setContentAvailability((bool) $message->contentAvailable)
