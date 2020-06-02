@@ -187,9 +187,9 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->titleLocKey("HELLO_WORLD");
+        $result = $message->titleLocKey('HELLO_WORLD');
 
-        $this->assertEquals("HELLO_WORLD", $message->titleLocKey);
+        $this->assertEquals('HELLO_WORLD', $message->titleLocKey);
         $this->assertEquals($message, $result);
     }
 
@@ -198,9 +198,9 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->titleLocArgs(["hello", "world"]);
+        $result = $message->titleLocArgs(['hello', 'world']);
 
-        $this->assertEquals(["hello", "world"], $message->titleLocArgs);
+        $this->assertEquals(['hello', 'world'], $message->titleLocArgs);
         $this->assertEquals($message, $result);
     }
 
@@ -209,9 +209,9 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->actionLocKey("hello_world");
+        $result = $message->actionLocKey('hello_world');
 
-        $this->assertEquals("hello_world", $message->actionLocKey);
+        $this->assertEquals('hello_world', $message->actionLocKey);
         $this->assertEquals($message, $result);
     }
 
@@ -220,9 +220,9 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->setLocKey("hello_world");
+        $result = $message->setLocKey('hello_world');
 
-        $this->assertEquals("hello_world", $message->locKey);
+        $this->assertEquals('hello_world', $message->locKey);
         $this->assertEquals($message, $result);
     }
 
@@ -231,9 +231,9 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->setLocArgs(["hello", "world"]);
+        $result = $message->setLocArgs(['hello', 'world']);
 
-        $this->assertEquals(["hello", "world"], $message->locArgs);
+        $this->assertEquals(['hello', 'world'], $message->locArgs);
         $this->assertEquals($message, $result);
     }
 }
