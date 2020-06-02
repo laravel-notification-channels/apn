@@ -59,7 +59,7 @@ class ApnMessage
     /**
      * Variable string values to appear in place of the format specifiers in title-loc-key.
      *
-     * @var string[]|null
+     * @var string|null
      */
     public $titleLocArgs;
 
@@ -73,14 +73,14 @@ class ApnMessage
     /**
      * A key to an alert-message string in a Localizable.strings file for the current localization.
      *
-     * @var string
+     * @var string|null
      */
     public $locKey;
 
     /**
      * Variable string values to appear in place of the format specifiers in loc-key.
      *
-     * @var array
+     * @var array|null
      */
     public $locArgs;
 
@@ -267,6 +267,7 @@ class ApnMessage
     public function titleLocKey($titleLocKey = null)
     {
         $this->titleLocKey = $titleLocKey;
+
         return $this;
     }
 
@@ -279,6 +280,7 @@ class ApnMessage
     public function titleLocArgs(array $titleLocArgs = null)
     {
         $this->titleLocArgs = $titleLocArgs;
+
         return $this;
     }
 
@@ -291,6 +293,7 @@ class ApnMessage
     public function actionLocKey($actionLocKey = null)
     {
         $this->actionLocKey = $actionLocKey;
+
         return $this;
     }
 
@@ -303,6 +306,7 @@ class ApnMessage
     public function setLocKey($locKey)
     {
         $this->locKey = $locKey;
+
         return $this;
     }
 
@@ -315,6 +319,7 @@ class ApnMessage
     public function setLocArgs($locArgs)
     {
         $this->locArgs = $locArgs;
+
         return $this;
     }
 
