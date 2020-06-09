@@ -96,7 +96,7 @@ class ApnChannel
                 continue;
             }
 
-            $event = new NotificationFailed($notifiable, $notification, $this, [
+            $event = new NotificationFailed($notifiable, $notification, static::class, [
                 'id' => $response->getApnsId(),
                 'token' => $response->getDeviceToken(),
                 'error' => $response->getErrorReason(),

@@ -62,4 +62,23 @@ class ApnChannelTest extends TestCase
 
         $this->channel->send(new TestNotifiable, new TestNotification);
     }
+
+    /** @test */
+    public function it_dispatches_failed_notification_events_with_correct_channel()
+    {
+        $this->events->shouldReceive('dispatch')
+            ->withArgs(function (NotificationFailed $notificationFailed) {
+                return $notificationFailed->channel === ApnChannel::class;
+            });
+
+        $this->client->shouldReceive('addNotification');
+        $this->client->shouldReceive('push')
+            ->once()
+            ->andReturn([
+                new Response(200, 'headers', 'body'),
+                new Response(400, 'headers', 'body'),
+            ]);
+
+        $this->channel->send(new TestNotifiable, new TestNotification);
+    }
 }
