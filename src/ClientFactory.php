@@ -4,6 +4,7 @@ namespace NotificationChannels\Apn;
 
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\Carbon;
 use Pushok\Client;
 
 class ClientFactory
@@ -49,8 +50,8 @@ class ClientFactory
      */
     public function instance(): Client
     {
-        return $this->cache->remember(Client::class, now()->addMinutes(static::CACHE_MINUTES), function () {
-            $this->app->make(Client::class);
+        return $this->cache->remember(Client::class, Carbon::now()->addMinutes(static::CACHE_MINUTES), function () {
+            return $this->app->make(Client::class);
         });
     }
 }
