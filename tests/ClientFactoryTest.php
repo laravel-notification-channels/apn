@@ -27,13 +27,13 @@ class ClientFactoryTest extends TestCase
     {
         $client = Mockery::mock(Client::class);
 
-        // $this->app->shouldReceive('make')
-        //     ->with(Client::class)
-        //     ->andReturn($client);
+        $this->app->shouldReceive('make')
+            ->with(Client::class)
+            ->andReturn($client);
 
         $this->cache->shouldReceive('remember')
-            ->with(Client::class, Mockery::type(Carbon::class), Mockery::on(function () {
-                return true;
+            ->with(Client::class, Mockery::type(Carbon::class), Mockery::on(function ($closure) use ($client) {
+                return $client == $closure();
             }))
             ->andReturn($client);
 
