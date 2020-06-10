@@ -11,11 +11,11 @@ use Pushok\Response;
 class ApnChannel
 {
     /**
-     * The APNS client.
+     * The Pushok\Client factory.
      *
-     * @var \Pushok\Client
+     * @var \NotificationChannels\Apn\ClientFactory
      */
-    protected $client;
+    protected $factory;
 
     /**
      * The event dispatcher.
@@ -27,12 +27,12 @@ class ApnChannel
     /**
      * Create a new channel instance.
      *
-     * @param  \Pushok\Client  $client
+     * @param  \NotificationChannels\Apn\ClientFactory  $factory
      * @param  \Illuminate\Contracts\Events\Dispatcher  $events
      */
-    public function __construct(Client $client, Dispatcher $events)
+    public function __construct(ClientFactory $factory, Dispatcher $events)
     {
-        $this->client = $client;
+        $this->factory = $factory;
         $this->events = $events;
     }
 
@@ -53,11 +53,9 @@ class ApnChannel
 
         $message = $notification->toApn($notifiable);
 
-        $responses = $this->sendNotifications(
-            $message->client ?? $this->client,
-            $message,
-            $tokens
-        );
+        $client = $message->client ?? $this->factory->instance();
+
+        $responses = $this->sendNotifications($client, $message, $tokens);
 
         $this->dispatchEvents($notifiable, $notification, $responses);
 
