@@ -13,11 +13,11 @@
     "require": {
         "php": "^7.2.5",
         "edamov/pushok": "^0.11",
-        "illuminate/cache": "^7.0",
-        "illuminate/config": "^7.0",
-        "illuminate/events": "^7.0",
-        "illuminate/notifications": "^7.0",
-        "illuminate/support": "^7.0"
+        "illuminate/cache": "~7.0 || ~8.0",
+        "illuminate/config": "~7.0 || ~8.0",
+        "illuminate/events": "~7.0 || ~8.0",
+        "illuminate/notifications": "~7.0 || ~8.0",
+        "illuminate/support": "~7.0 || ~8.0"
     },
     "require-dev": {
         "mockery/mockery": "~1.3.0",
