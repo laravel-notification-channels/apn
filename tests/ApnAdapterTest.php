@@ -66,6 +66,16 @@ class ApnAdapterTest extends TestCase
     }
 
     /** @test */
+    public function it_adapts_badge_clear()
+    {
+        $message = (new ApnMessage)->badge(0);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertSame(0, $notification->getPayload()->getBadge());
+    }
+
+    /** @test */
     public function it_adapts_sound()
     {
         $message = (new ApnMessage)->sound('sound');
