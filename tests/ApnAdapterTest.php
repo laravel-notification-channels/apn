@@ -46,6 +46,16 @@ class ApnAdapterTest extends TestCase
     }
 
     /** @test */
+    public function it_does_not_set_content_available_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->isContentAvailable());
+    }
+
+    /** @test */
     public function it_adapts_mutable_content()
     {
         $message = (new ApnMessage)->mutableContent(true);
@@ -53,6 +63,16 @@ class ApnAdapterTest extends TestCase
         $notification = $this->adapter->adapt($message, 'token');
 
         $this->assertTrue($notification->getPayload()->hasMutableContent());
+    }
+
+    /** @test */
+    public function it_does_not_set_mutable_content_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->hasMutableContent());
     }
 
     /** @test */
