@@ -120,7 +120,7 @@ class ApnMessage
     public $mutableContent = null;
     
     /**
-     * Custom alert for Edamov/Pushok
+     * Custom alert for Edamov/Pushok.
      * 
      * @var string|array|null
      */
@@ -346,7 +346,7 @@ class ApnMessage
     }
     
     /**
-     * Sets custom alert value as JSON or Array
+     * Sets custom alert value as JSON or Arrayю
      * 
      * @param string|array $customAlert
      * 
