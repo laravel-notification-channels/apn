@@ -17,35 +17,40 @@ class ApnAdapter
      */
     public function adapt(ApnMessage $message, string $token)
     {
-        $alert = Alert::create();
+        if($message->customAlert){
+            $alert = $message->customAlert;
+        } else {
+            $alert = Alert::create();
 
-        if ($title = $message->title) {
-            $alert->setTitle($title);
-        }
+            if ($title = $message->title) {
+                $alert->setTitle($title);
+            }
 
-        if ($body = $message->body) {
-            $alert->setBody($body);
-        }
+            if ($body = $message->body) {
+                $alert->setBody($body);
+            }
 
-        if ($titleLocArgs = $message->titleLocArgs) {
-            $alert->setTitleLocArgs($titleLocArgs);
-        }
+            if ($titleLocArgs = $message->titleLocArgs) {
+                $alert->setTitleLocArgs($titleLocArgs);
+            }
 
-        if ($titleLocKey = $message->titleLocKey) {
-            $alert->setTitleLocKey($titleLocKey);
-        }
+            if ($titleLocKey = $message->titleLocKey) {
+                $alert->setTitleLocKey($titleLocKey);
+            }
 
-        if ($actionLocKey = $message->actionLocKey) {
-            $alert->setActionLocKey($actionLocKey);
-        }
+            if ($actionLocKey = $message->actionLocKey) {
+                $alert->setActionLocKey($actionLocKey);
+            }
 
-        if ($locArgs = $message->locArgs) {
-            $alert->setLocArgs($locArgs);
-        }
+            if ($locArgs = $message->locArgs) {
+                $alert->setLocArgs($locArgs);
+            }
 
-        if ($locKey = $message->locKey) {
-            $alert->setLocKey($locKey);
+            if ($locKey = $message->locKey) {
+                $alert->setLocKey($locKey);
+            }
         }
+        
 
         $payload = Payload::create()
             ->setAlert($alert);
