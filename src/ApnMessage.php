@@ -120,10 +120,10 @@ class ApnMessage
     public $mutableContent = null;
     
     /**
-    * Custom alert for Edamov/Pushok
-    * 
-    * @var string|array|null
-    */
+     * Custom alert for Edamov/Pushok
+     * 
+     * @var string|array|null
+     */
     public $customAlert = null;
 
     /**
@@ -346,12 +346,12 @@ class ApnMessage
     }
     
     /**
-    * Sets custom alert value as JSON or Array
-    * 
-    * @param string|array $customAlert
-    * 
-    * @return $this
-    */
+     * Sets custom alert value as JSON or Array
+     * 
+     * @param string|array $customAlert
+     * 
+     * @return $this
+     */
     public function setCustomAlert($customAlert)
     {
         $this->customAlert = $customAlert;
