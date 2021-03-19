@@ -346,7 +346,7 @@ class ApnMessage
     }
     
     /**
-     * Sets custom alert value as JSON or Arrayю
+     * Sets custom alert value as JSON or Array.
      * 
      * @param string|array $customAlert
      * 
