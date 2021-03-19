@@ -17,7 +17,7 @@ class ApnAdapter
      */
     public function adapt(ApnMessage $message, string $token)
     {
-        if($message->customAlert){
+        if ($message->customAlert) {
             $alert = $message->customAlert;
         } else {
             $alert = Alert::create();
@@ -50,7 +50,6 @@ class ApnAdapter
                 $alert->setLocKey($locKey);
             }
         }
-        
 
         $payload = Payload::create()
             ->setAlert($alert);
