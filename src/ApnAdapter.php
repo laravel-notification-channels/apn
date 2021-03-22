@@ -17,42 +17,37 @@ class ApnAdapter
      */
     public function adapt(ApnMessage $message, string $token)
     {
-        if ($message->customAlert) {
-            $alert = $message->customAlert;
-        } else {
-            $alert = Alert::create();
+        $alert = Alert::create();
 
-            if ($title = $message->title) {
-                $alert->setTitle($title);
-            }
-
-            if ($body = $message->body) {
-                $alert->setBody($body);
-            }
-
-            if ($titleLocArgs = $message->titleLocArgs) {
-                $alert->setTitleLocArgs($titleLocArgs);
-            }
-
-            if ($titleLocKey = $message->titleLocKey) {
-                $alert->setTitleLocKey($titleLocKey);
-            }
-
-            if ($actionLocKey = $message->actionLocKey) {
-                $alert->setActionLocKey($actionLocKey);
-            }
-
-            if ($locArgs = $message->locArgs) {
-                $alert->setLocArgs($locArgs);
-            }
-
-            if ($locKey = $message->locKey) {
-                $alert->setLocKey($locKey);
-            }
+        if ($title = $message->title) {
+            $alert->setTitle($title);
         }
 
-        $payload = Payload::create()
-            ->setAlert($alert);
+        if ($body = $message->body) {
+            $alert->setBody($body);
+        }
+
+        if ($titleLocArgs = $message->titleLocArgs) {
+            $alert->setTitleLocArgs($titleLocArgs);
+        }
+
+        if ($titleLocKey = $message->titleLocKey) {
+            $alert->setTitleLocKey($titleLocKey);
+        }
+
+        if ($actionLocKey = $message->actionLocKey) {
+            $alert->setActionLocKey($actionLocKey);
+        }
+
+        if ($locArgs = $message->locArgs) {
+            $alert->setLocArgs($locArgs);
+        }
+
+        if ($locKey = $message->locKey) {
+            $alert->setLocKey($locKey);
+        }
+
+        $payload = Payload::create()->setAlert($message->customAlert ?: $alert);
 
         if ($contentAvailable = $message->contentAvailable) {
             $payload->setContentAvailability((bool) $message->contentAvailable);

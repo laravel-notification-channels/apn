@@ -126,6 +126,16 @@ class ApnAdapterTest extends TestCase
     }
 
     /** @test */
+    public function it_adapts_custom_alert()
+    {
+        $message = (new ApnMessage)->setCustomAlert('custom');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals('custom', $notification->getPayload()->getAlert());
+    }
+
+    /** @test */
     public function it_adapts_push_type()
     {
         $message = (new ApnMessage)->pushType('push type');

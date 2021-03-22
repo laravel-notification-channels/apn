@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
-        "edamov/pushok": "^0.12",
+        "edamov/pushok": "^0.13",
         "illuminate/cache": "^6.0|^7.0|^8.0",
         "illuminate/config": "^6.0|^7.0|^8.0",
         "illuminate/events": "^6.0|^7.0|^8.0",
