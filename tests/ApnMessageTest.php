@@ -146,6 +146,17 @@ class ApnMessageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_custom_alert()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->setCustomAlert('foo');
+
+        $this->assertEquals('foo', $message->customAlert);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
     public function it_can_set_action()
     {
         $message = new ApnMessage;
