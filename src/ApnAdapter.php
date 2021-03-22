@@ -47,8 +47,7 @@ class ApnAdapter
             $alert->setLocKey($locKey);
         }
 
-        $payload = Payload::create()
-            ->setAlert($alert);
+        $payload = Payload::create()->setAlert($message->customAlert ?: $alert);
 
         if ($contentAvailable = $message->contentAvailable) {
             $payload->setContentAvailability((bool) $message->contentAvailable);
