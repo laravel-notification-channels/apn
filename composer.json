@@ -1,5 +1,5 @@
 {
-    "name": "laravel-notification-channels/apn",
+    "name": "steveeakin/apn",
     "description": "Apple APN Push Notification Channel",
     "homepage": "https://github.com/laravel-notification-channels/apn",
     "license": "MIT",
