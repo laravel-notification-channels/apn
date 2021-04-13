@@ -28,7 +28,7 @@
         {
             "type": "vcs",
             "url": "https://github.com/steveeakin/pushok"
-        },
+        }
     ],
     "autoload": {
         "psr-4": {
