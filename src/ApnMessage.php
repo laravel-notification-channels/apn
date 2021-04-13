@@ -92,6 +92,13 @@ class ApnMessage
     public $custom = [];
 
     /**
+     * Url arguments of the notification.
+     *
+     * @var array
+     */
+    public $urlArgs = [];
+
+    /**
      * Value indicating when the message will expire.
      *
      * @var \string
@@ -369,6 +376,35 @@ class ApnMessage
     public function setCustom($custom)
     {
         $this->custom = $custom;
+
+        return $this;
+    }
+
+    /**
+     * Add a url argument to the notification.
+     *
+     * @param string $key
+     * @param mixed $value
+     *
+     * @return $this
+     */
+    public function urlArg($key, $value)
+    {
+        $this->urlArgs[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Override the data of the notification.
+     *
+     * @param array $urlArgs
+     *
+     * @return $this
+     */
+    public function setUrlArguments($urlArgs)
+    {
+        $this->urlArgs = $urlArgs;
 
         return $this;
     }
