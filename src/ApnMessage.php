@@ -92,7 +92,7 @@ class ApnMessage
     public $custom = [];
 
     /**
-     * Url arguments of the notification.
+     * URL arguments of the notification.
      *
      * @var array
      */
@@ -381,7 +381,7 @@ class ApnMessage
     }
 
     /**
-     * Add a url argument to the notification.
+     * Add a URL argument to the notification.
      *
      * @param string $key
      * @param mixed $value
@@ -396,13 +396,13 @@ class ApnMessage
     }
 
     /**
-     * Override the data of the notification.
+     * Override the URL arguemnts of the notification.
      *
      * @param array $urlArgs
      *
      * @return $this
      */
-    public function setUrlArguments($urlArgs)
+    public function setUrlArgs($urlArgs)
     {
         $this->urlArgs = $urlArgs;
 
