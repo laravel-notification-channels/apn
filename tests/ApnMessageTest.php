@@ -12,12 +12,11 @@ class ApnMessageTest extends TestCase
     /** @test */
     public function it_can_be_created_statically()
     {
-        $message = ApnMessage::create('title', 'subtitle', 'body', ['custom' => 'data'], 1);
+        $message = ApnMessage::create('title', 'body', ['custom' => 'data'], 1);
 
         $this->assertInstanceOf(ApnMessage::class, $message);
 
         $this->assertEquals('title', $message->title);
-        $this->assertEquals('subtitle', $message->subtitle);
         $this->assertEquals('body', $message->body);
         $this->assertEquals(['custom' => 'data'], $message->custom);
         $this->assertEquals(1, $message->badge);

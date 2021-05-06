@@ -142,29 +142,26 @@ class ApnMessage
 
     /**
      * @param string|null $title
-     * @param string|null $subtitle
      * @param string|null $body
      * @param array $custom
      * @param null|int $badge
      *
      * @return static
      */
-    public static function create($title = null, $subtitle = null, $body = null, $custom = [], $badge = null)
+    public static function create($title = null, $body = null, $custom = [], $badge = null)
     {
-        return new static($title, $subtitle, $body, $custom, $badge);
+        return new static($title, $body, $custom, $badge);
     }
 
     /**
      * @param string|null $title
-     * @param string|null $subtitle
      * @param string|null $body
      * @param array $custom
      * @param null|int $badge
      */
-    public function __construct($title = null, $subtitle = null, $body = null, $custom = [], $badge = null)
+    public function __construct($title = null, $body = null, $custom = [], $badge = null)
     {
         $this->title = $title;
-        $this->subtitle = $subtitle;
         $this->body = $body;
         $this->custom = $custom;
         $this->badge = $badge;
