@@ -15,6 +15,13 @@ class ApnMessage
     public $title;
 
     /**
+     * The subtitle of the notification.
+     *
+     * @var string
+     */
+    public $subtitle;
+
+    /**
      * The body of the notification.
      *
      * @var string
@@ -170,6 +177,20 @@ class ApnMessage
     public function title($title)
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Set the alert subtitle of the notification.
+     *
+     * @param string $subtitle
+     *
+     * @return $this
+     */
+    public function subtitle($subtitle)
+    {
+        $this->subtitle = $subtitle;
 
         return $this;
     }

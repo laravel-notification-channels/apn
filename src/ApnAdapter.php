@@ -23,6 +23,10 @@ class ApnAdapter
             $alert->setTitle($title);
         }
 
+        if ($subtitle = $message->subtitle) {
+            $alert->setSubtitle($subtitle);
+        }
+
         if ($body = $message->body) {
             $alert->setBody($body);
         }

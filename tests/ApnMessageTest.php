@@ -34,6 +34,17 @@ class ApnMessageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_subtitle()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->subtitle('Subtitle');
+
+        $this->assertEquals('Subtitle', $message->subtitle);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
     public function it_can_set_body()
     {
         $message = new ApnMessage;
