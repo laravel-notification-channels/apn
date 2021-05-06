@@ -26,6 +26,16 @@ class ApnAdapterTest extends TestCase
     }
 
     /** @test */
+    public function it_adapts_subtitle()
+    {
+        $message = (new ApnMessage)->subtitle('subtitle');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals('subtitle', $notification->getPayload()->getAlert()->getSubtitle());
+    }
+
+    /** @test */
     public function it_adapts_body()
     {
         $message = (new ApnMessage)->body('body');
