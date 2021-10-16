@@ -166,4 +166,14 @@ class ApnAdapterTest extends TestCase
 
         $this->assertEquals($expiresAt, $notification->getExpirationAt());
     }
+
+    /** @test */
+    public function it_adapts_background_without_alert(): void
+    {
+        $message = (new ApnMessage)->pushType('background');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getAlert());
+    }
 }
