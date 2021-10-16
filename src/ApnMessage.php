@@ -8,6 +8,13 @@ use Pushok\Client;
 class ApnMessage
 {
     /**
+     * The background push type.
+     *
+     * @var string
+     */
+    const PUSH_TYPE_BACKGROUND = 'background';
+
+    /**
      * The title of the notification.
      *
      * @var string

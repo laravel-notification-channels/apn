@@ -18,7 +18,8 @@ class ApnAdapter
     public function adapt(ApnMessage $message, string $token)
     {
         $alert = null;
-        if ($message->pushType !== 'background') {
+
+        if ($message->pushType !== ApnMessage::PUSH_TYPE_BACKGROUND) {
             $alert = Alert::create();
 
             if ($title = $message->title) {
