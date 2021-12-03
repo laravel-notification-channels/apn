@@ -57,6 +57,13 @@ class ApnMessage
     public $category;
 
     /**
+     * The thread id of the notification.
+     *
+     * @var string|null
+     * */
+    public $threadId;
+
+    /**
      * Value indicating incoming resource in the notification.
      *
      * @var int|null
@@ -125,6 +132,13 @@ class ApnMessage
      * @var \DateTime|null
      */
     public $expiresAt = null;
+
+    /**
+     * Id for the coalescing of similar notifications.
+     *
+     * @var string|null
+     */
+    public $collapseId;
 
     /**
      * Message specific client.
@@ -259,6 +273,20 @@ class ApnMessage
     }
 
     /**
+     * Set thread id for this notification.
+     *
+     * @param string|null $threadId
+     *
+     * @return $this
+     * */
+    public function threadId($threadId)
+    {
+        $this->threadId = $threadId;
+
+        return $this;
+    }
+
+    /**
      * Set content available value for this notification.
      *
      * @param int $value
@@ -296,6 +324,20 @@ class ApnMessage
     public function expiresAt(DateTime $expiresAt)
     {
         $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
+    /**
+     * Set the collapse id for the notification.
+     *
+     * @param string|null $collapseId
+     *
+     * @return $this
+     */
+    public function collapseId($collapseId)
+    {
+        $this->collapseId = $collapseId;
 
         return $this;
     }
