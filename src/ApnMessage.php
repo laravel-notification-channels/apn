@@ -162,11 +162,10 @@ class ApnMessage
     public $customAlert = null;
 
     /**
-     * @param string|null $title
-     * @param string|null $body
-     * @param array $custom
-     * @param null|int $badge
-     *
+     * @param  string|null  $title
+     * @param  string|null  $body
+     * @param  array  $custom
+     * @param  null|int  $badge
      * @return static
      */
     public static function create($title = null, $body = null, $custom = [], $badge = null)
@@ -175,10 +174,10 @@ class ApnMessage
     }
 
     /**
-     * @param string|null $title
-     * @param string|null $body
-     * @param array $custom
-     * @param null|int $badge
+     * @param  string|null  $title
+     * @param  string|null  $body
+     * @param  array  $custom
+     * @param  null|int  $badge
      */
     public function __construct($title = null, $body = null, $custom = [], $badge = null)
     {
@@ -191,8 +190,7 @@ class ApnMessage
     /**
      * Set the alert title of the notification.
      *
-     * @param string $title
-     *
+     * @param  string  $title
      * @return $this
      */
     public function title($title)
@@ -205,8 +203,7 @@ class ApnMessage
     /**
      * Set the alert subtitle of the notification.
      *
-     * @param string $subtitle
-     *
+     * @param  string  $subtitle
      * @return $this
      */
     public function subtitle($subtitle)
@@ -219,8 +216,7 @@ class ApnMessage
     /**
      * Set the alert message of the notification.
      *
-     * @param string $body
-     *
+     * @param  string  $body
      * @return $this
      */
     public function body($body)
@@ -233,8 +229,7 @@ class ApnMessage
     /**
      * Set the badge of the notification.
      *
-     * @param int $badge
-     *
+     * @param  int  $badge
      * @return $this
      */
     public function badge($badge)
@@ -247,8 +242,7 @@ class ApnMessage
     /**
      * Set the sound for the notification.
      *
-     * @param string|null $sound
-     *
+     * @param  string|null  $sound
      * @return $this
      */
     public function sound($sound = 'default')
@@ -261,8 +255,7 @@ class ApnMessage
     /**
      * Set category for this notification.
      *
-     * @param string|null $category
-     *
+     * @param  string|null  $category
      * @return $this
      * */
     public function category($category)
@@ -275,8 +268,7 @@ class ApnMessage
     /**
      * Set thread id for this notification.
      *
-     * @param string|null $threadId
-     *
+     * @param  string|null  $threadId
      * @return $this
      * */
     public function threadId($threadId)
@@ -289,8 +281,7 @@ class ApnMessage
     /**
      * Set content available value for this notification.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function contentAvailable($value = 1)
@@ -303,8 +294,7 @@ class ApnMessage
     /**
      * Set the push type for this notification.
      *
-     * @param  string $pushType
-     *
+     * @param  string  $pushType
      * @return $this
      */
     public function pushType(string $pushType)
@@ -317,8 +307,7 @@ class ApnMessage
     /**
      * Set the expiration time for the message.
      *
-     * @param  \DateTime $expiresAt
-     *
+     * @param  \DateTime  $expiresAt
      * @return $this
      */
     public function expiresAt(DateTime $expiresAt)
@@ -331,8 +320,7 @@ class ApnMessage
     /**
      * Set the collapse id for the notification.
      *
-     * @param string|null $collapseId
-     *
+     * @param  string|null  $collapseId
      * @return $this
      */
     public function collapseId($collapseId)
@@ -345,7 +333,7 @@ class ApnMessage
     /**
      * Set a title-loc-key.
      *
-     * @param  string|null $titleLocKey
+     * @param  string|null  $titleLocKey
      * @return $this
      */
     public function titleLocKey($titleLocKey = null)
@@ -358,7 +346,7 @@ class ApnMessage
     /**
      * Set the title-loc-args.
      *
-     * @param  array|null $titleLocArgs
+     * @param  array|null  $titleLocArgs
      * @return $this
      */
     public function titleLocArgs(array $titleLocArgs = null)
@@ -371,7 +359,7 @@ class ApnMessage
     /**
      * Set an action-loc-key.
      *
-     * @param  string|null $actionLocKey
+     * @param  string|null  $actionLocKey
      * @return $this
      */
     public function actionLocKey($actionLocKey = null)
@@ -384,7 +372,7 @@ class ApnMessage
     /**
      * Set a loc-key.
      *
-     * @param  string $locKey
+     * @param  string  $locKey
      * @return $this
      */
     public function setLocKey($locKey)
@@ -397,7 +385,7 @@ class ApnMessage
     /**
      * Set the loc-args.
      *
-     * @param  array $locArgs
+     * @param  array  $locArgs
      * @return $this
      */
     public function setLocArgs($locArgs)
@@ -410,9 +398,8 @@ class ApnMessage
     /**
      * Add custom data to the notification.
      *
-     * @param string $key
-     * @param mixed $value
-     *
+     * @param  string  $key
+     * @param  mixed  $value
      * @return $this
      */
     public function custom($key, $value)
@@ -425,8 +412,7 @@ class ApnMessage
     /**
      * Sets custom alert value as JSON or Array.
      *
-     * @param string|array $customAlert
-     *
+     * @param  string|array  $customAlert
      * @return $this
      */
     public function setCustomAlert($customAlert)
@@ -439,8 +425,7 @@ class ApnMessage
     /**
      * Override the data of the notification.
      *
-     * @param array $custom
-     *
+     * @param  array  $custom
      * @return $this
      */
     public function setCustom($custom)
@@ -453,9 +438,8 @@ class ApnMessage
     /**
      * Add a URL argument to the notification.
      *
-     * @param string $key
-     * @param mixed $value
-     *
+     * @param  string  $key
+     * @param  mixed  $value
      * @return $this
      */
     public function urlArg($key, $value)
@@ -468,8 +452,7 @@ class ApnMessage
     /**
      * Override the URL arguemnts of the notification.
      *
-     * @param array $urlArgs
-     *
+     * @param  array  $urlArgs
      * @return $this
      */
     public function setUrlArgs($urlArgs)
@@ -482,9 +465,8 @@ class ApnMessage
     /**
      * Add an action to the notification.
      *
-     * @param string $action
-     * @param mixed $params
-     *
+     * @param  string  $action
+     * @param  mixed  $params
      * @return $this
      */
     public function action($action, $params = null)
@@ -511,8 +493,7 @@ class ApnMessage
     /**
      * Set mutable content value for this notification.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function mutableContent($value = 1)
