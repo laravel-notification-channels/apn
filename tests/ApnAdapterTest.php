@@ -126,6 +126,16 @@ class ApnAdapterTest extends TestCase
     }
 
     /** @test */
+    public function it_adapts_thread_id()
+    {
+        $message = (new ApnMessage)->threadId('threadId');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals('threadId', $notification->getPayload()->getThreadId());
+    }
+
+    /** @test */
     public function it_adapts_custom()
     {
         $message = (new ApnMessage)->custom('key', 'value');
@@ -165,6 +175,16 @@ class ApnAdapterTest extends TestCase
         $notification = $this->adapter->adapt($message, 'token');
 
         $this->assertEquals($expiresAt, $notification->getExpirationAt());
+    }
+
+    /** @test */
+    public function it_adapts_collapse_id()
+    {
+        $message = (new ApnMessage)->collapseId('collapseId');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals('collapseId', $notification->getCollapseId());
     }
 
     /** @test */
