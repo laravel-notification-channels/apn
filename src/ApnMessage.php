@@ -43,7 +43,7 @@ class ApnMessage
     public $badge;
 
     /**
-     * The sound for the notification.
+     * The sound of the notification.
      *
      * @var string|null
      */
@@ -57,7 +57,7 @@ class ApnMessage
     public $category;
 
     /**
-     * The thread id of the notification.
+     * The thread ID of the notification.
      *
      * @var string|null
      * */
@@ -134,7 +134,7 @@ class ApnMessage
     public $expiresAt = null;
 
     /**
-     * Id for the coalescing of similar notifications.
+     * ID for the collapsing of similar notifications.
      *
      * @var string|null
      */
@@ -240,7 +240,7 @@ class ApnMessage
     }
 
     /**
-     * Set the sound for the notification.
+     * Set the sound of the notification.
      *
      * @param  string|null  $sound
      * @return $this
@@ -253,7 +253,7 @@ class ApnMessage
     }
 
     /**
-     * Set category for this notification.
+     * Set category of the notification.
      *
      * @param  string|null  $category
      * @return $this
@@ -266,7 +266,7 @@ class ApnMessage
     }
 
     /**
-     * Set thread id for this notification.
+     * Set thread ID of the notification.
      *
      * @param  string|null  $threadId
      * @return $this
@@ -279,7 +279,7 @@ class ApnMessage
     }
 
     /**
-     * Set content available value for this notification.
+     * Set content available value of the notification.
      *
      * @param  int  $value
      * @return $this
@@ -292,7 +292,7 @@ class ApnMessage
     }
 
     /**
-     * Set the push type for this notification.
+     * Set the push type of the notification.
      *
      * @param  string  $pushType
      * @return $this
@@ -318,7 +318,7 @@ class ApnMessage
     }
 
     /**
-     * Set the collapse id for the notification.
+     * Set the collapse ID of the notification.
      *
      * @param  string|null  $collapseId
      * @return $this
@@ -491,7 +491,7 @@ class ApnMessage
     }
 
     /**
-     * Set mutable content value for this notification.
+     * Set mutable content value of the notification.
      *
      * @param  int  $value
      * @return $this
