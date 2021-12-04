@@ -77,6 +77,10 @@ class ApnAdapter
             $payload->setCategory($category);
         }
 
+        if ($threadId = $message->threadId) {
+            $payload->setThreadId($threadId);
+        }
+
         if ($urlArgs = $message->urlArgs) {
             $payload->setUrlArgs($message->urlArgs);
         }
@@ -93,6 +97,10 @@ class ApnAdapter
 
         if ($expiresAt = $message->expiresAt) {
             $notification->setExpirationAt($expiresAt);
+        }
+
+        if ($collapseId = $message->collapseId) {
+            $notification->setCollapseId($collapseId);
         }
 
         return $notification;

@@ -100,6 +100,17 @@ class ApnMessageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_thread_id()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->threadId('Thread');
+
+        $this->assertEquals('Thread', $message->threadId);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
     public function it_can_set_content_available()
     {
         $message = new ApnMessage;
@@ -131,6 +142,17 @@ class ApnMessageTest extends TestCase
         $result = $message->expiresAt($now);
 
         $this->assertEquals($now, $message->expiresAt);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
+    public function it_can_set_collapse_id()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->collapseId('collapseId');
+
+        $this->assertEquals('collapseId', $message->collapseId);
         $this->assertEquals($message, $result);
     }
 
