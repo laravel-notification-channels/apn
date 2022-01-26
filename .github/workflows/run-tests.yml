@@ -1,4 +1,4 @@
-name: build
+name: test
 
 on: [push]
 
@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        php: [8.0, 1]
+        php: [8.0, 8.1]
         laravel: [8.*, 9.*]
         stability: [prefer-lowest, prefer-stable]
 
