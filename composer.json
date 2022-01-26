@@ -11,13 +11,13 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "edamov/pushok": "^0.13",
-        "illuminate/cache": "^6.0|^7.0|^8.0",
-        "illuminate/config": "^6.0|^7.0|^8.0",
-        "illuminate/events": "^6.0|^7.0|^8.0",
-        "illuminate/notifications": "^6.0|^7.0|^8.0",
-        "illuminate/support": "^6.0|^7.0|^8.0"
+        "illuminate/cache": "^8.0|^9.0",
+        "illuminate/config": "^8.0|^9.0",
+        "illuminate/events": "^8.0|^9.0",
+        "illuminate/notifications": "^8.0|^9.0",
+        "illuminate/support": "^8.0|^9.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.4",
@@ -49,5 +49,7 @@
                 "NotificationChannels\\Apn\\ApnServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
