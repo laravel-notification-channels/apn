@@ -262,7 +262,7 @@ class ApnMessage
     /**
      * Set the interruptionLevel of the notification.
      *
-     * @param string|null  $interruptionLevel
+     * @param  string|null  $interruptionLevel
      * @return $this
      */
     public function interruptionLevel($interruptionLevel = 'active')
