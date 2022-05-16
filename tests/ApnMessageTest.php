@@ -78,6 +78,17 @@ class ApnMessageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_interruption_level()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->interruptionLevel('critical');
+
+        $this->assertEquals('critical', $message->interruptionLevel);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
     public function it_can_set_sound_to_default()
     {
         $message = new ApnMessage;

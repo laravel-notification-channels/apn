@@ -73,6 +73,10 @@ class ApnAdapter
             $payload->setSound($sound);
         }
 
+        if ($interruptionLevel = $message->interruptionLevel) {
+            $payload->setInterruptionLevel($interruptionLevel);
+        }
+
         if ($category = $message->category) {
             $payload->setCategory($category);
         }
