@@ -50,6 +50,13 @@ class ApnMessage
     public $sound;
 
     /**
+     * The interruption level of the notification.
+     *
+     * @var string|null
+     */
+    public $interruptionLevel;
+
+    /**
      * The category for action button.
      *
      * @var string|null
@@ -248,6 +255,19 @@ class ApnMessage
     public function sound($sound = 'default')
     {
         $this->sound = $sound;
+
+        return $this;
+    }
+
+    /**
+     * Set the interruptionLevel of the notification.
+     *
+     * @param string|null  $interruptionLevel
+     * @return $this
+     */
+    public function interruptionLevel($interruptionLevel = 'active')
+    {
+        $this->interruptionLevel = $interruptionLevel;
 
         return $this;
     }

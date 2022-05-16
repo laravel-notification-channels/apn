@@ -116,6 +116,16 @@ class ApnAdapterTest extends TestCase
     }
 
     /** @test */
+    public function it_adapts_interruption_level()
+    {
+        $message = (new ApnMessage)->interruptionLevel('interruption-level');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals('interruption-level', $notification->getPayload()->getInterruptionLevel());
+    }
+
+    /** @test */
     public function it_adapts_category()
     {
         $message = (new ApnMessage)->category('category');
