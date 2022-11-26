@@ -148,6 +148,14 @@ class ApnMessage
     public $collapseId;
 
     /**
+     * A canonical UUID that is the unique ID for the notification.
+     * APNs includes this value when reporting the error to your server.
+     *
+     * @var string|null
+     */
+    public $apnsId;
+
+    /**
      * Message specific client.
      *
      * @var \Pushok\Client|null
@@ -346,6 +354,19 @@ class ApnMessage
     public function collapseId($collapseId)
     {
         $this->collapseId = $collapseId;
+
+        return $this;
+    }
+
+    /**
+     * Set the apns ID.
+     *
+     * @param  string|null  $apnsId
+     * @return $this
+     */
+    public function apnsId($apnsId)
+    {
+        $this->apnsId = $apnsId;
 
         return $this;
     }

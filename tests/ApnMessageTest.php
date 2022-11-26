@@ -168,6 +168,17 @@ class ApnMessageTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_apns_id()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->apnsId('123e4567-e89b-12d3-a456-4266554400a0');
+
+        $this->assertEquals('123e4567-e89b-12d3-a456-4266554400a0', $message->apnsId);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
     public function it_can_set_custom_value()
     {
         $message = new ApnMessage;

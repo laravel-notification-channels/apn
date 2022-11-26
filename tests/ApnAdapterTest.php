@@ -198,6 +198,16 @@ class ApnAdapterTest extends TestCase
     }
 
     /** @test */
+    public function it_adapts_apns_id()
+    {
+        $message = (new ApnMessage)->apnsId('123e4567-e89b-12d3-a456-4266554400a0');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals('123e4567-e89b-12d3-a456-4266554400a0', $notification->getId());
+    }
+
+    /** @test */
     public function it_adapts_background_without_alert(): void
     {
         $message = (new ApnMessage)->pushType('background');

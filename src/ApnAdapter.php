@@ -107,6 +107,10 @@ class ApnAdapter
             $notification->setCollapseId($collapseId);
         }
 
+        if ($apnsId = $message->apnsId) {
+            $notification->setId($apnsId);
+        }
+
         return $notification;
     }
 }
