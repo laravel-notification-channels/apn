@@ -16,8 +16,8 @@ use Pushok\Response;
 class ApnVoipChannelTest extends TestCase
 {
     protected $client;
+    protected $factory;
     protected $events;
-    protected $notification;
     protected $channel;
 
     public function setUp(): void

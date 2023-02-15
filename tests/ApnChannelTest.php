@@ -13,8 +13,8 @@ use Pushok\Response;
 class ApnChannelTest extends TestCase
 {
     protected $client;
+    protected $factory;
     protected $events;
-    protected $notification;
     protected $channel;
 
     public function setUp(): void
