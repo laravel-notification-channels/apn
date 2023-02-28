@@ -20,6 +20,7 @@ class ApnServiceProvider extends ServiceProvider
     {
         $this->app->bind(AuthProviderInterface::class, function ($app) {
             $options = Arr::except($app['config']['broadcasting.connections.apn'], 'production');
+
             return Arr::exists($options, 'certificate_path') ? Certificate::create($options) : Token::create($options);
         });
 
