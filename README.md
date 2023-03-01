@@ -34,7 +34,7 @@ Before using the APN Service, [enable Push Notifications in your app](https://he
 
 Collect your Key ID, as well as your Team ID (displayed at the top right of the Apple Developer page) and app bundle ID and configure as necessary in `config/broadcasting.php`.
 
-Using JWT token configuration example
+## JWT Token Authentication
 
 ```php
 'connections' => [
@@ -42,28 +42,34 @@ Using JWT token configuration example
         'key_id' => env('APN_KEY_ID'),
         'team_id' => env('APN_TEAM_ID'),
         'app_bundle_id' => env('APN_BUNDLE_ID'),
-        // Only one of `private_key_path` and `private_key_content` can be enabled
+        // Enable either `private_key_path` or `private_key_content` depending on your environment
         // 'private_key_path' => env('APN_PRIVATE_KEY'),
         'private_key_content' => env('APN_PRIVATE_KEY'),
-        'private_key_secret' => env('APN_PRIVATE_SECRET', null),
+        'private_key_secret' => env('APN_PRIVATE_SECRET'),
         'production' => env('APN_PRODUCTION', true),
     ],
 ],
 ```
 
-Using Certificate (.pem) configuration example
+See the [Establishing a token-based connection to APNs](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns) which will guide you how to obtain the values of the necessary parameters.
+
+## Using Certificate (.pem) Authentication
 
 ```php
 'connections' => [
     'apn' => [
         'app_bundle_id' => env('APN_BUNDLE_ID'),
         'certificate_path' => env('APN_CERTIFICATE_PATH'),
-        'certificate_secret' => env('APN_CERTIFICATE_SECRET', null),
+        'certificate_secret' => env('APN_CERTIFICATE_SECRET'),
         'production' => env('APN_PRODUCTION', true),
     ],
 ],
 ```
-See the [`pushok` docs](https://github.com/edamov/pushok) for more information about what arguments can be supplied to the client
+If you are connecting with certificate based APNs, `key_id` and `team_id` are not needed. You can refer to [Send a Push Notification Using a Certificate](https://developer.apple.com/documentation/usernotifications/sending_push_notifications_using_command-line_tools#3694578)
+
+See the [Establishing a certificate-based connection to APNs](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns) which will guide you how to obtain the values of the necessary parameters.
+
+See the [`pushok` docs](https://github.com/edamov/pushok) for more information about what arguments can be supplied to the client.
 
 ## Usage
 
