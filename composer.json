@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.1 || ^8.2",
         "edamov/pushok": "^0.15",
         "illuminate/cache": "^9.0|^10.0",
         "illuminate/config": "^9.0|^10.0",
