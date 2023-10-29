@@ -10,12 +10,8 @@ class ApnAdapter
 {
     /**
      * Convert an ApnMessage instance into a Zend Apns Message.
-     *
-     * @param  \NotificationChannels\Apn\ApnMessage  $message
-     * @param  string  $token
-     * @return \Pushok\Notification
      */
-    public function adapt(ApnMessage $message, string $token)
+    public function adapt(ApnMessage $message, string $token): Notification
     {
         $alert = null;
 
