@@ -45,7 +45,7 @@ class ApnChannelTest extends TestCase
         $customClient->shouldReceive('addNotification');
         $customClient->shouldReceive('push')->once();
 
-        $this->channel->send(new TestNotifiable, (new TestNotificationWithClient($customClient)));
+        $this->channel->send(new TestNotifiable, new TestNotificationWithClient($customClient));
     }
 
     /** @test */

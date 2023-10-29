@@ -11,44 +11,22 @@ use Pushok\Response;
 class ApnChannel
 {
     /**
-     * The Pushok\Client factory.
-     *
-     * @var \NotificationChannels\Apn\ClientFactory
-     */
-    protected $factory;
-
-    /**
-     * The event dispatcher.
-     *
-     * @var \Illuminate\Contracts\Events\Dispatcher
-     */
-    protected $events;
-
-    /**
      * Create a new channel instance.
-     *
-     * @param  \NotificationChannels\Apn\ClientFactory  $factory
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
      */
-    public function __construct(ClientFactory $factory, Dispatcher $events)
+    public function __construct(protected ClientFactory $factory, protected Dispatcher $events)
     {
-        $this->factory = $factory;
-        $this->events = $events;
+        //
     }
 
     /**
      * Send the notification to Apple Push Notification Service.
-     *
-     * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
-     * @return array|void
      */
-    public function send($notifiable, Notification $notification)
+    public function send(mixed $notifiable, Notification $notification): ?array
     {
         $tokens = (array) $notifiable->routeNotificationFor('apn', $notification);
 
         if (empty($tokens)) {
-            return;
+            return null;
         }
 
         $message = $notification->toApn($notifiable);
@@ -64,13 +42,8 @@ class ApnChannel
 
     /**
      * Send the message to the given tokens through the given client.
-     *
-     * @param  \Pushok\Client  $client
-     * @param  \NotificationChannels\Apn\ApnMessage  $message
-     * @param  array  $tokens
-     * @return array
      */
-    protected function sendNotifications(Client $client, ApnMessage $message, array $tokens)
+    protected function sendNotifications(Client $client, ApnMessage $message, array $tokens): array
     {
         foreach ($tokens as $token) {
             $client->addNotification((new ApnAdapter)->adapt($message, $token));
@@ -81,13 +54,8 @@ class ApnChannel
 
     /**
      * Dispatch failed events for notifications that weren't delivered.
-     *
-     * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
-     * @param  array  $responses
-     * @return void
      */
-    protected function dispatchEvents($notifiable, $notification, array $responses)
+    protected function dispatchEvents(mixed $notifiable, Notification $notification, array $responses): void
     {
         foreach ($responses as $response) {
             if ($response->getStatusCode() === Response::APNS_SUCCESS) {

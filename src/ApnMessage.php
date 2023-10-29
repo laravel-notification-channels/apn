@@ -16,158 +16,114 @@ class ApnMessage
 
     /**
      * The title of the notification.
-     *
-     * @var string
      */
-    public $title;
+    public ?string $title = null;
 
     /**
      * The subtitle of the notification.
-     *
-     * @var string
      */
-    public $subtitle;
+    public ?string $subtitle = null;
 
     /**
      * The body of the notification.
-     *
-     * @var string
      */
-    public $body;
+    public ?string $body = null;
 
     /**
      * The badge of the notification.
-     *
-     * @var int
      */
-    public $badge;
+    public ?int $badge;
 
     /**
      * The sound of the notification.
-     *
-     * @var string|null
      */
-    public $sound;
+    public ?string $sound = null;
 
     /**
      * The interruption level of the notification.
-     *
-     * @var string|null
      */
-    public $interruptionLevel;
+    public ?string $interruptionLevel = null;
 
     /**
      * The category for action button.
-     *
-     * @var string|null
-     * */
-    public $category;
+     */
+    public ?string $category = null;
 
     /**
      * The thread ID of the notification.
-     *
-     * @var string|null
-     * */
-    public $threadId;
+     */
+    public ?string $threadId = null;
 
     /**
      * Value indicating incoming resource in the notification.
-     *
-     * @var int|null
      */
-    public $contentAvailable = null;
+    public ?int $contentAvailable = null;
 
     /**
      * The key to a title string in the Localizable.strings file for the current localization.
-     *
-     * @var string|null
      */
-    public $titleLocKey;
+    public ?string $titleLocKey = null;
 
     /**
      * Variable string values to appear in place of the format specifiers in title-loc-key.
-     *
-     * @var string|null
      */
-    public $titleLocArgs;
+    public ?array $titleLocArgs = null;
 
     /**
      * If a string is specified, the iOS system displays an alert that includes the Close and View buttons.
-     *
-     * @var string|null
      */
-    public $actionLocKey;
+    public ?string $actionLocKey = null;
 
     /**
      * A key to an alert-message string in a Localizable.strings file for the current localization.
-     *
-     * @var string|null
      */
-    public $locKey;
+    public ?string $locKey = null;
 
     /**
      * Variable string values to appear in place of the format specifiers in loc-key.
-     *
-     * @var array|null
      */
-    public $locArgs;
+    public ?array $locArgs = null;
 
     /**
      * Additional data of the notification.
-     *
-     * @var array
      */
-    public $custom = [];
+    public array $custom = [];
 
     /**
      * URL arguments of the notification.
-     *
-     * @var array
      */
-    public $urlArgs = [];
+    public array $urlArgs = [];
 
     /**
      * Value indicating when the message will expire.
-     *
-     * @var \string
      */
-    public $pushType = null;
+    public ?string $pushType = null;
 
     /**
      * The expiration time of the notification.
-     *
-     * @var \DateTime|null
      */
-    public $expiresAt = null;
+    public ?DateTime $expiresAt = null;
 
     /**
      * ID for the collapsing of similar notifications.
-     *
-     * @var string|null
      */
-    public $collapseId;
+    public ?string $collapseId = null;
 
     /**
      * A canonical UUID that is the unique ID for the notification.
      * APNs includes this value when reporting the error to your server.
-     *
-     * @var string|null
      */
-    public $apnsId;
+    public ?string $apnsId = null;
 
     /**
      * Message specific client.
-     *
-     * @var \Pushok\Client|null
      */
-    public $client = null;
+    public ?Client $client = null;
 
     /**
      * The notification service app extension flag.
-     *
-     * @var int|null
      */
-    public $mutableContent = null;
+    public ?int $mutableContent = null;
 
     /**
      * Custom alert for Edamov/Pushok.
@@ -177,24 +133,9 @@ class ApnMessage
     public $customAlert = null;
 
     /**
-     * @param  string|null  $title
-     * @param  string|null  $body
-     * @param  array  $custom
-     * @param  null|int  $badge
-     * @return static
+     * Create a new messages instance.
      */
-    public static function create($title = null, $body = null, $custom = [], $badge = null)
-    {
-        return new static($title, $body, $custom, $badge);
-    }
-
-    /**
-     * @param  string|null  $title
-     * @param  string|null  $body
-     * @param  array  $custom
-     * @param  null|int  $badge
-     */
-    public function __construct($title = null, $body = null, $custom = [], $badge = null)
+    public function __construct(?string $title = null, ?string $body = null, array $custom = [], ?int $badge = null)
     {
         $this->title = $title;
         $this->body = $body;
@@ -203,12 +144,17 @@ class ApnMessage
     }
 
     /**
-     * Set the alert title of the notification.
-     *
-     * @param  string  $title
-     * @return $this
+     * Create a new message instance.
      */
-    public function title($title)
+    public static function create(?string $title = null, ?string $body = null, array $custom = [], ?int $badge = null): static
+    {
+        return new static($title, $body, $custom, $badge);
+    }
+
+    /**
+     * Set the alert title of the notification.
+     */
+    public function title(?string $title): self
     {
         $this->title = $title;
 
@@ -217,11 +163,8 @@ class ApnMessage
 
     /**
      * Set the alert subtitle of the notification.
-     *
-     * @param  string  $subtitle
-     * @return $this
      */
-    public function subtitle($subtitle)
+    public function subtitle(?string $subtitle): self
     {
         $this->subtitle = $subtitle;
 
@@ -230,11 +173,8 @@ class ApnMessage
 
     /**
      * Set the alert message of the notification.
-     *
-     * @param  string  $body
-     * @return $this
      */
-    public function body($body)
+    public function body(?string $body): self
     {
         $this->body = $body;
 
@@ -243,11 +183,8 @@ class ApnMessage
 
     /**
      * Set the badge of the notification.
-     *
-     * @param  int  $badge
-     * @return $this
      */
-    public function badge($badge)
+    public function badge(?int $badge): self
     {
         $this->badge = $badge;
 
@@ -256,11 +193,8 @@ class ApnMessage
 
     /**
      * Set the sound of the notification.
-     *
-     * @param  string|null  $sound
-     * @return $this
      */
-    public function sound($sound = 'default')
+    public function sound(?string $sound = 'default'): self
     {
         $this->sound = $sound;
 
@@ -269,11 +203,8 @@ class ApnMessage
 
     /**
      * Set the interruptionLevel of the notification.
-     *
-     * @param  string|null  $interruptionLevel
-     * @return $this
      */
-    public function interruptionLevel($interruptionLevel = 'active')
+    public function interruptionLevel(?string $interruptionLevel = 'active'): self
     {
         $this->interruptionLevel = $interruptionLevel;
 
@@ -282,11 +213,8 @@ class ApnMessage
 
     /**
      * Set category of the notification.
-     *
-     * @param  string|null  $category
-     * @return $this
      * */
-    public function category($category)
+    public function category(?string $category): self
     {
         $this->category = $category;
 
@@ -295,11 +223,8 @@ class ApnMessage
 
     /**
      * Set thread ID of the notification.
-     *
-     * @param  string|null  $threadId
-     * @return $this
      * */
-    public function threadId($threadId)
+    public function threadId(?string $threadId): self
     {
         $this->threadId = $threadId;
 
@@ -308,11 +233,8 @@ class ApnMessage
 
     /**
      * Set content available value of the notification.
-     *
-     * @param  int  $value
-     * @return $this
      */
-    public function contentAvailable($value = 1)
+    public function contentAvailable(?int $value = 1): self
     {
         $this->contentAvailable = $value;
 
@@ -321,11 +243,8 @@ class ApnMessage
 
     /**
      * Set the push type of the notification.
-     *
-     * @param  string  $pushType
-     * @return $this
      */
-    public function pushType(string $pushType)
+    public function pushType(?string $pushType): self
     {
         $this->pushType = $pushType;
 
@@ -334,11 +253,8 @@ class ApnMessage
 
     /**
      * Set the expiration time for the message.
-     *
-     * @param  \DateTime  $expiresAt
-     * @return $this
      */
-    public function expiresAt(DateTime $expiresAt)
+    public function expiresAt(DateTime $expiresAt): self
     {
         $this->expiresAt = $expiresAt;
 
@@ -347,11 +263,8 @@ class ApnMessage
 
     /**
      * Set the collapse ID of the notification.
-     *
-     * @param  string|null  $collapseId
-     * @return $this
      */
-    public function collapseId($collapseId)
+    public function collapseId(?string $collapseId): self
     {
         $this->collapseId = $collapseId;
 
@@ -359,12 +272,9 @@ class ApnMessage
     }
 
     /**
-     * Set the apns ID.
-     *
-     * @param  string|null  $apnsId
-     * @return $this
+     * Set the APNS ID.
      */
-    public function apnsId($apnsId)
+    public function apnsId(?string $apnsId): self
     {
         $this->apnsId = $apnsId;
 
@@ -373,11 +283,8 @@ class ApnMessage
 
     /**
      * Set a title-loc-key.
-     *
-     * @param  string|null  $titleLocKey
-     * @return $this
      */
-    public function titleLocKey($titleLocKey = null)
+    public function titleLocKey(?string $titleLocKey = null): self
     {
         $this->titleLocKey = $titleLocKey;
 
@@ -386,11 +293,8 @@ class ApnMessage
 
     /**
      * Set the title-loc-args.
-     *
-     * @param  array|null  $titleLocArgs
-     * @return $this
      */
-    public function titleLocArgs(array $titleLocArgs = null)
+    public function titleLocArgs(array $titleLocArgs = null): self
     {
         $this->titleLocArgs = $titleLocArgs;
 
@@ -399,11 +303,8 @@ class ApnMessage
 
     /**
      * Set an action-loc-key.
-     *
-     * @param  string|null  $actionLocKey
-     * @return $this
      */
-    public function actionLocKey($actionLocKey = null)
+    public function actionLocKey($actionLocKey = null): self
     {
         $this->actionLocKey = $actionLocKey;
 
@@ -412,11 +313,8 @@ class ApnMessage
 
     /**
      * Set a loc-key.
-     *
-     * @param  string  $locKey
-     * @return $this
      */
-    public function setLocKey($locKey)
+    public function setLocKey(?string $locKey): self
     {
         $this->locKey = $locKey;
 
@@ -425,11 +323,8 @@ class ApnMessage
 
     /**
      * Set the loc-args.
-     *
-     * @param  array  $locArgs
-     * @return $this
      */
-    public function setLocArgs($locArgs)
+    public function setLocArgs(?array $locArgs): self
     {
         $this->locArgs = $locArgs;
 
@@ -438,12 +333,8 @@ class ApnMessage
 
     /**
      * Add custom data to the notification.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return $this
      */
-    public function custom($key, $value)
+    public function custom(string $key, mixed $value): self
     {
         $this->custom[$key] = $value;
 
@@ -454,9 +345,8 @@ class ApnMessage
      * Sets custom alert value as JSON or Array.
      *
      * @param  string|array  $customAlert
-     * @return $this
      */
-    public function setCustomAlert($customAlert)
+    public function setCustomAlert($customAlert): self
     {
         $this->customAlert = $customAlert;
 
@@ -465,11 +355,8 @@ class ApnMessage
 
     /**
      * Override the data of the notification.
-     *
-     * @param  array  $custom
-     * @return $this
      */
-    public function setCustom($custom)
+    public function setCustom(array $custom): self
     {
         $this->custom = $custom;
 
@@ -478,12 +365,8 @@ class ApnMessage
 
     /**
      * Add a URL argument to the notification.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return $this
      */
-    public function urlArg($key, $value)
+    public function urlArg(string $key, mixed $value): self
     {
         $this->urlArgs[$key] = $value;
 
@@ -492,11 +375,8 @@ class ApnMessage
 
     /**
      * Override the URL arguemnts of the notification.
-     *
-     * @param  array  $urlArgs
-     * @return $this
      */
-    public function setUrlArgs($urlArgs)
+    public function setUrlArgs(array $urlArgs): self
     {
         $this->urlArgs = $urlArgs;
 
@@ -505,12 +385,8 @@ class ApnMessage
 
     /**
      * Add an action to the notification.
-     *
-     * @param  string  $action
-     * @param  mixed  $params
-     * @return $this
      */
-    public function action($action, $params = null)
+    public function action(string $action, mixed $params = null): self
     {
         return $this->custom('action', [
             'action' => $action,
@@ -520,11 +396,8 @@ class ApnMessage
 
     /**
      * Set message specific client.
-     *
-     * @param \Pushok\Client
-     * @return $this
      */
-    public function via(Client $client)
+    public function via(Client $client): self
     {
         $this->client = $client;
 
@@ -533,11 +406,8 @@ class ApnMessage
 
     /**
      * Set mutable content value of the notification.
-     *
-     * @param  int  $value
-     * @return $this
      */
-    public function mutableContent($value = 1)
+    public function mutableContent(?int $value = 1): self
     {
         $this->mutableContent = $value;
 
