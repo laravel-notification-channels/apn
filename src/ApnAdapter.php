@@ -107,6 +107,14 @@ class ApnAdapter
             $notification->setId($apnsId);
         }
 
+        if ($message->priority === ApnMessage::PRIORITY_HIGH) {
+            $notification->setHighPriority();
+        }
+
+        if ($message->priority === ApnMessage::PRIORITY_LOW) {
+            $notification->setLowPriority();
+        }
+
         return $notification;
     }
 }
