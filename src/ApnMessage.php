@@ -116,6 +116,11 @@ class ApnMessage
     public ?string $apnsId = null;
 
     /**
+     * The message priority.
+     */
+    public ?ApnMessagePriority $priority = null;
+
+    /**
      * Message specific client.
      */
     public ?Client $client = null;
@@ -277,6 +282,16 @@ class ApnMessage
     public function apnsId(?string $apnsId): self
     {
         $this->apnsId = $apnsId;
+
+        return $this;
+    }
+
+    /**
+     * Set the message priority.
+     */
+    public function priority(ApnMessagePriority $priority): self
+    {
+        $this->priority = $priority;
 
         return $this;
     }
