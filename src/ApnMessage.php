@@ -7,9 +7,6 @@ use Pushok\Client;
 
 class ApnMessage
 {
-    const PRIORITY_HIGH = 10;
-    const PRIORITY_LOW = 5;
-
     /**
      * The background push type.
      *
@@ -119,9 +116,9 @@ class ApnMessage
     public ?string $apnsId = null;
 
     /**
-     * The priority of the notification. 10 - immediate. 5 - power considerations.
+     * The message priority.
      */
-    public ?int $priority = null;
+    public ?ApnMessagePriority $priority = null;
 
     /**
      * Message specific client.
@@ -290,23 +287,11 @@ class ApnMessage
     }
 
     /**
-     * Set high priority.
+     * Set the message priority.
      */
-    public function setHighPriority(): self
+    public function priority(ApnMessagePriority $priority): self
     {
-        $this->priority = self::PRIORITY_HIGH;
-
-        return $this;
-    }
-
-    /**
-     * Set low priority.
-     *
-     * @return Notification
-     */
-    public function setLowPriority(): self
-    {
-        $this->priority = self::PRIORITY_LOW;
+        $this->priority = $priority;
 
         return $this;
     }
