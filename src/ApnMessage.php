@@ -37,7 +37,7 @@ class ApnMessage
     /**
      * The sound of the notification.
      */
-    public ?string $sound = null;
+    public null|string|\Pushok\Payload\Sound $sound = null;
 
     /**
      * The interruption level of the notification.
@@ -199,7 +199,7 @@ class ApnMessage
     /**
      * Set the sound of the notification.
      */
-    public function sound(?string $sound = 'default'): self
+    public function sound(null|string|\Pushok\Payload\Sound $sound = 'default'): self
     {
         $this->sound = $sound;
 
