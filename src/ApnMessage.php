@@ -4,6 +4,7 @@ namespace NotificationChannels\Apn;
 
 use DateTime;
 use Pushok\Client;
+use Pushok\Payload\Sound;
 
 class ApnMessage
 {
@@ -37,7 +38,7 @@ class ApnMessage
     /**
      * The sound of the notification.
      */
-    public null|string|\Pushok\Payload\Sound $sound = null;
+    public null|string|Sound $sound = null;
 
     /**
      * The interruption level of the notification.
@@ -199,7 +200,7 @@ class ApnMessage
     /**
      * Set the sound of the notification.
      */
-    public function sound(null|string|\Pushok\Payload\Sound $sound = 'default'): self
+    public function sound(null|string|Sound $sound = 'default'): self
     {
         $this->sound = $sound;
 
