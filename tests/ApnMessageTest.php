@@ -5,6 +5,7 @@ namespace NotificationChannels\Apn\Tests;
 use DateTime;
 use Mockery;
 use NotificationChannels\Apn\ApnMessage;
+use NotificationChannels\Apn\ApnMessageInterruptionLevel;
 use Pushok\Client;
 
 class ApnMessageTest extends TestCase
@@ -78,11 +79,22 @@ class ApnMessageTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_interruption_level()
+    public function it_can_set_interruption_level_as_string()
     {
         $message = new ApnMessage;
 
         $result = $message->interruptionLevel('critical');
+
+        $this->assertEquals('critical', $message->interruptionLevel);
+        $this->assertEquals($message, $result);
+    }
+
+    /** @test */
+    public function it_can_set_interruption_level_as_enum()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->interruptionLevel(ApnMessageInterruptionLevel::Critical);
 
         $this->assertEquals('critical', $message->interruptionLevel);
         $this->assertEquals($message, $result);

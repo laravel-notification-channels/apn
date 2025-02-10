@@ -210,9 +210,11 @@ class ApnMessage
     /**
      * Set the interruptionLevel of the notification.
      */
-    public function interruptionLevel(?string $interruptionLevel = 'active'): self
+    public function interruptionLevel(string|ApnMessageInterruptionLevel|null $interruptionLevel = 'active'): self
     {
-        $this->interruptionLevel = $interruptionLevel;
+        $this->interruptionLevel = $interruptionLevel instanceof ApnMessageInterruptionLevel
+            ? $interruptionLevel->value
+            : $interruptionLevel;
 
         return $this;
     }
