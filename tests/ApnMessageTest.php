@@ -10,8 +10,7 @@ use Pushok\Client;
 
 class ApnMessageTest extends TestCase
 {
-    /** @test */
-    public function it_can_be_created_statically()
+    public function test_it_can_be_created_statically()
     {
         $message = ApnMessage::create('title', 'body', ['custom' => 'data'], 1);
 
@@ -23,8 +22,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals(1, $message->badge);
     }
 
-    /** @test */
-    public function it_can_set_title()
+    public function test_it_can_set_title()
     {
         $message = new ApnMessage;
 
@@ -34,8 +32,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_subtitle()
+    public function test_it_can_set_subtitle()
     {
         $message = new ApnMessage;
 
@@ -45,8 +42,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_body()
+    public function test_it_can_set_body()
     {
         $message = new ApnMessage;
 
@@ -56,8 +52,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_badge()
+    public function test_it_can_set_badge()
     {
         $message = new ApnMessage;
 
@@ -67,8 +62,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_sound()
+    public function test_it_can_set_sound()
     {
         $message = new ApnMessage;
 
@@ -78,8 +72,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_interruption_level_as_string()
+    public function test_it_can_set_interruption_level_as_string()
     {
         $message = new ApnMessage;
 
@@ -89,8 +82,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_interruption_level_as_enum()
+    public function test_it_can_set_interruption_level_as_enum()
     {
         $message = new ApnMessage;
 
@@ -100,8 +92,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_sound_to_default()
+    public function test_it_can_set_sound_to_default()
     {
         $message = new ApnMessage;
 
@@ -111,8 +102,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_category()
+    public function test_it_can_set_category()
     {
         $message = new ApnMessage;
 
@@ -122,8 +112,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_thread_id()
+    public function test_it_can_set_thread_id()
     {
         $message = new ApnMessage;
 
@@ -133,8 +122,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_content_available()
+    public function test_it_can_set_content_available()
     {
         $message = new ApnMessage;
 
@@ -144,8 +132,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_push_type()
+    public function test_it_can_set_push_type()
     {
         $message = new ApnMessage;
 
@@ -155,8 +142,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_expires_at()
+    public function test_it_can_set_expires_at()
     {
         $message = new ApnMessage;
 
@@ -168,8 +154,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_collapse_id()
+    public function test_it_can_set_collapse_id()
     {
         $message = new ApnMessage;
 
@@ -179,8 +164,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_apns_id()
+    public function test_it_can_set_apns_id()
     {
         $message = new ApnMessage;
 
@@ -190,8 +174,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_custom_value()
+    public function test_it_can_set_custom_value()
     {
         $message = new ApnMessage;
 
@@ -201,8 +184,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_custom_values()
+    public function test_it_can_set_custom_values()
     {
         $message = new ApnMessage;
 
@@ -211,8 +193,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals(['foo' => 'bar'], $message->custom);
         $this->assertEquals($message, $result);
     }
-
-    public function it_can_set_url_arg()
+    public function test_it_can_set_url_arg()
     {
         $message = new ApnMessage;
 
@@ -222,8 +203,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_url_args()
+    public function test_it_can_set_url_args()
     {
         $message = new ApnMessage;
 
@@ -233,8 +213,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_custom_alert()
+    public function test_it_can_set_custom_alert()
     {
         $message = new ApnMessage;
 
@@ -244,8 +223,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_action()
+    public function test_it_can_set_action()
     {
         $message = new ApnMessage;
 
@@ -257,8 +235,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_client()
+    public function test_it_can_set_client()
     {
         $message = new ApnMessage;
 
@@ -270,8 +247,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_mutable_content()
+    public function test_it_can_set_mutable_content()
     {
         $message = new ApnMessage;
 
@@ -281,8 +257,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_title_loc_key()
+    public function test_it_can_set_title_loc_key()
     {
         $message = new ApnMessage;
 
@@ -292,8 +267,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_title_loc_args()
+    public function test_it_can_set_title_loc_args()
     {
         $message = new ApnMessage;
 
@@ -303,8 +277,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_action_loc_key()
+    public function test_it_can_set_action_loc_key()
     {
         $message = new ApnMessage;
 
@@ -314,8 +287,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_loc_key()
+    public function test_it_can_set_loc_key()
     {
         $message = new ApnMessage;
 
@@ -325,8 +297,7 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    /** @test */
-    public function it_can_set_loc_args()
+    public function test_it_can_set_loc_args()
     {
         $message = new ApnMessage;
 
