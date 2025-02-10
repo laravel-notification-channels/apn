@@ -26,8 +26,7 @@ class ApnChannelTest extends TestCase
         $this->channel = new ApnChannel($this->factory, $this->events);
     }
 
-    /** @test */
-    public function it_can_send_a_notification()
+    public function test_it_can_send_a_notification()
     {
         $this->client->shouldReceive('addNotification');
         $this->client->shouldReceive('push')->once();
@@ -35,8 +34,7 @@ class ApnChannelTest extends TestCase
         $this->channel->send(new TestNotifiable, new TestNotification);
     }
 
-    /** @test */
-    public function it_can_send_a_notification_with_custom_client()
+    public function test_it_can_send_a_notification_with_custom_client()
     {
         $customClient = Mockery::mock(Client::class);
 
@@ -48,8 +46,7 @@ class ApnChannelTest extends TestCase
         $this->channel->send(new TestNotifiable, new TestNotificationWithClient($customClient));
     }
 
-    /** @test */
-    public function it_dispatches_events_for_failed_notifications()
+    public function test_it_dispatches_events_for_failed_notifications()
     {
         $this->events->shouldReceive('dispatch')
             ->once()
@@ -66,8 +63,7 @@ class ApnChannelTest extends TestCase
         $this->channel->send(new TestNotifiable, new TestNotification);
     }
 
-    /** @test */
-    public function it_dispatches_failed_notification_events_with_correct_channel()
+    public function test_it_dispatches_failed_notification_events_with_correct_channel()
     {
         $this->events->shouldReceive('dispatch')
             ->withArgs(function (NotificationFailed $notificationFailed) {

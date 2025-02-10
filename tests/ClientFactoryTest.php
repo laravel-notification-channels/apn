@@ -22,8 +22,7 @@ class ClientFactoryTest extends TestCase
         $this->factory = new ClientFactory($this->app, $this->cache);
     }
 
-    /** @test */
-    public function it_returns_an_instance_through_the_cache()
+    public function test_it_returns_an_instance_through_the_cache()
     {
         $client = Mockery::mock(Client::class);
 

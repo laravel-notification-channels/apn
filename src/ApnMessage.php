@@ -312,7 +312,7 @@ class ApnMessage
     /**
      * Set the title-loc-args.
      */
-    public function titleLocArgs(array $titleLocArgs = null): self
+    public function titleLocArgs(?array $titleLocArgs = null): self
     {
         $this->titleLocArgs = $titleLocArgs;
 
