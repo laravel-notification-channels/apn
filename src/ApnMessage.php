@@ -16,6 +16,13 @@ class ApnMessage
     const PUSH_TYPE_BACKGROUND = 'background';
 
     /**
+     * The live activity push type.
+     *
+     * @var string
+     */
+    const PUSH_TYPE_LIVE_ACTIVITY = 'liveactivity';
+
+    /**
      * The title of the notification.
      */
     public ?string $title = null;

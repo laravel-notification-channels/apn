@@ -251,4 +251,13 @@ class ApnAdapterTest extends TestCase
 
         $this->assertNull($notification->getPayload()->getAlert());
     }
+
+    public function test_it_adapts_live_activity_without_alert(): void
+    {
+        $message = (new ApnMessage)->pushType('liveactivity');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getAlert());
+    }
 }

@@ -142,6 +142,21 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
+    public function test_it_has_live_activity_push_type_constant()
+    {
+        $this->assertEquals('liveactivity', ApnMessage::PUSH_TYPE_LIVE_ACTIVITY);
+    }
+
+    public function test_it_can_set_push_type_to_live_activity()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->pushType(ApnMessage::PUSH_TYPE_LIVE_ACTIVITY);
+
+        $this->assertEquals('liveactivity', $message->pushType);
+        $this->assertEquals($message, $result);
+    }
+
     public function test_it_can_set_expires_at()
     {
         $message = new ApnMessage;
