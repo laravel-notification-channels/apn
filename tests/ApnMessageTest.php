@@ -359,9 +359,9 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->timestamp(1234567890.0);
+        $result = $message->timestamp(1234567890);
 
-        $this->assertEquals(1234567890.0, $message->timestamp);
+        $this->assertEquals(1234567890, $message->timestamp);
         $this->assertEquals($message, $result);
     }
 
@@ -369,7 +369,7 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $message->timestamp(1234567890.0);
+        $message->timestamp(1234567890);
 
         $result = $message->timestamp(null);
 

@@ -144,7 +144,7 @@ class ApnMessage
     /**
      * The timestamp for live activities.
      */
-    public ?float $timestamp = null;
+    public ?int $timestamp = null;
 
     /**
      * Custom alert for Edamov/Pushok.
@@ -470,7 +470,7 @@ class ApnMessage
     /**
      * Set timestamp for live activities.
      */
-    public function timestamp(?float $timestamp): self
+    public function timestamp(?int $timestamp): self
     {
         $this->timestamp = $timestamp;
 
