@@ -65,6 +65,11 @@ class ApnAdapter
             $payload->setContentState($contentState);
         }
 
+        if ($event = $message->event) {
+            $payload->setEvent($event);
+        }
+
+
         if (is_int($badge = $message->badge)) {
             $payload->setBadge($badge);
         }

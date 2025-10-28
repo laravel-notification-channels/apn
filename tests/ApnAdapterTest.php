@@ -97,6 +97,24 @@ class ApnAdapterTest extends TestCase
         $this->assertNull($notification->getPayload()->getContentState());
     }
 
+    public function test_it_adapts_event()
+    {
+        $message = (new ApnMessage)->event('update');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals('update', $notification->getPayload()->getEvent());
+    }
+
+    public function test_it_does_not_set_event_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getEvent());
+    }
+
     public function test_it_adapts_badge()
     {
         $message = (new ApnMessage)->badge(1);

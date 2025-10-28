@@ -137,6 +137,11 @@ class ApnMessage
     public ?array $contentState = null;
 
     /**
+     * The event for live activities.
+     */
+    public ?string $event = null;
+
+    /**
      * Custom alert for Edamov/Pushok.
      *
      * @var string|array|null
@@ -443,6 +448,16 @@ class ApnMessage
     public function contentState(?array $contentState): self
     {
         $this->contentState = $contentState;
+
+        return $this;
+    }
+
+    /**
+     * Set event for live activities.
+     */
+    public function event(?string $event): self
+    {
+        $this->event = $event;
 
         return $this;
     }

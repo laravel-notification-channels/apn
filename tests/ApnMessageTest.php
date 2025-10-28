@@ -332,4 +332,26 @@ class ApnMessageTest extends TestCase
         $this->assertEquals(null, $message->contentState);
         $this->assertEquals($message, $result);
     }
+
+    public function test_it_can_set_event()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->event('update');
+
+        $this->assertEquals('update', $message->event);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_event_to_null()
+    {
+        $message = new ApnMessage;
+
+        $message->event('update');
+
+        $result = $message->event(null);
+
+        $this->assertEquals(null, $message->event);
+        $this->assertEquals($message, $result);
+    }
 }
