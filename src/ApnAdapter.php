@@ -61,6 +61,10 @@ class ApnAdapter
             $payload->setMutableContent((bool) $message->mutableContent);
         }
 
+        if ($contentState = $message->contentState) {
+            $payload->setContentState($contentState);
+        }
+
         if (is_int($badge = $message->badge)) {
             $payload->setBadge($badge);
         }

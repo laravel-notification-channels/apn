@@ -307,4 +307,29 @@ class ApnMessageTest extends TestCase
         $this->assertEquals(['hello', 'world'], $message->locArgs);
         $this->assertEquals($message, $result);
     }
+
+    public function test_it_can_set_content_state()
+    {
+        $message = new ApnMessage;
+
+        $contentState = ['status' => 'active', 'count' => 5];
+
+        $result = $message->contentState($contentState);
+
+        $this->assertEquals($contentState, $message->contentState);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_content_state_to_null()
+    {
+        $message = new ApnMessage;
+
+        $contentState = ['status' => 'active', 'count' => 5];
+        $message->contentState($contentState);
+
+        $result = $message->contentState(null);
+
+        $this->assertEquals(null, $message->contentState);
+        $this->assertEquals($message, $result);
+    }
 }

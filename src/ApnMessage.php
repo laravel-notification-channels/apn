@@ -132,6 +132,11 @@ class ApnMessage
     public ?int $mutableContent = null;
 
     /**
+     * The content state for live activities.
+     */
+    public ?array $contentState = null;
+
+    /**
      * Custom alert for Edamov/Pushok.
      *
      * @var string|array|null
@@ -428,6 +433,16 @@ class ApnMessage
     public function mutableContent(?int $value = 1): self
     {
         $this->mutableContent = $value;
+
+        return $this;
+    }
+
+    /**
+     * Set content state for live activities.
+     */
+    public function contentState(?array $contentState): self
+    {
+        $this->contentState = $contentState;
 
         return $this;
     }
