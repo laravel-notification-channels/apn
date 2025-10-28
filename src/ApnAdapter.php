@@ -69,6 +69,9 @@ class ApnAdapter
             $payload->setEvent($event);
         }
 
+        if ($timestamp = $message->timestamp) {
+            $payload->setTimestamp($timestamp);
+        }
 
         if (is_int($badge = $message->badge)) {
             $payload->setBadge($badge);

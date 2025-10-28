@@ -115,6 +115,24 @@ class ApnAdapterTest extends TestCase
         $this->assertNull($notification->getPayload()->getEvent());
     }
 
+    public function test_it_adapts_timestamp()
+    {
+        $message = (new ApnMessage)->timestamp(1234567890.0);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals(1234567890.0, $notification->getPayload()->getTimestamp());
+    }
+
+    public function test_it_does_not_set_timestamp_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getTimestamp());
+    }
+
     public function test_it_adapts_badge()
     {
         $message = (new ApnMessage)->badge(1);

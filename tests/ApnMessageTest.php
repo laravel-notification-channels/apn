@@ -354,4 +354,26 @@ class ApnMessageTest extends TestCase
         $this->assertEquals(null, $message->event);
         $this->assertEquals($message, $result);
     }
+
+    public function test_it_can_set_timestamp()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->timestamp(1234567890.0);
+
+        $this->assertEquals(1234567890.0, $message->timestamp);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_timestamp_to_null()
+    {
+        $message = new ApnMessage;
+
+        $message->timestamp(1234567890.0);
+
+        $result = $message->timestamp(null);
+
+        $this->assertEquals(null, $message->timestamp);
+        $this->assertEquals($message, $result);
+    }
 }
