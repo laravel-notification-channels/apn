@@ -154,6 +154,16 @@ class ApnMessage
     public ?int $timestamp = null;
 
     /**
+     * The attributes type for live activities.
+     */
+    public ?string $attributesType = null;
+
+    /**
+     * The attributes for live activities.
+     */
+    public array $attributes = [];
+
+    /**
      * Custom alert for Edamov/Pushok.
      *
      * @var string|array|null
@@ -480,6 +490,36 @@ class ApnMessage
     public function timestamp(?int $timestamp): self
     {
         $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Set attributes type for live activities.
+     */
+    public function attributesType(?string $attributesType): self
+    {
+        $this->attributesType = $attributesType;
+
+        return $this;
+    }
+
+    /**
+     * Add an attribute for live activities.
+     */
+    public function attribute(string $key, mixed $value): self
+    {
+        $this->attributes[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Set attributes for live activities.
+     */
+    public function setAttributes(array $attributes): self
+    {
+        $this->attributes = $attributes;
 
         return $this;
     }

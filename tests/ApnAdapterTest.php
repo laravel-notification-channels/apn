@@ -133,6 +133,43 @@ class ApnAdapterTest extends TestCase
         $this->assertNull($notification->getPayload()->getTimestamp());
     }
 
+    public function test_it_adapts_attributes_type()
+    {
+        $message = (new ApnMessage)->attributesType('dateTime');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals('dateTime', $notification->getPayload()->getAttributesType());
+    }
+
+    public function test_it_does_not_set_attributes_type_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getAttributesType());
+    }
+
+    public function test_it_adapts_attributes()
+    {
+        $attributes = ['status' => 'active', 'count' => 5];
+        $message = (new ApnMessage)->setAttributes($attributes);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals($attributes, $notification->getPayload()->getAttributes());
+    }
+
+    public function test_it_does_not_set_attributes_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals([], $notification->getPayload()->getAttributes());
+    }
+
     public function test_it_adapts_badge()
     {
         $message = (new ApnMessage)->badge(1);

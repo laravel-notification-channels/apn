@@ -73,6 +73,14 @@ class ApnAdapter
             $payload->setTimestamp($timestamp);
         }
 
+        if ($attributesType = $message->attributesType) {
+            $payload->setAttributesType($attributesType);
+        }
+
+        if (!empty($message->attributes)) {
+            $payload->addAttributes($message->attributes);
+        }
+
         if (is_int($badge = $message->badge)) {
             $payload->setBadge($badge);
         }
