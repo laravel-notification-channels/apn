@@ -81,6 +81,10 @@ class ApnAdapter
             $payload->addAttributes($message->attributes);
         }
 
+        if ($dismissalDate = $message->dismissalDate) {
+            $payload->setDismissalDate($dismissalDate);
+        }
+
         if (is_int($badge = $message->badge)) {
             $payload->setBadge($badge);
         }

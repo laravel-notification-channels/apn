@@ -164,6 +164,11 @@ class ApnMessage
     public array $attributes = [];
 
     /**
+     * The dismissal date for live activities.
+     */
+    public ?int $dismissalDate = null;
+
+    /**
      * Custom alert for Edamov/Pushok.
      *
      * @var string|array|null
@@ -520,6 +525,16 @@ class ApnMessage
     public function setAttributes(array $attributes): self
     {
         $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    /**
+     * Set dismissal date for live activities.
+     */
+    public function dismissalDate(?int $dismissalDate): self
+    {
+        $this->dismissalDate = $dismissalDate;
 
         return $this;
     }

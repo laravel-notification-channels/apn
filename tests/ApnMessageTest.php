@@ -445,4 +445,26 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($attributes, $message->attributes);
         $this->assertEquals($message, $result);
     }
+
+    public function test_it_can_set_dismissal_date()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->dismissalDate(1700000000);
+
+        $this->assertEquals(1700000000, $message->dismissalDate);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_dismissal_date_to_null()
+    {
+        $message = new ApnMessage;
+
+        $message->dismissalDate(1700000000);
+
+        $result = $message->dismissalDate(null);
+
+        $this->assertEquals(null, $message->dismissalDate);
+        $this->assertEquals($message, $result);
+    }
 }

@@ -170,6 +170,24 @@ class ApnAdapterTest extends TestCase
         $this->assertEquals([], $notification->getPayload()->getAttributes());
     }
 
+    public function test_it_adapts_dismissal_date()
+    {
+        $message = (new ApnMessage)->dismissalDate(1700000000);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals(1700000000, $notification->getPayload()->getDismissalDate());
+    }
+
+    public function test_it_does_not_set_dismissal_date_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getDismissalDate());
+    }
+
     public function test_it_adapts_badge()
     {
         $message = (new ApnMessage)->badge(1);
