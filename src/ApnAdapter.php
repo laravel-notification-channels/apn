@@ -54,11 +54,11 @@ class ApnAdapter
         $payload = Payload::create()->setAlert($message->customAlert ?: $alert);
 
         if ($contentAvailable = $message->contentAvailable) {
-            $payload->setContentAvailability((bool) $message->contentAvailable);
+            $payload->setContentAvailability((bool) $contentAvailable);
         }
 
         if ($mutableContent = $message->mutableContent) {
-            $payload->setMutableContent((bool) $message->mutableContent);
+            $payload->setMutableContent((bool) $mutableContent);
         }
 
         if (is_int($badge = $message->badge)) {
