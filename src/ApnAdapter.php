@@ -77,7 +77,7 @@ class ApnAdapter
             $payload->setAttributesType($attributesType);
         }
 
-        if (!empty($message->attributes)) {
+        if (! empty($message->attributes)) {
             $payload->addAttributes($message->attributes);
         }
 
