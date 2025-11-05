@@ -15,7 +15,7 @@ class ApnAdapter
     {
         $alert = null;
 
-        if ($message->pushType !== ApnMessage::PUSH_TYPE_BACKGROUND) {
+        if ($message->pushType !== ApnMessagePushType::Background) {
             $alert = Alert::create();
 
             if ($title = $message->title) {
