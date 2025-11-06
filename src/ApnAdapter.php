@@ -110,7 +110,7 @@ class ApnAdapter
         }
 
         if ($urlArgs = $message->urlArgs) {
-            $payload->setUrlArgs($message->urlArgs);
+            $payload->setUrlArgs($urlArgs);
         }
 
         foreach ($message->custom as $key => $value) {
