@@ -201,7 +201,7 @@ class ApnMessage
     /**
      * Set the sound of the notification.
      */
-    public function sound(null|string|Sound $sound = "default"): self
+    public function sound(null|string|Sound $sound = 'default'): self
     {
         $this->sound = $sound;
 
@@ -212,7 +212,7 @@ class ApnMessage
      * Set the interruptionLevel of the notification.
      */
     public function interruptionLevel(
-        string|ApnMessageInterruptionLevel|null $interruptionLevel = "active",
+        string|ApnMessageInterruptionLevel|null $interruptionLevel = 'active',
     ): self {
         $this->interruptionLevel =
             $interruptionLevel instanceof ApnMessageInterruptionLevel
@@ -409,9 +409,9 @@ class ApnMessage
      */
     public function action(string $action, mixed $params = null): self
     {
-        return $this->custom("action", [
-            "action" => $action,
-            "params" => $params,
+        return $this->custom('action', [
+            'action' => $action,
+            'params' => $params,
         ]);
     }
 
