@@ -15,7 +15,7 @@ class ApnAdapter
     {
         $alert = null;
 
-        if ($message->pushType !== ApnMessage::PUSH_TYPE_BACKGROUND && $message->pushType !== ApnMessage::PUSH_TYPE_LIVE_ACTIVITY) {
+        if ($message->pushType !== ApnMessagePushType::Background && $message->pushType !== ApnMessagePushType::LiveActivity) {
             $alert = Alert::create();
 
             if ($title = $message->title) {
@@ -54,11 +54,11 @@ class ApnAdapter
         $payload = Payload::create()->setAlert($message->customAlert ?: $alert);
 
         if ($contentAvailable = $message->contentAvailable) {
-            $payload->setContentAvailability((bool) $message->contentAvailable);
+            $payload->setContentAvailability((bool) $contentAvailable);
         }
 
         if ($mutableContent = $message->mutableContent) {
-            $payload->setMutableContent((bool) $message->mutableContent);
+            $payload->setMutableContent((bool) $mutableContent);
         }
 
         if ($contentState = $message->contentState) {

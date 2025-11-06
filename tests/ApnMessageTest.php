@@ -6,6 +6,7 @@ use DateTime;
 use Mockery;
 use NotificationChannels\Apn\ApnMessage;
 use NotificationChannels\Apn\ApnMessageInterruptionLevel;
+use NotificationChannels\Apn\ApnMessagePushType;
 use Pushok\Client;
 
 class ApnMessageTest extends TestCase
@@ -86,7 +87,9 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->interruptionLevel(ApnMessageInterruptionLevel::Critical);
+        $result = $message->interruptionLevel(
+            ApnMessageInterruptionLevel::Critical,
+        );
 
         $this->assertEquals('critical', $message->interruptionLevel);
         $this->assertEquals($message, $result);
@@ -136,9 +139,9 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->pushType('type');
+        $result = $message->pushType(ApnMessagePushType::Background);
 
-        $this->assertEquals('type', $message->pushType);
+        $this->assertEquals(ApnMessagePushType::Background, $message->pushType);
         $this->assertEquals($message, $result);
     }
 
@@ -185,7 +188,10 @@ class ApnMessageTest extends TestCase
 
         $result = $message->apnsId('123e4567-e89b-12d3-a456-4266554400a0');
 
-        $this->assertEquals('123e4567-e89b-12d3-a456-4266554400a0', $message->apnsId);
+        $this->assertEquals(
+            '123e4567-e89b-12d3-a456-4266554400a0',
+            $message->apnsId,
+        );
         $this->assertEquals($message, $result);
     }
 
@@ -245,7 +251,9 @@ class ApnMessageTest extends TestCase
 
         $result = $message->action('action', ['foo' => 'bar']);
 
-        $expected = ['action' => ['action' => 'action', 'params' => ['foo' => 'bar']]];
+        $expected = [
+            'action' => ['action' => 'action', 'params' => ['foo' => 'bar']],
+        ];
 
         $this->assertEquals($expected, $message->custom);
         $this->assertEquals($message, $result);

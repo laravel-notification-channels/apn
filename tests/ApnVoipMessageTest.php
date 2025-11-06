@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn\Tests;
 
+use NotificationChannels\Apn\ApnMessagePushType;
 use NotificationChannels\Apn\ApnVoipMessage;
 
 class ApnVoipMessageTest extends TestCase
@@ -10,6 +11,6 @@ class ApnVoipMessageTest extends TestCase
     {
         $message = new ApnVoipMessage;
 
-        $this->assertEquals('voip', $message->pushType);
+        $this->assertEquals(ApnMessagePushType::Voip, $message->pushType);
     }
 }

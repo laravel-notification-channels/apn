@@ -9,20 +9,6 @@ use Pushok\Payload\Sound;
 class ApnMessage
 {
     /**
-     * The background push type.
-     *
-     * @var string
-     */
-    const PUSH_TYPE_BACKGROUND = 'background';
-
-    /**
-     * The live activity push type.
-     *
-     * @var string
-     */
-    const PUSH_TYPE_LIVE_ACTIVITY = 'liveactivity';
-
-    /**
      * The title of the notification.
      */
     public ?string $title = null;
@@ -103,9 +89,9 @@ class ApnMessage
     public array $urlArgs = [];
 
     /**
-     * Value indicating when the message will expire.
+     * Value indicating the push type.
      */
-    public ?string $pushType = null;
+    public ?ApnMessagePushType $pushType = null;
 
     /**
      * The expiration time of the notification.
@@ -178,8 +164,12 @@ class ApnMessage
     /**
      * Create a new messages instance.
      */
-    public function __construct(?string $title = null, ?string $body = null, array $custom = [], ?int $badge = null)
-    {
+    public function __construct(
+        ?string $title = null,
+        ?string $body = null,
+        array $custom = [],
+        ?int $badge = null,
+    ) {
         $this->title = $title;
         $this->body = $body;
         $this->custom = $custom;
@@ -189,8 +179,12 @@ class ApnMessage
     /**
      * Create a new message instance.
      */
-    public static function create(?string $title = null, ?string $body = null, array $custom = [], ?int $badge = null): static
-    {
+    public static function create(
+        ?string $title = null,
+        ?string $body = null,
+        array $custom = [],
+        ?int $badge = null,
+    ): static {
         return new static($title, $body, $custom, $badge);
     }
 
@@ -247,11 +241,13 @@ class ApnMessage
     /**
      * Set the interruptionLevel of the notification.
      */
-    public function interruptionLevel(string|ApnMessageInterruptionLevel|null $interruptionLevel = 'active'): self
-    {
-        $this->interruptionLevel = $interruptionLevel instanceof ApnMessageInterruptionLevel
-            ? $interruptionLevel->value
-            : $interruptionLevel;
+    public function interruptionLevel(
+        string|ApnMessageInterruptionLevel|null $interruptionLevel = 'active',
+    ): self {
+        $this->interruptionLevel =
+            $interruptionLevel instanceof ApnMessageInterruptionLevel
+                ? $interruptionLevel->value
+                : $interruptionLevel;
 
         return $this;
     }
@@ -289,7 +285,7 @@ class ApnMessage
     /**
      * Set the push type of the notification.
      */
-    public function pushType(?string $pushType): self
+    public function pushType(?ApnMessagePushType $pushType): self
     {
         $this->pushType = $pushType;
 
