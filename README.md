@@ -121,6 +121,30 @@ return ApnMessage::create()
     ->via($customClient)
 ```
 
+### Live Activity notifications
+
+You can send Live Activity notifications using the same `ApnChannel` but instead you will return an `ApnLiveActivityMessage` from your notification.
+
+```php
+use NotificationChannels\Apn\ApnChannel;
+use NotificationChannels\Apn\ApnLiveActivityMessage;
+use Illuminate\Notifications\Notification;
+
+class AccountApproved extends Notification
+{
+    public function via($notifiable)
+    {
+        return [ApnChannel::class];
+    }
+
+    public function toApn($notifiable)
+    {
+        return ApnLiveActivityMessage::create()
+            ->attributes(['foo' => 'bar']);
+    }
+}
+```
+
 ### VoIP push notifications
 
 Sending VoIP push notifications is very similar. You just need to use the `ApnVoipChannel` channel with `ApnVoipMessage` (which has the same API as a regular `ApnMessage`).

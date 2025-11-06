@@ -15,7 +15,10 @@ class ApnAdapter
     {
         $alert = null;
 
-        if ($message->pushType !== ApnMessagePushType::Background && $message->pushType !== ApnMessagePushType::LiveActivity) {
+        if (
+            $message->pushType !== ApnMessagePushType::Background &&
+            $message->pushType !== ApnMessagePushType::LiveActivity
+        ) {
             $alert = Alert::create();
 
             if ($title = $message->title) {
@@ -61,28 +64,29 @@ class ApnAdapter
             $payload->setMutableContent((bool) $mutableContent);
         }
 
-        if ($contentState = $message->contentState) {
-            $payload->setContentState($contentState);
-        }
+        if ($message instanceof ApnLiveActivityMessage) {
+            if ($contentState = $message->contentState) {
+                $payload->setContentState($contentState);
+            }
 
-        if ($event = $message->event) {
-            $payload->setEvent($event);
-        }
+            if ($event = $message->event) {
+                $payload->setEvent($event);
+            }
+            if ($timestamp = $message->timestamp) {
+                $payload->setTimestamp($timestamp);
+            }
 
-        if ($timestamp = $message->timestamp) {
-            $payload->setTimestamp($timestamp);
-        }
+            if ($attributesType = $message->attributesType) {
+                $payload->setAttributesType($attributesType);
+            }
 
-        if ($attributesType = $message->attributesType) {
-            $payload->setAttributesType($attributesType);
-        }
+            if (! empty($message->attributes)) {
+                $payload->addAttributes($message->attributes);
+            }
 
-        if (! empty($message->attributes)) {
-            $payload->addAttributes($message->attributes);
-        }
-
-        if ($dismissalDate = $message->dismissalDate) {
-            $payload->setDismissalDate($dismissalDate);
+            if ($dismissalDate = $message->dismissalDate) {
+                $payload->setDismissalDate($dismissalDate);
+            }
         }
 
         if (is_int($badge = $message->badge)) {

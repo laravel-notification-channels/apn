@@ -145,19 +145,6 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
-    public function test_it_can_set_push_type_to_live_activity(): void
-    {
-        $message = new ApnMessage;
-
-        $result = $message->pushType(ApnMessagePushType::LiveActivity);
-
-        $this->assertEquals(
-            ApnMessagePushType::LiveActivity,
-            $message->pushType,
-        );
-        $this->assertEquals($message, $result);
-    }
-
     public function test_it_can_set_expires_at(): void
     {
         $message = new ApnMessage;
@@ -207,7 +194,7 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->setCustom(['foo' => 'bar']);
+        $result = $message->custom(['foo' => 'bar']);
 
         $this->assertEquals(['foo' => 'bar'], $message->custom);
         $this->assertEquals($message, $result);
@@ -227,7 +214,7 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->setUrlArgs(['foo' => 'bar']);
+        $result = $message->urlArgs(['foo' => 'bar']);
 
         $this->assertEquals(['foo' => 'bar'], $message->urlArgs);
         $this->assertEquals($message, $result);
@@ -237,7 +224,7 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->setCustomAlert('foo');
+        $result = $message->customAlert('foo');
 
         $this->assertEquals('foo', $message->customAlert);
         $this->assertEquals($message, $result);
@@ -313,7 +300,7 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->setLocKey('hello_world');
+        $result = $message->locKey('hello_world');
 
         $this->assertEquals('hello_world', $message->locKey);
         $this->assertEquals($message, $result);
@@ -323,156 +310,9 @@ class ApnMessageTest extends TestCase
     {
         $message = new ApnMessage;
 
-        $result = $message->setLocArgs(['hello', 'world']);
+        $result = $message->locArgs(['hello', 'world']);
 
         $this->assertEquals(['hello', 'world'], $message->locArgs);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_set_content_state(): void
-    {
-        $message = new ApnMessage;
-
-        $contentState = ['status' => 'active', 'count' => 5];
-
-        $result = $message->contentState($contentState);
-
-        $this->assertEquals($contentState, $message->contentState);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_set_content_state_to_null(): void
-    {
-        $message = new ApnMessage;
-
-        $contentState = ['status' => 'active', 'count' => 5];
-        $message->contentState($contentState);
-
-        $result = $message->contentState(null);
-
-        $this->assertEquals(null, $message->contentState);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_set_event(): void
-    {
-        $message = new ApnMessage;
-
-        $result = $message->event('update');
-
-        $this->assertEquals('update', $message->event);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_set_event_to_null(): void
-    {
-        $message = new ApnMessage;
-
-        $message->event('update');
-
-        $result = $message->event(null);
-
-        $this->assertEquals(null, $message->event);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_set_timestamp(): void
-    {
-        $message = new ApnMessage;
-
-        $result = $message->timestamp(1234567890);
-
-        $this->assertEquals(1234567890, $message->timestamp);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_set_timestamp_to_null(): void
-    {
-        $message = new ApnMessage;
-
-        $message->timestamp(1234567890);
-
-        $result = $message->timestamp(null);
-
-        $this->assertEquals(null, $message->timestamp);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_set_attributes_type(): void
-    {
-        $message = new ApnMessage;
-
-        $result = $message->attributesType('dateTime');
-
-        $this->assertEquals('dateTime', $message->attributesType);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_set_attributes_type_to_null(): void
-    {
-        $message = new ApnMessage;
-
-        $message->attributesType('dateTime');
-
-        $result = $message->attributesType(null);
-
-        $this->assertEquals(null, $message->attributesType);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_add_attribute(): void
-    {
-        $message = new ApnMessage;
-
-        $result = $message->attribute('key', 'value');
-
-        $this->assertEquals(['key' => 'value'], $message->attributes);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_add_multiple_attributes(): void
-    {
-        $message = new ApnMessage;
-
-        $message->attribute('key1', 'value1')->attribute('key2', 'value2');
-
-        $this->assertEquals(
-            ['key1' => 'value1', 'key2' => 'value2'],
-            $message->attributes,
-        );
-    }
-
-    public function test_it_can_set_attributes(): void
-    {
-        $message = new ApnMessage;
-
-        $attributes = ['status' => 'active', 'count' => 5];
-
-        $result = $message->setAttributes($attributes);
-
-        $this->assertEquals($attributes, $message->attributes);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_set_dismissal_date(): void
-    {
-        $message = new ApnMessage;
-
-        $result = $message->dismissalDate(1700000000);
-
-        $this->assertEquals(1700000000, $message->dismissalDate);
-        $this->assertEquals($message, $result);
-    }
-
-    public function test_it_can_set_dismissal_date_to_null(): void
-    {
-        $message = new ApnMessage;
-
-        $message->dismissalDate(1700000000);
-
-        $result = $message->dismissalDate(null);
-
-        $this->assertEquals(null, $message->dismissalDate);
         $this->assertEquals($message, $result);
     }
 }
