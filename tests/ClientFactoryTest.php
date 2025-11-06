@@ -12,10 +12,12 @@ use Pushok\Client;
 class ClientFactoryTest extends TestCase
 {
     protected $app;
+
     protected $cache;
+
     protected $factory;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->app = Mockery::mock(Container::class);
         $this->cache = Mockery::mock(Repository::class);

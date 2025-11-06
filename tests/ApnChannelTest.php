@@ -13,11 +13,14 @@ use Pushok\Response;
 class ApnChannelTest extends TestCase
 {
     protected $client;
+
     protected $factory;
+
     protected $events;
+
     protected $channel;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = Mockery::mock(Client::class);
         $this->factory = Mockery::mock(ClientFactory::class);
