@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Mockery;
 use NotificationChannels\Apn\ApnMessage;
+use NotificationChannels\Apn\ApnMessagePushType;
 use NotificationChannels\Apn\ApnVoipChannel;
 use NotificationChannels\Apn\ClientFactory;
 use Pushok\Client;
@@ -24,46 +25,51 @@ class ApnVoipChannelTest extends TestCase
     {
         $this->client = Mockery::mock(Client::class);
         $this->factory = Mockery::mock(ClientFactory::class);
-        $this->factory->shouldReceive('instance')->andReturn($this->client);
+        $this->factory->shouldReceive("instance")->andReturn($this->client);
         $this->events = Mockery::mock(Dispatcher::class);
         $this->channel = new ApnVoipChannel($this->factory, $this->events);
     }
 
     public function test_it_can_send_a_notification()
     {
-        $this->client->shouldReceive('addNotification');
-        $this->client->shouldReceive('push')->once();
+        $this->client->shouldReceive("addNotification");
+        $this->client->shouldReceive("push")->once();
 
-        $this->channel->send(new TestNotifiable, new TestNotification);
+        $this->channel->send(new TestNotifiable(), new TestNotification());
     }
 
     public function test_it_can_send_a_notification_with_custom_client()
     {
         $customClient = Mockery::mock(Client::class);
 
-        $this->client->shouldNotReceive('addNotification');
+        $this->client->shouldNotReceive("addNotification");
 
-        $customClient->shouldReceive('addNotification');
-        $customClient->shouldReceive('push')->once();
+        $customClient->shouldReceive("addNotification");
+        $customClient->shouldReceive("push")->once();
 
-        $this->channel->send(new TestNotifiable, new TestNotificationWithClient($customClient));
+        $this->channel->send(
+            new TestNotifiable(),
+            new TestNotificationWithClient($customClient),
+        );
     }
 
     public function test_it_dispatches_events_for_failed_notifications()
     {
-        $this->events->shouldReceive('dispatch')
+        $this->events
+            ->shouldReceive("dispatch")
             ->once()
             ->with(Mockery::type(NotificationFailed::class));
 
-        $this->client->shouldReceive('addNotification');
-        $this->client->shouldReceive('push')
+        $this->client->shouldReceive("addNotification");
+        $this->client
+            ->shouldReceive("push")
             ->once()
             ->andReturn([
-                new Response(200, 'headers', 'body'),
-                new Response(400, 'headers', 'body'),
+                new Response(200, "headers", "body"),
+                new Response(400, "headers", "body"),
             ]);
 
-        $this->channel->send(new TestNotifiable, new TestNotification);
+        $this->channel->send(new TestNotifiable(), new TestNotification());
     }
 }
 
@@ -77,8 +83,8 @@ class TestNotifiable
     public function routeNotificationForApn()
     {
         return [
-            '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd8',
-            '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd9',
+            "662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd8",
+            "662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd9",
         ];
     }
 
@@ -88,8 +94,8 @@ class TestNotifiable
     public function routeNotificationForApnVoip()
     {
         return [
-            '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd1',
-            '662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd2',
+            "662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd1",
+            "662cfe5a69ddc65cdd39a1b8f8690647778204b064df7b264e8c4c254f94fdd2",
         ];
     }
 }
@@ -98,13 +104,12 @@ class TestNotification extends Notification
 {
     public function toApn($notifiable)
     {
-        return new ApnMessage('title');
+        return new ApnMessage("title");
     }
 
     public function toApnVoip($notifiable)
     {
-        return (new ApnMessage)
-            ->pushType('voip');
+        return new ApnMessage()->pushType(ApnMessagePushType::Voip);
     }
 }
 
@@ -119,11 +124,13 @@ class TestNotificationWithClient extends Notification
 
     public function toApn($notifiable)
     {
-        return (new ApnMessage('title'))->via($this->client);
+        return new ApnMessage("title")->via($this->client);
     }
 
     public function toApnVoip($notifiable)
     {
-        return (new ApnMessage)->pushType('voip')->via($this->client);
+        return new ApnMessage()
+            ->pushType(ApnMessagePushType::Voip)
+            ->via($this->client);
     }
 }
