@@ -19,13 +19,22 @@ class ApnServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(AuthProviderInterface::class, function ($app) {
-            $options = Arr::except($app['config']['broadcasting.connections.apn'], 'production');
+            $options = Arr::except(
+                $app['config']['broadcasting.connections.apn'],
+                'production',
+            );
 
-            return Arr::exists($options, 'certificate_path') ? Certificate::create($options) : Token::create($options);
+            return Arr::exists($options, 'certificate_path')
+                ? Certificate::create($options)
+                : Token::create($options);
         });
 
         $this->app->bind(Client::class, function ($app) {
-            return new Client($app->make(AuthProviderInterface::class), $app['config']['broadcasting.connections.apn.production']);
+            return new Client(
+                $app->make(AuthProviderInterface::class),
+                $app['config']['broadcasting.connections.apn.production'],
+                $app->make(ApnAdapter::class),
+            );
         });
     }
 }

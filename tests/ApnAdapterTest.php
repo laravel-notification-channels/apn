@@ -4,6 +4,7 @@ namespace NotificationChannels\Apn\Tests;
 
 use DateTime;
 use NotificationChannels\Apn\ApnAdapter;
+use NotificationChannels\Apn\ApnLiveActivityMessage;
 use NotificationChannels\Apn\ApnMessage;
 use NotificationChannels\Apn\ApnMessagePushType;
 
@@ -91,7 +92,7 @@ class ApnAdapterTest extends TestCase
     public function test_it_adapts_content_state(): void
     {
         $contentState = ['status' => 'active', 'count' => 5];
-        $message = new ApnMessage()->contentState($contentState);
+        $message = new ApnLiveActivityMessage()->contentState($contentState);
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -103,7 +104,7 @@ class ApnAdapterTest extends TestCase
 
     public function test_it_does_not_set_content_state_by_default(): void
     {
-        $message = new ApnMessage;
+        $message = new ApnLiveActivityMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -112,7 +113,7 @@ class ApnAdapterTest extends TestCase
 
     public function test_it_adapts_event(): void
     {
-        $message = new ApnMessage()->event('update');
+        $message = new ApnLiveActivityMessage()->event('update');
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -121,7 +122,7 @@ class ApnAdapterTest extends TestCase
 
     public function test_it_does_not_set_event_by_default(): void
     {
-        $message = new ApnMessage;
+        $message = new ApnLiveActivityMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -130,7 +131,7 @@ class ApnAdapterTest extends TestCase
 
     public function test_it_adapts_timestamp(): void
     {
-        $message = new ApnMessage()->timestamp(1234567890);
+        $message = new ApnLiveActivityMessage()->timestamp(1234567890);
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -142,7 +143,7 @@ class ApnAdapterTest extends TestCase
 
     public function test_it_does_not_set_timestamp_by_default(): void
     {
-        $message = new ApnMessage;
+        $message = new ApnLiveActivityMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -151,7 +152,7 @@ class ApnAdapterTest extends TestCase
 
     public function test_it_adapts_attributes_type(): void
     {
-        $message = new ApnMessage()->attributesType('dateTime');
+        $message = new ApnLiveActivityMessage()->attributesType('dateTime');
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -173,7 +174,7 @@ class ApnAdapterTest extends TestCase
     public function test_it_adapts_attributes(): void
     {
         $attributes = ['status' => 'active', 'count' => 5];
-        $message = new ApnMessage()->setAttributes($attributes);
+        $message = new ApnLiveActivityMessage()->attributes($attributes);
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -185,7 +186,7 @@ class ApnAdapterTest extends TestCase
 
     public function test_it_does_not_set_attributes_by_default(): void
     {
-        $message = new ApnMessage;
+        $message = new ApnLiveActivityMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -194,7 +195,7 @@ class ApnAdapterTest extends TestCase
 
     public function test_it_adapts_dismissal_date(): void
     {
-        $message = new ApnMessage()->dismissalDate(1700000000);
+        $message = new ApnLiveActivityMessage()->dismissalDate(1700000000);
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -206,7 +207,7 @@ class ApnAdapterTest extends TestCase
 
     public function test_it_does_not_set_dismissal_date_by_default(): void
     {
-        $message = new ApnMessage;
+        $message = new ApnLiveActivityMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
@@ -288,9 +289,9 @@ class ApnAdapterTest extends TestCase
         );
     }
 
-    public function test_it_adapts_custom_alert()
+    public function test_it_adapts_custom_alert(): void
     {
-        $message = new ApnMessage()->setCustomAlert('custom');
+        $message = new ApnMessage()->customAlert('custom');
 
         $notification = $this->adapter->adapt($message, 'token');
 

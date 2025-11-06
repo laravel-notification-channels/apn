@@ -125,36 +125,6 @@ class ApnMessage
     public ?int $mutableContent = null;
 
     /**
-     * The content state for live activities.
-     */
-    public ?array $contentState = null;
-
-    /**
-     * The event for live activities.
-     */
-    public ?string $event = null;
-
-    /**
-     * The timestamp for live activities.
-     */
-    public ?int $timestamp = null;
-
-    /**
-     * The attributes type for live activities.
-     */
-    public ?string $attributesType = null;
-
-    /**
-     * The attributes for live activities.
-     */
-    public array $attributes = [];
-
-    /**
-     * The dismissal date for live activities.
-     */
-    public ?int $dismissalDate = null;
-
-    /**
      * Custom alert for Edamov/Pushok.
      *
      * @var string|array|null
@@ -365,7 +335,7 @@ class ApnMessage
     /**
      * Set a loc-key.
      */
-    public function setLocKey(?string $locKey): self
+    public function locKey(?string $locKey): self
     {
         $this->locKey = $locKey;
 
@@ -375,19 +345,9 @@ class ApnMessage
     /**
      * Set the loc-args.
      */
-    public function setLocArgs(?array $locArgs): self
+    public function locArgs(?array $locArgs): self
     {
         $this->locArgs = $locArgs;
-
-        return $this;
-    }
-
-    /**
-     * Add custom data to the notification.
-     */
-    public function custom(string $key, mixed $value): self
-    {
-        $this->custom[$key] = $value;
 
         return $this;
     }
@@ -397,7 +357,7 @@ class ApnMessage
      *
      * @param  string|array  $customAlert
      */
-    public function setCustomAlert($customAlert): self
+    public function customAlert($customAlert): self
     {
         $this->customAlert = $customAlert;
 
@@ -405,11 +365,15 @@ class ApnMessage
     }
 
     /**
-     * Override the data of the notification.
+     * Add custom data to the notification.
      */
-    public function setCustom(array $custom): self
+    public function custom(array|string $custom, mixed $value = null): self
     {
-        $this->custom = $custom;
+        if (is_array($custom)) {
+            $this->custom = $custom;
+        } else {
+            $this->custom[$custom] = $value;
+        }
 
         return $this;
     }
@@ -427,7 +391,7 @@ class ApnMessage
     /**
      * Override the URL arguemnts of the notification.
      */
-    public function setUrlArgs(array $urlArgs): self
+    public function urlArgs(array $urlArgs): self
     {
         $this->urlArgs = $urlArgs;
 
@@ -461,76 +425,6 @@ class ApnMessage
     public function mutableContent(?int $value = 1): self
     {
         $this->mutableContent = $value;
-
-        return $this;
-    }
-
-    /**
-     * Set content state for live activities.
-     */
-    public function contentState(?array $contentState): self
-    {
-        $this->contentState = $contentState;
-
-        return $this;
-    }
-
-    /**
-     * Set event for live activities.
-     */
-    public function event(?string $event): self
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    /**
-     * Set timestamp for live activities.
-     */
-    public function timestamp(?int $timestamp): self
-    {
-        $this->timestamp = $timestamp;
-
-        return $this;
-    }
-
-    /**
-     * Set attributes type for live activities.
-     */
-    public function attributesType(?string $attributesType): self
-    {
-        $this->attributesType = $attributesType;
-
-        return $this;
-    }
-
-    /**
-     * Add an attribute for live activities.
-     */
-    public function attribute(string $key, mixed $value): self
-    {
-        $this->attributes[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * Set attributes for live activities.
-     */
-    public function setAttributes(array $attributes): self
-    {
-        $this->attributes = $attributes;
-
-        return $this;
-    }
-
-    /**
-     * Set dismissal date for live activities.
-     */
-    public function dismissalDate(?int $dismissalDate): self
-    {
-        $this->dismissalDate = $dismissalDate;
 
         return $this;
     }
