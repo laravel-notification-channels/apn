@@ -88,6 +88,116 @@ class ApnAdapterTest extends TestCase
         $this->assertNull($notification->getPayload()->hasMutableContent());
     }
 
+    public function test_it_adapts_content_state()
+    {
+        $contentState = ['status' => 'active', 'count' => 5];
+        $message = (new ApnMessage)->contentState($contentState);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals($contentState, $notification->getPayload()->getContentState());
+    }
+
+    public function test_it_does_not_set_content_state_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getContentState());
+    }
+
+    public function test_it_adapts_event()
+    {
+        $message = (new ApnMessage)->event('update');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals('update', $notification->getPayload()->getEvent());
+    }
+
+    public function test_it_does_not_set_event_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getEvent());
+    }
+
+    public function test_it_adapts_timestamp()
+    {
+        $message = (new ApnMessage)->timestamp(1234567890);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals(1234567890, $notification->getPayload()->getTimestamp());
+    }
+
+    public function test_it_does_not_set_timestamp_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getTimestamp());
+    }
+
+    public function test_it_adapts_attributes_type()
+    {
+        $message = (new ApnMessage)->attributesType('dateTime');
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals('dateTime', $notification->getPayload()->getAttributesType());
+    }
+
+    public function test_it_does_not_set_attributes_type_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getAttributesType());
+    }
+
+    public function test_it_adapts_attributes()
+    {
+        $attributes = ['status' => 'active', 'count' => 5];
+        $message = (new ApnMessage)->setAttributes($attributes);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals($attributes, $notification->getPayload()->getAttributes());
+    }
+
+    public function test_it_does_not_set_attributes_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals([], $notification->getPayload()->getAttributes());
+    }
+
+    public function test_it_adapts_dismissal_date()
+    {
+        $message = (new ApnMessage)->dismissalDate(1700000000);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertEquals(1700000000, $notification->getPayload()->getDismissalDate());
+    }
+
+    public function test_it_does_not_set_dismissal_date_by_default()
+    {
+        $message = (new ApnMessage);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getDismissalDate());
+    }
+
     public function test_it_adapts_badge()
     {
         $message = new ApnMessage()->badge(1);
@@ -221,6 +331,15 @@ class ApnAdapterTest extends TestCase
     public function test_it_adapts_background_without_alert(): void
     {
         $message = new ApnMessage()->pushType(ApnMessagePushType::Background);
+
+        $notification = $this->adapter->adapt($message, 'token');
+
+        $this->assertNull($notification->getPayload()->getAlert());
+    }
+
+    public function test_it_adapts_live_activity_without_alert(): void
+    {
+        $message = (new ApnMessage)->pushType('liveactivity');
 
         $notification = $this->adapter->adapt($message, 'token');
 

@@ -145,6 +145,21 @@ class ApnMessageTest extends TestCase
         $this->assertEquals($message, $result);
     }
 
+    public function test_it_has_live_activity_push_type_constant()
+    {
+        $this->assertEquals('liveactivity', ApnMessage::PUSH_TYPE_LIVE_ACTIVITY);
+    }
+
+    public function test_it_can_set_push_type_to_live_activity()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->pushType(ApnMessage::PUSH_TYPE_LIVE_ACTIVITY);
+
+        $this->assertEquals('liveactivity', $message->pushType);
+        $this->assertEquals($message, $result);
+    }
+
     public function test_it_can_set_expires_at()
     {
         $message = new ApnMessage;
@@ -313,6 +328,151 @@ class ApnMessageTest extends TestCase
         $result = $message->setLocArgs(['hello', 'world']);
 
         $this->assertEquals(['hello', 'world'], $message->locArgs);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_content_state()
+    {
+        $message = new ApnMessage;
+
+        $contentState = ['status' => 'active', 'count' => 5];
+
+        $result = $message->contentState($contentState);
+
+        $this->assertEquals($contentState, $message->contentState);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_content_state_to_null()
+    {
+        $message = new ApnMessage;
+
+        $contentState = ['status' => 'active', 'count' => 5];
+        $message->contentState($contentState);
+
+        $result = $message->contentState(null);
+
+        $this->assertEquals(null, $message->contentState);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_event()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->event('update');
+
+        $this->assertEquals('update', $message->event);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_event_to_null()
+    {
+        $message = new ApnMessage;
+
+        $message->event('update');
+
+        $result = $message->event(null);
+
+        $this->assertEquals(null, $message->event);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_timestamp()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->timestamp(1234567890);
+
+        $this->assertEquals(1234567890, $message->timestamp);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_timestamp_to_null()
+    {
+        $message = new ApnMessage;
+
+        $message->timestamp(1234567890);
+
+        $result = $message->timestamp(null);
+
+        $this->assertEquals(null, $message->timestamp);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_attributes_type()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->attributesType('dateTime');
+
+        $this->assertEquals('dateTime', $message->attributesType);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_attributes_type_to_null()
+    {
+        $message = new ApnMessage;
+
+        $message->attributesType('dateTime');
+
+        $result = $message->attributesType(null);
+
+        $this->assertEquals(null, $message->attributesType);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_add_attribute()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->attribute('key', 'value');
+
+        $this->assertEquals(['key' => 'value'], $message->attributes);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_add_multiple_attributes()
+    {
+        $message = new ApnMessage;
+
+        $message->attribute('key1', 'value1')
+                ->attribute('key2', 'value2');
+
+        $this->assertEquals(['key1' => 'value1', 'key2' => 'value2'], $message->attributes);
+    }
+
+    public function test_it_can_set_attributes()
+    {
+        $message = new ApnMessage;
+
+        $attributes = ['status' => 'active', 'count' => 5];
+
+        $result = $message->setAttributes($attributes);
+
+        $this->assertEquals($attributes, $message->attributes);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_dismissal_date()
+    {
+        $message = new ApnMessage;
+
+        $result = $message->dismissalDate(1700000000);
+
+        $this->assertEquals(1700000000, $message->dismissalDate);
+        $this->assertEquals($message, $result);
+    }
+
+    public function test_it_can_set_dismissal_date_to_null()
+    {
+        $message = new ApnMessage;
+
+        $message->dismissalDate(1700000000);
+
+        $result = $message->dismissalDate(null);
+
+        $this->assertEquals(null, $message->dismissalDate);
         $this->assertEquals($message, $result);
     }
 }
