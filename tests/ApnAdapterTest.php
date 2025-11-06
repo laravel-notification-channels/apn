@@ -16,7 +16,7 @@ class ApnAdapterTest extends TestCase
         $this->adapter = new ApnAdapter;
     }
 
-    public function test_it_adapts_title()
+    public function test_it_adapts_title(): void
     {
         $message = new ApnMessage()->title('title');
 
@@ -28,7 +28,7 @@ class ApnAdapterTest extends TestCase
         );
     }
 
-    public function test_it_adapts_subtitle()
+    public function test_it_adapts_subtitle(): void
     {
         $message = new ApnMessage()->subtitle('subtitle');
 
@@ -40,7 +40,7 @@ class ApnAdapterTest extends TestCase
         );
     }
 
-    public function test_it_adapts_body()
+    public function test_it_adapts_body(): void
     {
         $message = new ApnMessage()->body('body');
 
@@ -52,7 +52,7 @@ class ApnAdapterTest extends TestCase
         );
     }
 
-    public function test_it_adapts_content_available()
+    public function test_it_adapts_content_available(): void
     {
         $message = new ApnMessage()->contentAvailable(true);
 
@@ -61,7 +61,7 @@ class ApnAdapterTest extends TestCase
         $this->assertTrue($notification->getPayload()->isContentAvailable());
     }
 
-    public function test_it_does_not_set_content_available_by_default()
+    public function test_it_does_not_set_content_available_by_default(): void
     {
         $message = new ApnMessage;
 
@@ -70,7 +70,7 @@ class ApnAdapterTest extends TestCase
         $this->assertNull($notification->getPayload()->isContentAvailable());
     }
 
-    public function test_it_adapts_mutable_content()
+    public function test_it_adapts_mutable_content(): void
     {
         $message = new ApnMessage()->mutableContent(true);
 
@@ -79,7 +79,7 @@ class ApnAdapterTest extends TestCase
         $this->assertTrue($notification->getPayload()->hasMutableContent());
     }
 
-    public function test_it_does_not_set_mutable_content_by_default()
+    public function test_it_does_not_set_mutable_content_by_default(): void
     {
         $message = new ApnMessage;
 
@@ -88,117 +88,132 @@ class ApnAdapterTest extends TestCase
         $this->assertNull($notification->getPayload()->hasMutableContent());
     }
 
-    public function test_it_adapts_content_state()
+    public function test_it_adapts_content_state(): void
     {
         $contentState = ['status' => 'active', 'count' => 5];
-        $message = (new ApnMessage)->contentState($contentState);
+        $message = new ApnMessage()->contentState($contentState);
 
         $notification = $this->adapter->adapt($message, 'token');
 
-        $this->assertEquals($contentState, $notification->getPayload()->getContentState());
+        $this->assertEquals(
+            $contentState,
+            $notification->getPayload()->getContentState(),
+        );
     }
 
-    public function test_it_does_not_set_content_state_by_default()
+    public function test_it_does_not_set_content_state_by_default(): void
     {
-        $message = (new ApnMessage);
+        $message = new ApnMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
         $this->assertNull($notification->getPayload()->getContentState());
     }
 
-    public function test_it_adapts_event()
+    public function test_it_adapts_event(): void
     {
-        $message = (new ApnMessage)->event('update');
+        $message = new ApnMessage()->event('update');
 
         $notification = $this->adapter->adapt($message, 'token');
 
         $this->assertEquals('update', $notification->getPayload()->getEvent());
     }
 
-    public function test_it_does_not_set_event_by_default()
+    public function test_it_does_not_set_event_by_default(): void
     {
-        $message = (new ApnMessage);
+        $message = new ApnMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
         $this->assertNull($notification->getPayload()->getEvent());
     }
 
-    public function test_it_adapts_timestamp()
+    public function test_it_adapts_timestamp(): void
     {
-        $message = (new ApnMessage)->timestamp(1234567890);
+        $message = new ApnMessage()->timestamp(1234567890);
 
         $notification = $this->adapter->adapt($message, 'token');
 
-        $this->assertEquals(1234567890, $notification->getPayload()->getTimestamp());
+        $this->assertEquals(
+            1234567890,
+            $notification->getPayload()->getTimestamp(),
+        );
     }
 
-    public function test_it_does_not_set_timestamp_by_default()
+    public function test_it_does_not_set_timestamp_by_default(): void
     {
-        $message = (new ApnMessage);
+        $message = new ApnMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
         $this->assertNull($notification->getPayload()->getTimestamp());
     }
 
-    public function test_it_adapts_attributes_type()
+    public function test_it_adapts_attributes_type(): void
     {
-        $message = (new ApnMessage)->attributesType('dateTime');
+        $message = new ApnMessage()->attributesType('dateTime');
 
         $notification = $this->adapter->adapt($message, 'token');
 
-        $this->assertEquals('dateTime', $notification->getPayload()->getAttributesType());
+        $this->assertEquals(
+            'dateTime',
+            $notification->getPayload()->getAttributesType(),
+        );
     }
 
-    public function test_it_does_not_set_attributes_type_by_default()
+    public function test_it_does_not_set_attributes_type_by_default(): void
     {
-        $message = (new ApnMessage);
+        $message = new ApnMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
         $this->assertNull($notification->getPayload()->getAttributesType());
     }
 
-    public function test_it_adapts_attributes()
+    public function test_it_adapts_attributes(): void
     {
         $attributes = ['status' => 'active', 'count' => 5];
-        $message = (new ApnMessage)->setAttributes($attributes);
+        $message = new ApnMessage()->setAttributes($attributes);
 
         $notification = $this->adapter->adapt($message, 'token');
 
-        $this->assertEquals($attributes, $notification->getPayload()->getAttributes());
+        $this->assertEquals(
+            $attributes,
+            $notification->getPayload()->getAttributes(),
+        );
     }
 
-    public function test_it_does_not_set_attributes_by_default()
+    public function test_it_does_not_set_attributes_by_default(): void
     {
-        $message = (new ApnMessage);
+        $message = new ApnMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
         $this->assertEquals([], $notification->getPayload()->getAttributes());
     }
 
-    public function test_it_adapts_dismissal_date()
+    public function test_it_adapts_dismissal_date(): void
     {
-        $message = (new ApnMessage)->dismissalDate(1700000000);
+        $message = new ApnMessage()->dismissalDate(1700000000);
 
         $notification = $this->adapter->adapt($message, 'token');
 
-        $this->assertEquals(1700000000, $notification->getPayload()->getDismissalDate());
+        $this->assertEquals(
+            1700000000,
+            $notification->getPayload()->getDismissalDate(),
+        );
     }
 
-    public function test_it_does_not_set_dismissal_date_by_default()
+    public function test_it_does_not_set_dismissal_date_by_default(): void
     {
-        $message = (new ApnMessage);
+        $message = new ApnMessage;
 
         $notification = $this->adapter->adapt($message, 'token');
 
         $this->assertNull($notification->getPayload()->getDismissalDate());
     }
 
-    public function test_it_adapts_badge()
+    public function test_it_adapts_badge(): void
     {
         $message = new ApnMessage()->badge(1);
 
@@ -207,7 +222,7 @@ class ApnAdapterTest extends TestCase
         $this->assertEquals(1, $notification->getPayload()->getBadge());
     }
 
-    public function test_it_adapts_badge_clear()
+    public function test_it_adapts_badge_clear(): void
     {
         $message = new ApnMessage()->badge(0);
 
@@ -216,7 +231,7 @@ class ApnAdapterTest extends TestCase
         $this->assertSame(0, $notification->getPayload()->getBadge());
     }
 
-    public function test_it_adapts_sound()
+    public function test_it_adapts_sound(): void
     {
         $message = new ApnMessage()->sound('sound');
 
@@ -225,7 +240,7 @@ class ApnAdapterTest extends TestCase
         $this->assertEquals('sound', $notification->getPayload()->getSound());
     }
 
-    public function test_it_adapts_interruption_level()
+    public function test_it_adapts_interruption_level(): void
     {
         $message = new ApnMessage()->interruptionLevel('interruption-level');
 
@@ -237,7 +252,7 @@ class ApnAdapterTest extends TestCase
         );
     }
 
-    public function test_it_adapts_category()
+    public function test_it_adapts_category(): void
     {
         $message = new ApnMessage()->category('category');
 
@@ -249,7 +264,7 @@ class ApnAdapterTest extends TestCase
         );
     }
 
-    public function test_it_adapts_thread_id()
+    public function test_it_adapts_thread_id(): void
     {
         $message = new ApnMessage()->threadId('threadId');
 
@@ -261,7 +276,7 @@ class ApnAdapterTest extends TestCase
         );
     }
 
-    public function test_it_adapts_custom()
+    public function test_it_adapts_custom(): void
     {
         $message = new ApnMessage()->custom('key', 'value');
 
@@ -294,7 +309,7 @@ class ApnAdapterTest extends TestCase
         );
     }
 
-    public function test_it_adapts_expires_at()
+    public function test_it_adapts_expires_at(): void
     {
         $expiresAt = new DateTime('2000-01-01');
 
@@ -305,7 +320,7 @@ class ApnAdapterTest extends TestCase
         $this->assertEquals($expiresAt, $notification->getExpirationAt());
     }
 
-    public function test_it_adapts_collapse_id()
+    public function test_it_adapts_collapse_id(): void
     {
         $message = new ApnMessage()->collapseId('collapseId');
 
@@ -314,7 +329,7 @@ class ApnAdapterTest extends TestCase
         $this->assertEquals('collapseId', $notification->getCollapseId());
     }
 
-    public function test_it_adapts_apns_id()
+    public function test_it_adapts_apns_id(): void
     {
         $message = new ApnMessage()->apnsId(
             '123e4567-e89b-12d3-a456-4266554400a0',
@@ -339,7 +354,7 @@ class ApnAdapterTest extends TestCase
 
     public function test_it_adapts_live_activity_without_alert(): void
     {
-        $message = (new ApnMessage)->pushType('liveactivity');
+        $message = new ApnMessage()->pushType(ApnMessagePushType::LiveActivity);
 
         $notification = $this->adapter->adapt($message, 'token');
 

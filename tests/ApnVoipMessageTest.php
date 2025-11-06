@@ -7,7 +7,7 @@ use NotificationChannels\Apn\ApnVoipMessage;
 
 class ApnVoipMessageTest extends TestCase
 {
-    public function test_it_defaults_push_type_to_voip()
+    public function test_it_defaults_push_type_to_voip(): void
     {
         $message = new ApnVoipMessage;
 

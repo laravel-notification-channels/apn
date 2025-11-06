@@ -33,7 +33,7 @@ class ApnVoipChannelTest extends TestCase
         $this->channel = new ApnVoipChannel($this->factory, $this->events);
     }
 
-    public function test_it_can_send_a_notification()
+    public function test_it_can_send_a_notification(): void
     {
         $this->client->shouldReceive('addNotification');
         $this->client->shouldReceive('push')->once();
@@ -41,7 +41,7 @@ class ApnVoipChannelTest extends TestCase
         $this->channel->send(new TestNotifiable, new TestNotification);
     }
 
-    public function test_it_can_send_a_notification_with_custom_client()
+    public function test_it_can_send_a_notification_with_custom_client(): void
     {
         $customClient = Mockery::mock(Client::class);
 
@@ -56,7 +56,7 @@ class ApnVoipChannelTest extends TestCase
         );
     }
 
-    public function test_it_dispatches_events_for_failed_notifications()
+    public function test_it_dispatches_events_for_failed_notifications(): void
     {
         $this->events
             ->shouldReceive('dispatch')
