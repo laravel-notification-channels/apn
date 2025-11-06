@@ -7,6 +7,7 @@ use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Mockery;
+use NotificationChannels\Apn\ApnAdapter;
 use NotificationChannels\Apn\ApnMessage;
 use NotificationChannels\Apn\ApnMessagePushType;
 use NotificationChannels\Apn\ApnVoipChannel;
@@ -30,7 +31,11 @@ class ApnVoipChannelTest extends TestCase
         $this->factory = Mockery::mock(ClientFactory::class);
         $this->factory->shouldReceive('instance')->andReturn($this->client);
         $this->events = Mockery::mock(Dispatcher::class);
-        $this->channel = new ApnVoipChannel($this->factory, $this->events);
+        $this->channel = new ApnVoipChannel(
+            $this->factory,
+            $this->events,
+            new ApnAdapter,
+        );
     }
 
     public function test_it_can_send_a_notification(): void

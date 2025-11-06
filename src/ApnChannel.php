@@ -13,8 +13,11 @@ class ApnChannel
     /**
      * Create a new channel instance.
      */
-    public function __construct(protected ClientFactory $factory, protected Dispatcher $events)
-    {
+    public function __construct(
+        protected ClientFactory $factory,
+        protected Dispatcher $events,
+        protected ApnAdapter $adapter,
+    ) {
         //
     }
 
@@ -23,7 +26,10 @@ class ApnChannel
      */
     public function send(mixed $notifiable, Notification $notification): ?array
     {
-        $tokens = (array) $notifiable->routeNotificationFor('apn', $notification);
+        $tokens = (array) $notifiable->routeNotificationFor(
+            'apn',
+            $notification,
+        );
 
         if (empty($tokens)) {
             return null;
@@ -43,10 +49,13 @@ class ApnChannel
     /**
      * Send the message to the given tokens through the given client.
      */
-    protected function sendNotifications(Client $client, ApnMessage $message, array $tokens): array
-    {
+    protected function sendNotifications(
+        Client $client,
+        ApnMessage $message,
+        array $tokens,
+    ): array {
         foreach ($tokens as $token) {
-            $client->addNotification((new ApnAdapter)->adapt($message, $token));
+            $client->addNotification($this->adapter->adapt($message, $token));
         }
 
         return $client->push();
@@ -55,18 +64,26 @@ class ApnChannel
     /**
      * Dispatch failed events for notifications that weren't delivered.
      */
-    protected function dispatchEvents(mixed $notifiable, Notification $notification, array $responses): void
-    {
+    protected function dispatchEvents(
+        mixed $notifiable,
+        Notification $notification,
+        array $responses,
+    ): void {
         foreach ($responses as $response) {
             if ($response->getStatusCode() === Response::APNS_SUCCESS) {
                 continue;
             }
 
-            $event = new NotificationFailed($notifiable, $notification, static::class, [
-                'id' => $response->getApnsId(),
-                'token' => $response->getDeviceToken(),
-                'error' => $response->getErrorReason(),
-            ]);
+            $event = new NotificationFailed(
+                $notifiable,
+                $notification,
+                static::class,
+                [
+                    'id' => $response->getApnsId(),
+                    'token' => $response->getDeviceToken(),
+                    'error' => $response->getErrorReason(),
+                ],
+            );
 
             $this->events->dispatch($event);
         }

@@ -5,6 +5,7 @@ namespace NotificationChannels\Apn\Tests;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Mockery;
+use NotificationChannels\Apn\ApnAdapter;
 use NotificationChannels\Apn\ApnChannel;
 use NotificationChannels\Apn\ClientFactory;
 use Pushok\Client;
@@ -26,7 +27,11 @@ class ApnChannelTest extends TestCase
         $this->factory = Mockery::mock(ClientFactory::class);
         $this->factory->shouldReceive('instance')->andReturn($this->client);
         $this->events = Mockery::mock(Dispatcher::class);
-        $this->channel = new ApnChannel($this->factory, $this->events);
+        $this->channel = new ApnChannel(
+            $this->factory,
+            $this->events,
+            new ApnAdapter,
+        );
     }
 
     public function test_it_can_send_a_notification(): void
@@ -46,17 +51,22 @@ class ApnChannelTest extends TestCase
         $customClient->shouldReceive('addNotification');
         $customClient->shouldReceive('push')->once();
 
-        $this->channel->send(new TestNotifiable, new TestNotificationWithClient($customClient));
+        $this->channel->send(
+            new TestNotifiable,
+            new TestNotificationWithClient($customClient),
+        );
     }
 
     public function test_it_dispatches_events_for_failed_notifications(): void
     {
-        $this->events->shouldReceive('dispatch')
+        $this->events
+            ->shouldReceive('dispatch')
             ->once()
             ->with(Mockery::type(NotificationFailed::class));
 
         $this->client->shouldReceive('addNotification');
-        $this->client->shouldReceive('push')
+        $this->client
+            ->shouldReceive('push')
             ->once()
             ->andReturn([
                 new Response(200, 'headers', 'body'),
@@ -68,13 +78,15 @@ class ApnChannelTest extends TestCase
 
     public function test_it_dispatches_failed_notification_events_with_correct_channel(): void
     {
-        $this->events->shouldReceive('dispatch')
+        $this->events
+            ->shouldReceive('dispatch')
             ->withArgs(function (NotificationFailed $notificationFailed) {
                 return $notificationFailed->channel === ApnChannel::class;
             });
 
         $this->client->shouldReceive('addNotification');
-        $this->client->shouldReceive('push')
+        $this->client
+            ->shouldReceive('push')
             ->once()
             ->andReturn([
                 new Response(200, 'headers', 'body'),
