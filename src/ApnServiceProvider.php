@@ -33,7 +33,6 @@ class ApnServiceProvider extends ServiceProvider
             return new Client(
                 $app->make(AuthProviderInterface::class),
                 $app['config']['broadcasting.connections.apn.production'],
-                $app->make(ApnAdapter::class),
             );
         });
     }
