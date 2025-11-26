@@ -305,7 +305,7 @@ class ApnAdapterTest extends TestCase
         $notification = $this->adapter->adapt($message, 'token');
 
         $this->assertEquals(
-            ApnMessagePushType::Background,
+            ApnMessagePushType::Background->value,
             $notification->getPayload()->getPushType(),
         );
     }
