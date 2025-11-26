@@ -118,7 +118,7 @@ class ApnAdapter
         }
 
         if ($pushType = $message->pushType) {
-            $payload->setPushType($pushType);
+            $payload->setPushType($pushType->value);
         }
 
         $notification = new Notification($payload, $token);
