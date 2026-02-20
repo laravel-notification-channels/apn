@@ -13,11 +13,11 @@
     "require": {
         "php": "^8.4",
         "edamov/pushok": "^0.18",
-        "illuminate/cache": "^12.0",
-        "illuminate/config": "^12.0",
-        "illuminate/events": "^12.0",
-        "illuminate/notifications": "^12.0",
-        "illuminate/support": "^12.0",
+        "illuminate/cache": "^12.0|^13.0",
+        "illuminate/config": "^12.0|^13.0",
+        "illuminate/events": "^12.0|^13.0",
+        "illuminate/notifications": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
         "nesbot/carbon": "^2.66|^3.0"
     },
     "require-dev": {
