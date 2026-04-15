@@ -7,15 +7,12 @@ use Illuminate\Notifications\Events\NotificationFailed;
 use Mockery;
 use NotificationChannels\Apn\ApnAdapter;
 use NotificationChannels\Apn\ApnChannel;
-use NotificationChannels\Apn\ClientFactory;
 use Pushok\Client;
 use Pushok\Response;
 
 class ApnChannelTest extends TestCase
 {
     protected $client;
-
-    protected $factory;
 
     protected $events;
 
@@ -24,11 +21,9 @@ class ApnChannelTest extends TestCase
     protected function setUp(): void
     {
         $this->client = Mockery::mock(Client::class);
-        $this->factory = Mockery::mock(ClientFactory::class);
-        $this->factory->shouldReceive('instance')->andReturn($this->client);
         $this->events = Mockery::mock(Dispatcher::class);
         $this->channel = new ApnChannel(
-            $this->factory,
+            $this->client,
             $this->events,
             new ApnAdapter,
         );

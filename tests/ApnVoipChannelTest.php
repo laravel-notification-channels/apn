@@ -11,15 +11,12 @@ use NotificationChannels\Apn\ApnAdapter;
 use NotificationChannels\Apn\ApnMessage;
 use NotificationChannels\Apn\ApnMessagePushType;
 use NotificationChannels\Apn\ApnVoipChannel;
-use NotificationChannels\Apn\ClientFactory;
 use Pushok\Client;
 use Pushok\Response;
 
 class ApnVoipChannelTest extends TestCase
 {
     protected $client;
-
-    protected $factory;
 
     protected $events;
 
@@ -28,11 +25,9 @@ class ApnVoipChannelTest extends TestCase
     protected function setUp(): void
     {
         $this->client = Mockery::mock(Client::class);
-        $this->factory = Mockery::mock(ClientFactory::class);
-        $this->factory->shouldReceive('instance')->andReturn($this->client);
         $this->events = Mockery::mock(Dispatcher::class);
         $this->channel = new ApnVoipChannel(
-            $this->factory,
+            $this->client,
             $this->events,
             new ApnAdapter,
         );
