@@ -29,7 +29,7 @@ class ApnServiceProvider extends ServiceProvider
                 : Token::create($options);
         });
 
-        $this->app->bind(Client::class, function ($app) {
+        $this->app->singleton(Client::class, function ($app) {
             return new Client(
                 $app->make(AuthProviderInterface::class),
                 $app['config']['broadcasting.connections.apn.production'],

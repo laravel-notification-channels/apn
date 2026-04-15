@@ -19,7 +19,7 @@ class ApnVoipChannel extends ApnChannel
 
         $message = $notification->toApnVoip($notifiable);
 
-        $client = $message->client ?? $this->factory->instance();
+        $client = $message->client ?? $this->client;
 
         $responses = $this->sendNotifications($client, $message, $tokens);
 

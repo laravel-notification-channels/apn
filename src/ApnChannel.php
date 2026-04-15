@@ -14,7 +14,7 @@ class ApnChannel
      * Create a new channel instance.
      */
     public function __construct(
-        protected ClientFactory $factory,
+        protected Client $client,
         protected Dispatcher $events,
         protected ApnAdapter $adapter,
     ) {
@@ -37,7 +37,7 @@ class ApnChannel
 
         $message = $notification->toApn($notifiable);
 
-        $client = $message->client ?? $this->factory->instance();
+        $client = $message->client ?? $this->client;
 
         $responses = $this->sendNotifications($client, $message, $tokens);
 
