@@ -53,7 +53,7 @@ class ApnServiceProvider extends ServiceProvider
             });
         });
 
-        $this->app->scoped(Client::class, function ($app) {
+        $this->app->scoped(Client::class, function (Application $app) {
             return new Client(
                 $app->make(AuthProviderInterface::class),
                 $app['config']['broadcasting.connections.apn.production'],
