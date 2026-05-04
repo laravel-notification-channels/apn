@@ -2,7 +2,8 @@
 
 namespace NotificationChannels\Apn;
 
-use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
@@ -25,7 +26,7 @@ class ApnServiceProvider extends ServiceProvider
     {
         $this->app->bind(AuthProviderInterface::class, function (Application $app) {
             $options = Arr::except(
-                $app->get('config')['broadcasting.connections.apn'],
+                $app->get(ConfigRepository::class)->get('broadcasting.connections.apn'),
                 'production',
             );
 
@@ -33,7 +34,7 @@ class ApnServiceProvider extends ServiceProvider
                 return Certificate::create($options);
             }
 
-            $cache = $app->get(Repository::class);
+            $cache = $app->get(CacheRepository::class);
 
             $jwt = $cache->get(Token::class);
             if ($jwt !== null) {
@@ -42,7 +43,7 @@ class ApnServiceProvider extends ServiceProvider
 
             return tap(
                 Token::create($options),
-                fn (Token $token) => $cache->put(Token::class, $token->get(), Carbon::now()->addMinutes(self::CACHE_MINUTES))
+                fn(Token $token) => $cache->put(Token::class, $token->get(), Carbon::now()->addMinutes(self::CACHE_MINUTES))
             );
         });
 
