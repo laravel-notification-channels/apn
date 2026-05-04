@@ -33,7 +33,7 @@ class ApnServiceProvider extends ServiceProvider
             $options = Arr::except($app['config']['broadcasting.connections.apn'], 'production');
 
             if (Arr::exists($options, 'certificate_path')) {
-                return Certificate::create();
+                return Certificate::create($options);
             }
 
             return $this->app->make(Token::class);
