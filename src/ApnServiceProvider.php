@@ -2,6 +2,8 @@
 
 namespace NotificationChannels\Apn;
 
+use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Pushok\AuthProvider\Certificate;
@@ -18,18 +20,24 @@ class ApnServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(AuthProviderInterface::class, function ($app) {
+        $this->app->bind(AuthProviderInterface::class, function (Application $app) {
             $options = Arr::except(
-                $app['config']['broadcasting.connections.apn'],
+                $app->get('config')['broadcasting.connections.apn'],
                 'production',
             );
 
-            return Arr::exists($options, 'certificate_path')
-                ? Certificate::create($options)
+            if (Arr::has($options, 'certificate_path')) {
+                return Certificate::create($options);
+            }
+
+            $cache = $app->get(Repository::class);
+
+            return ($token = $cache->get(Token::class))
+                ? Token::useExisting($token, $options)
                 : Token::create($options);
         });
 
-        $this->app->singleton(Client::class, function ($app) {
+        $this->app->scoped(Client::class, function ($app) {
             return new Client(
                 $app->make(AuthProviderInterface::class),
                 $app['config']['broadcasting.connections.apn.production'],
