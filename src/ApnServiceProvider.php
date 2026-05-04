@@ -5,6 +5,7 @@ namespace NotificationChannels\Apn;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Pushok\AuthProvider\Certificate;
 use Pushok\AuthProvider\Token;
@@ -13,6 +14,8 @@ use Pushok\Client;
 
 class ApnServiceProvider extends ServiceProvider
 {
+    private const int CACHE_MINUTES = 20;
+
     /**
      * Register any application services.
      *
@@ -32,9 +35,15 @@ class ApnServiceProvider extends ServiceProvider
 
             $cache = $app->get(Repository::class);
 
-            return ($token = $cache->get(Token::class))
-                ? Token::useExisting($token, $options)
-                : Token::create($options);
+            $jwt = $cache->get(Token::class);
+            if ($jwt !== null) {
+                return Token::useExisting($jwt, $options);
+            }
+
+            return tap(
+                Token::create($options),
+                fn (Token $token) => $cache->put(Token::class, $token->get(), Carbon::now()->addMinutes(self::CACHE_MINUTES))
+            );
         });
 
         $this->app->scoped(Client::class, function ($app) {
