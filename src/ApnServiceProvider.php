@@ -41,15 +41,14 @@ class ApnServiceProvider extends ServiceProvider
 
         $this->app->bind(Token::class, function (Application $app) {
             $token = $app['cache']->get(static::TOKEN_CACHE_KEY);
+            $options = Arr::except($app['config']['broadcasting.connections.apn'], 'production');
 
             if ($token) {
-                $options = Arr::except($app['config']['broadcasting.connections.apn'], 'production');
-
                 return Token::useExisting($token, $options);
             }
 
-            return tap(Token::create(), function (Token $token) use ($app) {
-                $app['cache']->put(static::TOKEN_CACHE_KEY, $token->get(), now()->addMintues(self::TOKEN_CACHE_MINUTES));
+            return tap(Token::create($options), function (Token $token) use ($app) {
+                $app['cache']->put(static::TOKEN_CACHE_KEY, $token->get(), now()->addMinutes(self::TOKEN_CACHE_MINUTES));
             });
         });
 
