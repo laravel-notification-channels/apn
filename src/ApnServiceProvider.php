@@ -43,7 +43,7 @@ class ApnServiceProvider extends ServiceProvider
 
             return tap(
                 Token::create($options),
-                fn(Token $token) => $cache->put(Token::class, $token->get(), Carbon::now()->addMinutes(self::CACHE_MINUTES))
+                fn (Token $token) => $cache->put(Token::class, $token->get(), Carbon::now()->addMinutes(self::CACHE_MINUTES))
             );
         });
 
