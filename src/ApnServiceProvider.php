@@ -2,6 +2,8 @@
 
 namespace NotificationChannels\Apn;
 
+use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
@@ -30,26 +32,32 @@ class ApnServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(AuthProviderInterface::class, function (Application $app) {
-            $options = Arr::except($app['config']['broadcasting.connections.apn'], 'production');
+            $config = $app->make(ConfigRepository::class);
+
+            $options = Arr::except($config->get('broadcasting.connections.apn'), 'production');
 
             if (Arr::exists($options, 'certificate_path')) {
                 return Certificate::create($options);
             }
 
-            return $this->app->make(Token::class);
+            return $app->make(Token::class);
         });
 
         $this->app->bind(Token::class, function (Application $app) {
-            $token = $app['cache']->get(static::TOKEN_CACHE_KEY);
-            $options = Arr::except($app['config']['broadcasting.connections.apn'], 'production');
+            $cache = $app->make(CacheRepository::class);
+            $config = $app->make(ConfigRepository::class);
+
+            $token = $cache->get(static::TOKEN_CACHE_KEY);
+            $options = Arr::except($config->get('broadcasting.connections.apn'), 'production');
 
             if ($token) {
                 return Token::useExisting($token, $options);
             }
 
-            return tap(Token::create($options), function (Token $token) use ($app) {
-                $app['cache']->put(static::TOKEN_CACHE_KEY, $token->get(), now()->addMinutes(self::TOKEN_CACHE_MINUTES));
-            });
+            return tap(
+                Token::create($options),
+                fn (Token $token) => $cache->put(static::TOKEN_CACHE_KEY, $token->get(), now()->addMinutes(self::TOKEN_CACHE_MINUTES)),
+            );
         });
 
         $this->app->scoped(Client::class, function (Application $app) {
