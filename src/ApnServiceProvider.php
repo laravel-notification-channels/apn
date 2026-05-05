@@ -17,7 +17,7 @@ class ApnServiceProvider extends ServiceProvider
     /**
      * The token cache key.
      */
-    const string TOKEN_CACHE_KEY = 'apn.token';
+    const string TOKEN_CACHE_KEY = 'laravel_notification_channels.apn.token';
 
     /**
      * The token cache length.
