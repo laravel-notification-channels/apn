@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn\Tests;
 
+use Illuminate\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notifiable;
@@ -26,8 +27,12 @@ class ApnVoipChannelTest extends TestCase
     {
         $this->client = Mockery::mock(Client::class);
         $this->events = Mockery::mock(Dispatcher::class);
+
+        $container = new Container;
+        $container->instance(Client::class, $this->client);
+
         $this->channel = new ApnVoipChannel(
-            $this->client,
+            $container,
             $this->events,
             new ApnAdapter,
         );
