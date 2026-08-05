@@ -3,6 +3,7 @@
 namespace NotificationChannels\Apn;
 
 use Illuminate\Notifications\Notification;
+use Pushok\Client;
 
 class ApnVoipChannel extends ApnChannel
 {
@@ -19,7 +20,7 @@ class ApnVoipChannel extends ApnChannel
 
         $message = $notification->toApnVoip($notifiable);
 
-        $client = $message->client ?? $this->client;
+        $client = $message->client ?? $this->container->make(Client::class);
 
         $responses = $this->sendNotifications($client, $message, $tokens);
 

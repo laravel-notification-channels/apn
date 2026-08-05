@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn\Tests;
 
+use Illuminate\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Mockery;
@@ -22,8 +23,12 @@ class ApnChannelTest extends TestCase
     {
         $this->client = Mockery::mock(Client::class);
         $this->events = Mockery::mock(Dispatcher::class);
+
+        $container = new Container;
+        $container->instance(Client::class, $this->client);
+
         $this->channel = new ApnChannel(
-            $this->client,
+            $container,
             $this->events,
             new ApnAdapter,
         );
@@ -50,6 +55,28 @@ class ApnChannelTest extends TestCase
             new TestNotifiable,
             new TestNotificationWithClient($customClient),
         );
+    }
+
+    public function test_it_resolves_the_client_for_every_notification(): void
+    {
+        $clients = [];
+
+        $container = new Container;
+        $container->bind(Client::class, function () use (&$clients) {
+            $client = Mockery::mock(Client::class);
+            $client->shouldReceive('addNotification');
+            $client->shouldReceive('push')->once();
+
+            return $clients[] = $client;
+        });
+
+        $channel = new ApnChannel($container, $this->events, new ApnAdapter);
+
+        $channel->send(new TestNotifiable, new TestNotification);
+        $channel->send(new TestNotifiable, new TestNotification);
+
+        $this->assertCount(2, $clients);
+        $this->assertNotSame($clients[0], $clients[1]);
     }
 
     public function test_it_dispatches_events_for_failed_notifications(): void

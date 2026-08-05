@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Apn;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
@@ -14,7 +15,7 @@ class ApnChannel
      * Create a new channel instance.
      */
     public function __construct(
-        protected Client $client,
+        protected Container $container,
         protected Dispatcher $events,
         protected ApnAdapter $adapter,
     ) {
@@ -37,7 +38,7 @@ class ApnChannel
 
         $message = $notification->toApn($notifiable);
 
-        $client = $message->client ?? $this->client;
+        $client = $message->client ?? $this->container->make(Client::class);
 
         $responses = $this->sendNotifications($client, $message, $tokens);
 
